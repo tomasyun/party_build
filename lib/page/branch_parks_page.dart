@@ -49,16 +49,12 @@ class BranchParksState extends State<BranchParksPage>
         child: TabBarView(
           children: [
             Center(
-              child: Text("公告通知"),
             ),
             Center(
-              child: Text("支部活动"),
             ),
             Center(
-              child: Text("发展党员"),
             ),
             Center(
-              child: Text("各种台账"),
             )
           ],
           controller: _controller,

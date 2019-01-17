@@ -43,17 +43,11 @@ class OpenPromiseState extends State<OpenPromisePage>
         ),
       ),
       body: Center(
-        child: TabBarView(children: <Widget>[
-          Center(
-            child: Text("党委承诺"),
-          ),
-          Center(
-            child: Text("支部承诺"),
-          ),
-          Center(
-            child: Text("党员承诺"),
-          )
-        ],controller: _controller,),
+        child: TabBarView(
+          children: <Widget>[Center(), Center(), Center()],
+          controller: _controller,
+          physics: NeverScrollableScrollPhysics(),
+        ),
       ),
     );
   }
