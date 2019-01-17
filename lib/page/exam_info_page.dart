@@ -41,70 +41,87 @@ class ExamInfoState extends State<ExamInfoPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 30.0),
-                    child: Row(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Container(
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Image.asset(
-                                "images/ic_total_score.png",
-                                width: 50.0,
-                                height: 50.0,
-                              ),
+                              _buildContainer(
+                                  "images/ic_total_score.png", "试卷总分", "100"),
                               Container(
-                                margin: EdgeInsets.only(left: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Text(
-                                        "试卷总分",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 16),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                        "100",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 16),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
+                                width: 0.5,
+                                height: 120,
+                                color: Colors.black12,
+                              ),
+                              _buildContainer(
+                                  "images/ic_limit_score.png", "及格分", "60")
                             ],
                           ),
                         ),
                         Container(
+                          width: 330,
+                          height: 0.5,
+                          color: Colors.black12,
+                        ),
+                        Container(
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Image.asset(
-                                "images/ic_total_score.png",
-                                width: 50.0,
-                                height: 50.0,
+                              _buildContainer(
+                                  "images/ic_exam_duration.png", "考试时长", "60"),
+                              Container(
+                                width: 0.5,
+                                height: 120,
+                                color: Colors.black12,
+                              ),
+                              _buildContainer(
+                                  "images/ic_question_num.png", "总题数", "60")
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 330,
+                          height: 0.5,
+                          color: Colors.black12,
+                        ),
+                        Container(
+                          height: 120,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Container(
+                                child: Text(
+                                  "考试时间",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.black),
+                                ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(left: 10.0),
+                                margin: EdgeInsets.only(left: 30.0),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Container(
                                       child: Text(
-                                        "及格分",
+                                        "2018-12-25",
                                         style: TextStyle(
-                                            color: Colors.black, fontSize: 16),
+                                            fontSize: 16, color: Colors.black),
                                       ),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(top: 10.0),
                                       child: Text(
-                                        "60",
+                                        "至",
                                         style: TextStyle(
-                                            color: Colors.black, fontSize: 16),
+                                            fontSize: 16, color: Colors.black),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        "2018-12-26",
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.black),
                                       ),
                                     ),
                                   ],
@@ -116,10 +133,57 @@ class ExamInfoState extends State<ExamInfoPage> {
                       ],
                     ),
                   ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 600.0,left: 18.0,right: 15.0),
+                  child:  RaisedButton(
+                    onPressed: () => {},
+                    child: Text("开始考试",
+                      style: TextStyle(fontSize: 16, color: Colors.white),),
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    padding: EdgeInsets.fromLTRB(130.0, 15.0, 130.0, 15.0),),
                 )
               ],
             ),
           ),
         ));
+  }
+
+  Widget _buildContainer(String url, String key, String value) {
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Image.asset(
+            url,
+            width: 50.0,
+            height: 50.0,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    key,
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    value,
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -87,7 +87,9 @@ flutter:
     - images/ic_regulation.png
     - images/ic_org_situation.png
     - images/ic_total_score.png
-
+    - images/ic_question_num.png
+    - images/ic_exam_duration.png
+    - images/ic_limit_score.png
 #    - images/a_dot_burr.jpeg
 #    - images/a_dot_ham.jpeg
 
