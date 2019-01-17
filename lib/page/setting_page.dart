@@ -3,6 +3,7 @@ import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/page/password_page.dart';
 import 'package:party_build/page/splash_page.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class SettingState extends State<SettingPage> {
             Container(
               margin: EdgeInsets.only(top: 50.0),
               child: RaisedButton(
-                onPressed:_loginOut,
+                onPressed: _loginOut,
                 child: Text(
                   "退出登录",
                   style: TextStyle(color: Colors.white),
@@ -71,13 +72,43 @@ class SettingState extends State<SettingPage> {
   }
 
   void _loginOut() {
-    SpUtils sp=SpUtils();
-    sp.putInt("isLoginOk", 0);
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => SplashPage()),
-        (router) => router==null);
+    NavigatorState navigator =
+        context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+    Alert(
+      context: context,
+      title: "退出登录?",
+      desc: "退出登录可能会使你现有记录归零，确定退出?",
+      style: AlertStyle(isCloseButton: false),
+      buttons: [
+        DialogButton(
+          height: 45.0,
+          child: Text(
+            "确定",
+            style: TextStyle(fontSize: 15.0, color: Colors.white),
+          ),
+          color: Colors.red,
+          onPressed: () {
+            SpUtils sp = SpUtils();
+            sp.putInt("isLoginOk", 0);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => SplashPage()),
+                (router) => router == null);
+          },
+        ),
+        DialogButton(
+          height: 45.0,
+          child: Text(
+            "取消",
+            style: TextStyle(fontSize: 15.0, color: Colors.white),
+          ),
+          color: Colors.red,
+          onPressed: () => navigator.pop(context),
+        )
+      ],
+    ).show();
   }
-  void _checkVersion(){
+
+  void _checkVersion() {
     GlobalToast.showToast("当前版本为最新版本");
   }
 }
