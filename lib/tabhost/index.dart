@@ -115,15 +115,19 @@ class IndexState extends State<Index> with TickerProviderStateMixin {
           });
         });
 
-    bool isExit = false;
+//双击home键退出应用程序
+    int _lastClickTime = 0;
     Future<bool> doubleClickBack() {
-      if (!isExit) {
-        GlobalToast.showToast("再按一次后退键退出程序");
-        isExit = true;
-        return Future.value(false);
+      int nowTime = new DateTime.now().microsecondsSinceEpoch;
+      if (_lastClickTime != 0 && nowTime - _lastClickTime > 1500) {
+        return new Future.value(true);
       } else {
-        isExit = false;
-        return Future.value(true);
+        _lastClickTime = new DateTime.now().microsecondsSinceEpoch;
+        new Future.delayed(const Duration(milliseconds: 1500), () {
+          _lastClickTime = 0;
+        });
+        GlobalToast.showToast("再按一次后退键退出程序");
+        return new Future.value(false);
       }
     }
 

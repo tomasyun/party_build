@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/page/password_page.dart';
 import 'package:party_build/page/splash_page.dart';
 
@@ -36,7 +37,7 @@ class SettingState extends State<SettingPage> {
               ),
             ),
             GestureDetector(
-              onTap: () => {},
+              onTap: _checkVersion,
               child: Container(
                 margin: EdgeInsets.only(top: 1.0),
                 color: Colors.white,
@@ -49,7 +50,7 @@ class SettingState extends State<SettingPage> {
             Container(
               margin: EdgeInsets.only(top: 50.0),
               child: RaisedButton(
-                onPressed: () => _loginOut,
+                onPressed:_loginOut,
                 child: Text(
                   "退出登录",
                   style: TextStyle(color: Colors.white),
@@ -71,6 +72,9 @@ class SettingState extends State<SettingPage> {
   void _loginOut() {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => SplashPage()),
-        (router) => null);
+        (router) => router==null);
+  }
+  void _checkVersion(){
+    GlobalToast.showToast("当前版本为最新版本");
   }
 }

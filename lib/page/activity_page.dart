@@ -32,29 +32,20 @@ class ActivityState extends State<ActivityPage> {
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => OrgActPage())),
-                child: _buildContainer(
-                    Colors.orange,
-                    "images/ic_org_act.png",
-                    "组织活动",
-                    EdgeInsets.only(top: 15.0)),
+                child: _buildContainer(Colors.orange, "images/ic_org_act.png",
+                    "组织活动", EdgeInsets.only(top: 15.0)),
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => VoteMrgPage())),
-                child: _buildContainer(
-                    Colors.blue,
-                    "images/ic_vote_mrg.png",
-                    "投票管理",
-                    EdgeInsets.only(top: 10.0)),
+                child: _buildContainer(Colors.blue, "images/ic_vote_mrg.png",
+                    "投票管理", EdgeInsets.only(top: 10.0)),
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => QuestionSurPage())),
-                child: _buildContainer(
-                    Colors.red,
-                    "images/ic_question_sur.png",
-                    "调查问卷",
-                    EdgeInsets.only(top: 10.0)),
+                child: _buildContainer(Colors.red, "images/ic_question_sur.png",
+                    "调查问卷", EdgeInsets.only(top: 10.0)),
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
@@ -98,29 +89,29 @@ class ActivityState extends State<ActivityPage> {
       ),
     );
   }
-}
 
-Widget _buildContainer(
-    Color color, String url, String title, EdgeInsetsGeometry edge) {
-  return Container(
-    margin: edge,
-    decoration: BoxDecoration(
-      color: color,
-      borderRadius: BorderRadius.all(Radius.circular(12.0)),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Image.asset(
-          url,
-          width: 130,
-          height: 130,
-        ),
-        Text(
-          title,
-          style: TextStyle(fontSize: 20.0, color: Colors.white),
-        )
-      ],
-    ),
-  );
+  Widget _buildContainer(
+      Color color, String url, String title, EdgeInsetsGeometry edge) {
+    return Container(
+      margin: edge,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Image.asset(
+            url,
+            width: 130,
+            height: 130,
+          ),
+          Text(
+            title,
+            style: TextStyle(fontSize: 20.0, color: Colors.white),
+          )
+        ],
+      ),
+    );
+  }
 }

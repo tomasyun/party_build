@@ -78,29 +78,30 @@ class MissionState extends State<MissionPage> {
       ),
     );
   }
+
+  Widget _buildContainer(
+      Color color, String url, String title, EdgeInsetsGeometry edge) {
+    return Container(
+      margin: edge,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Image.asset(
+            url,
+            width: 130,
+            height: 130,
+          ),
+          Text(
+            title,
+            style: TextStyle(fontSize: 20.0, color: Colors.white),
+          )
+        ],
+      ),
+    );
+  }
 }
 
-Widget _buildContainer(
-    Color color, String url, String title, EdgeInsetsGeometry edge) {
-  return Container(
-    margin: edge,
-    decoration: BoxDecoration(
-      color: color,
-      borderRadius: BorderRadius.all(Radius.circular(12.0)),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Image.asset(
-          url,
-          width: 130,
-          height: 130,
-        ),
-        Text(
-          title,
-          style: TextStyle(fontSize: 20.0, color: Colors.white),
-        )
-      ],
-    ),
-  );
-}

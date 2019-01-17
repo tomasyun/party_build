@@ -66,35 +66,35 @@ class BaseInfoState extends State<BaseInfoPage> {
           ),
         ));
   }
-}
 
-Widget _buildContainer(
-    EdgeInsetsGeometry edge, String title1, String title2, int maxLines) {
-  return Container(
-    margin: edge,
-    child: Row(
-      children: <Widget>[
-        Expanded(
-          flex: 3,
-          child: Text(
-            title1,
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.black,
+  Widget _buildContainer(
+      EdgeInsetsGeometry edge, String title1, String title2, int maxLines) {
+    return Container(
+      margin: edge,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 3,
+            child: Text(
+              title1,
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
           ),
-        ),
-        Expanded(
-          flex: 7,
-          child: Text(
-            title2,
-            style: TextStyle(fontSize: 16.0, color: Colors.black),
-            textAlign: TextAlign.right,
-            maxLines: maxLines,
-          ),
-        )
-      ],
-    ),
-  );
+          Expanded(
+            flex: 7,
+            child: Text(
+              title2,
+              style: TextStyle(fontSize: 16.0, color: Colors.black),
+              textAlign: TextAlign.right,
+              maxLines: maxLines,
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }

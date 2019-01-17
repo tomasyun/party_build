@@ -71,9 +71,9 @@ class CreditState extends State<CreditPage> {
                               unselectedLabelColor: Colors.black45,
                             ),
                           ),
+//                          Expanded(child: TabBarView(children: <Widget>[]))
                         ],
-                      )
-                  ),
+                      )),
                 ),
               ],
             ),

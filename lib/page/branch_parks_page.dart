@@ -62,6 +62,7 @@ class BranchParksState extends State<BranchParksPage>
             )
           ],
           controller: _controller,
+          physics: NeverScrollableScrollPhysics(),//禁止滑动
         ),
       ),
     );

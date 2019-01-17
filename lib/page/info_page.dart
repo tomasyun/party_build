@@ -55,6 +55,7 @@ class InfoPageState extends State<InfoPage>
           Center(),
         ],
         controller: _controller,
+        physics: NeverScrollableScrollPhysics(),
       ),
     );
   }

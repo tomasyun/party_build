@@ -90,7 +90,7 @@ class MinePageState extends State<MinePage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 color: Colors.white,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -121,70 +121,70 @@ class MinePageState extends State<MinePage> {
       ),
     );
   }
-}
 
-Widget _buildGestureDetectorAction(
-    BuildContext context, Widget widget, String url) {
-  return GestureDetector(
-    onTap: () => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => widget)),
-    child: Container(
-      margin: EdgeInsets.only(right: 15.0),
-      child: Image.asset(
-        url,
-        width: 18.0,
-        height: 18.0,
-      ),
-    ),
-  );
-}
-
-Widget _buildGestureDetectorCredit(
-    BuildContext context, Widget widget, String url, String title) {
-  return GestureDetector(
+  Widget _buildGestureDetectorAction(
+      BuildContext context, Widget widget, String url) {
+    return GestureDetector(
       onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => widget)),
       child: Container(
-        margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-        child: Row(
-          children: <Widget>[
-            Image.asset(
-              url,
-              width: 22.0,
-              height: 22.0,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 15.0),
-                child: Text(
-                  title,
-                  style: TextStyle(fontSize: 15.0, color: Colors.black),
-                ))
-          ],
+        margin: EdgeInsets.only(right: 15.0),
+        child: Image.asset(
+          url,
+          width: 18.0,
+          height: 18.0,
         ),
-      ));
-}
+      ),
+    );
+  }
 
-Widget _buildContainer(
-    BuildContext context, Widget widget, String url, String title) {
-  return Container(
-    margin: EdgeInsets.only(top: 0.5),
-    color: Colors.white,
-    child: ListTile(
-      onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => widget)),
-      leading: Image.asset(
-        url,
-        width: 22.0,
-        height: 22.0,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 15.0,
-          color: Colors.black,
+  Widget _buildGestureDetectorCredit(
+      BuildContext context, Widget widget, String url, String title) {
+    return GestureDetector(
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => widget)),
+        child: Container(
+          margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+          child: Row(
+            children: <Widget>[
+              Image.asset(
+                url,
+                width: 22.0,
+                height: 22.0,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 15.0, color: Colors.black),
+                  ))
+            ],
+          ),
+        ));
+  }
+
+  Widget _buildContainer(
+      BuildContext context, Widget widget, String url, String title) {
+    return Container(
+      margin: EdgeInsets.only(top: 0.5),
+      color: Colors.white,
+      child: ListTile(
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => widget)),
+        leading: Image.asset(
+          url,
+          width: 22.0,
+          height: 22.0,
         ),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 15.0,
+            color: Colors.black,
+          ),
+        ),
+        trailing: Icon(Icons.keyboard_arrow_right),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right),
-    ),
-  );
+    );
+  }
 }

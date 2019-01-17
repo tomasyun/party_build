@@ -88,39 +88,40 @@ class PasswordState extends State<PasswordPage> {
           borderRadius: BorderRadius.circular(10.0),
         ));
   }
-}
 
-Widget _buildContainer(EdgeInsetsGeometry edge, String text, String hintText,
-    TextEditingController controller) {
-  return Container(
-    margin: edge,
-    color: Colors.white,
-    padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Expanded(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 16.0, color: Colors.black),
-          ),
-          flex: 3,
-        ),
-        Expanded(
-          child: TextField(
-            controller: controller,
-            maxLines: 1,
-            cursorColor: Colors.red,
-            cursorWidth: 3.0,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              hintText: hintText,
-              contentPadding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+  Widget _buildContainer(EdgeInsetsGeometry edge, String text, String hintText,
+      TextEditingController controller) {
+    return Container(
+      margin: edge,
+      color: Colors.white,
+      padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 16.0, color: Colors.black),
             ),
+            flex: 3,
           ),
-          flex: 8,
-        )
-      ],
-    ),
-  );
+          Expanded(
+            child: TextField(
+              controller: controller,
+              maxLines: 1,
+              cursorColor: Colors.red,
+              cursorWidth: 3.0,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                hintText: hintText,
+                contentPadding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+              ),
+            ),
+            flex: 8,
+          )
+        ],
+      ),
+    );
+  }
+
 }
