@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:party_build/banner/banner.dart';
-import 'package:party_build/model/banner_bean.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/marquee/marquee.dart';
+import 'package:party_build/model/banner_bean.dart';
 import 'package:party_build/page/activity_page.dart';
 import 'package:party_build/page/dues_page.dart';
 import 'package:party_build/page/integrity_page.dart';
@@ -52,11 +52,7 @@ class HomePageState extends State<HomePage> {
                     delayTime: 500,
                     duration: 1000,
                     bannerPress: (position, entity) {
-                      Fluttertoast.showToast(
-                          msg: entity.bUrl,
-                          gravity: ToastGravity.CENTER,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white);
+                      GlobalToast.showToast(entity.bTitle);
                     },
                   ),
                 ),

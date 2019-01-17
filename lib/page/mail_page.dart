@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/mail_bloc.dart';
+import 'package:party_build/item/leaders_item.dart';
+import 'package:party_build/model/leaders_model.dart';
 
 class MailPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MailState();
 }
 
-class MailState extends State<MailPage> {
+class MailState extends State<MailPage> with MailBloc {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,36 +26,7 @@ class MailState extends State<MailPage> {
             child: Column(
               children: <Widget>[
                 GestureDetector(
-                  onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext builder) {
-                        return SingleChildScrollView(
-                          child: Container(
-                            child: Column(
-                              children: <Widget>[
-                                ListTile(
-                                  title: Text(
-                                    "党委书记",
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                ListTile(
-                                  title: Text(
-                                    "纪委书记",
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
+                  onTap: doGetLeaders,
                   child: Container(
                     margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
                     padding: EdgeInsets.only(
@@ -116,5 +90,30 @@ class MailState extends State<MailPage> {
             ),
           ),
         ));
+  }
+
+  @override
+  void onSuccess(Leaders leaders) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext builder) {
+          return SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: _buildLeadersList(leaders),
+              ),
+            ),
+          );
+        });
+  }
+
+//集合
+  List<LeadersItem> _buildLeadersList(Leaders leaders) {
+    return leaders.data
+        .map((item) => LeadersItem(
+              data: item,
+            ))
+        .toList();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/page/password_page.dart';
 import 'package:party_build/page/splash_page.dart';
@@ -70,6 +71,8 @@ class SettingState extends State<SettingPage> {
   }
 
   void _loginOut() {
+    SpUtils sp=SpUtils();
+    sp.putInt("isLoginOk", 0);
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => SplashPage()),
         (router) => router==null);
