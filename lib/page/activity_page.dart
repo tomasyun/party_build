@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/page/branch_parks_page.dart';
-import 'package:party_build/page/open_promise_page.dart';
+import 'package:party_build/page/promise_page.dart';
 import 'package:party_build/page/org_act_page.dart';
 import 'package:party_build/page/party_parks_page.dart';
 import 'package:party_build/page/question_sur_page.dart';
