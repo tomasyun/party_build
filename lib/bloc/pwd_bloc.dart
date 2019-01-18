@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:party_build/api/const.dart';
 import 'package:party_build/bloc/bloc_provider.dart';
 import 'package:party_build/global/sharedpreferences.dart';
-import 'package:party_build/model/password_model.dart';
+import 'package:party_build/model/pwd_model.dart';
 
 class PasswordBloc extends BlocProvider<PasswordModel> {
   doSubmit(String oldPassword, String newPassword) async {

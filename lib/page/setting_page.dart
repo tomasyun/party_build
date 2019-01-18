@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/global/toast.dart';
-import 'package:party_build/page/password_page.dart';
+import 'package:party_build/page/pwd_page.dart';
 import 'package:party_build/page/splash_page.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 

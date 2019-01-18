@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/bloc/password_bloc.dart';
+import 'package:party_build/bloc/pwd_bloc.dart';
 import 'package:party_build/global/toast.dart';
-import 'package:party_build/model/password_model.dart';
+import 'package:party_build/model/pwd_model.dart';
 
 class PasswordPage extends StatefulWidget {
   @override

@@ -13,7 +13,7 @@ class InfoPageState extends State<InfoPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 4, vsync: this);
+    _controller = TabController(length: 4, vsync: this,initialIndex: 0);
   }
 
   @override
