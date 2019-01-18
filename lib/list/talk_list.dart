@@ -1,37 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:party_build/item/talk_item.dart';
 import 'package:party_build/model/info_model.dart';
 
+// ignore: must_be_immutable
 class TalkListView extends StatefulWidget {
+  InfoData data;
+
+  TalkListView({this.data});
+
   @override
   State<StatefulWidget> createState() => TalkListState();
 }
 
 class TalkListState extends State<TalkListView> {
-  InfoData _data;
-
-  Future<void> _onRefresh() {
-    return null;
-  }
-  @override
-  void initState() {
-    super.initState();
-
-  }
   @override
   Widget build(BuildContext context) {
-    return LiquidPullToRefresh(
-      onRefresh: _onRefresh,
-      child: ListView(
-        children: _buildTalkList(),
-      ),
+    return ListView(
+      children: _buildTalkList(),
     );
   }
 
 //习总讲话列表
   List<TalkItem> _buildTalkList() {
-    return _data.data
+    return widget.data.data
         .map((item) => TalkItem(
               model: item,
             ))

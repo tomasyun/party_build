@@ -5,7 +5,7 @@ import 'package:party_build/page/home_page.dart';
 import 'package:party_build/page/info_page.dart';
 import 'package:party_build/page/mine_page.dart';
 import 'package:party_build/page/sign_page.dart';
-import 'package:party_build/tabhost/nav_item.dart';
+import 'package:party_build/tab/nav_item.dart';
 
 class Index extends StatefulWidget {
   @override

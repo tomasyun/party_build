@@ -94,7 +94,8 @@ class PasswordState extends State<PasswordPage> {
     return Container(
       margin: edge,
       color: Colors.white,
-      padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
+      padding:
+          EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -123,5 +124,4 @@ class PasswordState extends State<PasswordPage> {
       ),
     );
   }
-
 }

@@ -3,7 +3,7 @@ import 'package:party_build/bloc/login_bloc.dart';
 import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/login_model.dart';
-import 'package:party_build/tabhost/index.dart';
+import 'package:party_build/tab/index.dart';
 
 //登录
 class LoginPage extends StatefulWidget {

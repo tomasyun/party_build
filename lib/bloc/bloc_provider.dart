@@ -33,8 +33,11 @@ class BlocProvider<T> {
               if (error != null) return error(errorStr);
             }
           } else {
-//            if (loading != null) return loading();
-            if (start != null) return start();
+            if (loading != null) {
+              return loading();
+            } else {
+              if (start != null) return start();
+            }
           }
         });
   }

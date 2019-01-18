@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/page/login_page.dart';
-import 'package:party_build/tabhost/index.dart';
+import 'package:party_build/tab/index.dart';
 
 //启动页
 class SplashPage extends StatefulWidget {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/info_bloc.dart';
+import 'package:party_build/list/talk_list.dart';
+import 'package:party_build/model/info_model.dart';
 
 //资讯
 class InfoPage extends StatefulWidget {
@@ -9,11 +12,20 @@ class InfoPage extends StatefulWidget {
 class InfoPageState extends State<InfoPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+  InfoBloc _bloc = InfoBloc.newInstance;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 4, vsync: this,initialIndex: 0);
+    _bloc.doInfoRequest(id: "0", draw: "0", start: "0", length: "10");
+    _controller = TabController(length: 4, vsync: this, initialIndex: 0);
+    _controller.addListener(() {
+      switch (_controller.index) {
+        case 0:
+          _bloc.doInfoRequest(id: "0", draw: "0", start: "0", length: "10");
+          break;
+      }
+    });
   }
 
   @override
@@ -25,7 +37,6 @@ class InfoPageState extends State<InfoPage>
           style: TextStyle(fontSize: 18.0, color: Colors.white),
         ),
         centerTitle: true,
-        iconTheme: null,
         backgroundColor: Colors.red,
         bottom: TabBar(
           tabs: <Widget>[
@@ -49,7 +60,36 @@ class InfoPageState extends State<InfoPage>
       ),
       body: TabBarView(
         children: <Widget>[
-          Center(),
+          Center(
+            child: _bloc.streamBuild(
+                loading: () {
+                  return Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Colors.red),
+                      ),
+                    ),
+                  );
+                },
+                success: (data) {
+                  return _buildTalkList(data);
+                },
+                error: (msg) {
+                  return Container(
+                    child: Center(
+                      child: Text(msg),
+                    ),
+                  );
+                },
+                empty: () {
+                  return Container(
+                    child: Center(
+                      child: Text("暂无数据"),
+                    ),
+                  );
+                },
+                finished: () {}),
+          ),
           Center(),
           Center(),
           Center(),
@@ -58,5 +98,10 @@ class InfoPageState extends State<InfoPage>
         physics: NeverScrollableScrollPhysics(),
       ),
     );
+  }
+
+//习总讲话
+  Widget _buildTalkList(Info info) {
+    return TalkListView(data: info.data);
   }
 }
