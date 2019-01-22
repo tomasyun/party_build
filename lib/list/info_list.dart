@@ -20,7 +20,6 @@ class TalkListState extends State<InfoList> {
     );
   }
 
-//习总讲话列表
   List<InfoItem> _buildTalkList() {
     return widget.data.data
         .map((item) => InfoItem(

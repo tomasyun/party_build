@@ -46,16 +46,14 @@ class IntegrityState extends State<IntegrityPage>
         child: TabBarView(
           children: [
             Center(
-              child: Text("廉政教育"),
             ),
             Center(
-              child: Text("监督预防"),
             ),
             Center(
-              child: Text("案例"),
             )
           ],
           controller: _controller,
+          physics: NeverScrollableScrollPhysics(),
         ),
       ),
     );
