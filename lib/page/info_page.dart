@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/info_bloc.dart';
-import 'package:party_build/list/talk_list.dart';
+import 'package:party_build/list/info_list.dart';
 import 'package:party_build/model/info_model.dart';
 
 //资讯
@@ -21,8 +21,17 @@ class InfoPageState extends State<InfoPage>
     _controller = TabController(length: 4, vsync: this, initialIndex: 0);
     _controller.addListener(() {
       switch (_controller.index) {
-        case 0:
+        case 0: //习总讲话
           _bloc.doInfoRequest(id: "0", draw: "0", start: "0", length: "10");
+          break;
+        case 1: //时政要闻
+          _bloc.doInfoRequest(id: "1", draw: "0", start: "0", length: "10");
+          break;
+        case 2: //反腐倡廉
+          _bloc.doInfoRequest(id: "2", draw: "0", start: "0", length: "10");
+          break;
+        case 3: //时代先锋
+          _bloc.doInfoRequest(id: "3", draw: "0", start: "0", length: "10");
           break;
       }
     });
@@ -61,38 +70,17 @@ class InfoPageState extends State<InfoPage>
       body: TabBarView(
         children: <Widget>[
           Center(
-            child: _bloc.streamBuild(
-                loading: () {
-                  return Container(
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(Colors.red),
-                      ),
-                    ),
-                  );
-                },
-                success: (data) {
-                  return _buildTalkList(data);
-                },
-                error: (msg) {
-                  return Container(
-                    child: Center(
-                      child: Text(msg),
-                    ),
-                  );
-                },
-                empty: () {
-                  return Container(
-                    child: Center(
-                      child: Text("暂无数据"),
-                    ),
-                  );
-                },
-                finished: () {}),
+            child: _inflaterList(),
           ),
-          Center(),
-          Center(),
-          Center(),
+          Center(
+            child: _inflaterList(),
+          ),
+          Center(
+            child: _inflaterList(),
+          ),
+          Center(
+            child: _inflaterList(),
+          ),
         ],
         controller: _controller,
         physics: NeverScrollableScrollPhysics(),
@@ -100,8 +88,38 @@ class InfoPageState extends State<InfoPage>
     );
   }
 
-//习总讲话
-  Widget _buildTalkList(Info info) {
-    return TalkListView(data: info.data);
+  Widget _buildList(Info info) {
+    return InfoList(data: info.data);
+  }
+
+  Widget _inflaterList() {
+    return _bloc.streamBuild(
+        loading: () {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.red),
+              ),
+            ),
+          );
+        },
+        success: (data) {
+          return _buildList(data);
+        },
+        error: (msg) {
+          return Container(
+            child: Center(
+              child: Text(msg),
+            ),
+          );
+        },
+        empty: () {
+          return Container(
+            child: Center(
+              child: Text("暂无数据"),
+            ),
+          );
+        },
+        finished: () {});
   }
 }

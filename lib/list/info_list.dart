@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/item/talk_item.dart';
+import 'package:party_build/item/info_item.dart';
 import 'package:party_build/model/info_model.dart';
 
 // ignore: must_be_immutable
-class TalkListView extends StatefulWidget {
+class InfoList extends StatefulWidget {
   InfoData data;
 
-  TalkListView({this.data});
+  InfoList({this.data});
 
   @override
   State<StatefulWidget> createState() => TalkListState();
 }
 
-class TalkListState extends State<TalkListView> {
+class TalkListState extends State<InfoList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -21,9 +21,9 @@ class TalkListState extends State<TalkListView> {
   }
 
 //习总讲话列表
-  List<TalkItem> _buildTalkList() {
+  List<InfoItem> _buildTalkList() {
     return widget.data.data
-        .map((item) => TalkItem(
+        .map((item) => InfoItem(
               model: item,
             ))
         .toList();

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:party_build/model/info_model.dart';
 
 // ignore: must_be_immutable
-class TalkItem extends StatelessWidget {
+class InfoItem extends StatelessWidget {
   InfoModel model;
 
-  TalkItem({this.model});
+  InfoItem({this.model});
 
   @override
   Widget build(BuildContext context) {
