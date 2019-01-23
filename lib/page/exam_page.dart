@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/bloc/exam_pending_bloc.dart';
-import 'package:party_build/list/exam_pending_list.dart';
-import 'package:party_build/model/exam_pending.dart';
+import 'package:party_build/bloc/exam_bloc.dart';
+import 'package:party_build/list/exam_ok_list.dart';
+import 'package:party_build/list/exam_on_list.dart';
+import 'package:party_build/model/exam_model.dart';
 
 //考试
 class ExamPage extends StatefulWidget {
@@ -12,18 +13,20 @@ class ExamPage extends StatefulWidget {
 class ExamPageState extends State<ExamPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
-  ExamPendingBloc _bloc = ExamPendingBloc.newInstance;
+  ExamBloc _bloc = ExamBloc.newInstance;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 2, vsync: this);
+    _bloc.doGetExam(type: "0");
+    _controller = TabController(length: 2, vsync: this, initialIndex: 0);
     _controller.addListener(() {
       switch (_controller.index) {
-        case 0:
-          _bloc.doGetExamPending(type: "0");
+        case 0: //待考
+          _bloc.doGetExam(type: "0");
           break;
-        case 1:
+        case 1: //已考
+          _bloc.doGetExam(type: "1");
           break;
       }
     });
@@ -57,32 +60,58 @@ class ExamPageState extends State<ExamPage>
       body: TabBarView(
         children: <Widget>[
           Center(
-            child: _bloc.streamBuild(
-                loading: () {
-                  return Container(
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(Colors.red),
-                      ),
-                    ),
-                  );
-                },
-                success: (data) {
-                  return _buildPendingList(data);
-                },
-                error: (msg) {},
-                empty: () {}),
+            child: _buildExamList("0"),
           ),
-          Center()
+          Center(
+            child: _buildExamList("1"),
+          )
         ],
         controller: _controller,
       ),
     );
   }
 
-  Widget _buildPendingList(Exam exam) {
-    return ExamPendingList(
-      exam: exam,
+//待考列表
+  Widget _buildExamOnList(ExamModel model) {
+    return ExamOnList(
+      model: model,
     );
+  }
+
+//已考列表
+  Widget _buildExamOkList(ExamModel model) {
+    return ExamOkList(
+      model: model,
+    );
+  }
+
+  Widget _buildExamList(String type) {
+    return _bloc.streamBuild(
+        loading: () {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.red),
+              ),
+            ),
+          );
+        },
+        success: (data) {
+          if (type == "0") {
+            return _buildExamOnList(data);
+          } else if (type == "1") {
+            return _buildExamOkList(data);
+          } else {
+            return null;
+          }
+        },
+        error: (msg) {},
+        empty: () {
+          return Container(
+            child: Center(
+              child: Text("暂无数据"),
+            ),
+          );
+        });
   }
 }

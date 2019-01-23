@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/model/exam_pending.dart';
+import 'package:party_build/model/exam_model.dart';
 import 'package:party_build/page/exam_info_page.dart';
 
 // ignore: must_be_immutable
-class ExamPendingItem extends StatelessWidget {
-  ExamModel model;
+class ExamOnItem extends StatelessWidget {
+  Exam exam;
 
-  ExamPendingItem({this.model});
+  ExamOnItem({this.exam});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ExamPendingItem extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => ExamInfoPage()));
               },
               title: Text(
-                model.title,
+                exam.title,
                 style: TextStyle(fontSize: 16.0, color: Colors.black),
               ),
               subtitle: Row(
@@ -32,7 +32,7 @@ class ExamPendingItem extends StatelessWidget {
                   Container(
                     child: Container(
                       child: Text(
-                        model.limitDate,
+                        exam.limitDate,
                         style: TextStyle(color: Colors.black45),
                       ),
                     ),
