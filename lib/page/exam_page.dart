@@ -67,6 +67,7 @@ class ExamPageState extends State<ExamPage>
           )
         ],
         controller: _controller,
+        physics: NeverScrollableScrollPhysics(),
       ),
     );
   }

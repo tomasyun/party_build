@@ -4,7 +4,6 @@ import 'package:party_build/global/toast.dart';
 import 'package:party_build/marquee/marquee.dart';
 import 'package:party_build/model/banner_bean.dart';
 import 'package:party_build/page/activity_page.dart';
-import 'package:party_build/page/dues_page.dart';
 import 'package:party_build/page/integrity_page.dart';
 import 'package:party_build/page/mail_page.dart';
 import 'package:party_build/page/meeting_page.dart';
@@ -249,10 +248,13 @@ class HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
-                              onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          DuesPage())),
+                              onTap: () {
+                                GlobalToast.showToast("暂未开通");
+                              },
+//                              onTap: () => Navigator.of(context).push(
+//                                  MaterialPageRoute(
+//                                      builder: (BuildContext context) =>
+//                                          DuesPage())),
                             ),
                           ],
                         ),

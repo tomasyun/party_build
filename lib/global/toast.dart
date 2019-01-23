@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class GlobalToast {
   static void showToast(String msg) {
-    Fluttertoast.showToast(
+    Fluttertoast.instance.showToast(
         msg: msg,
         textColor: Colors.white,
         gravity: ToastGravity.BOTTOM,

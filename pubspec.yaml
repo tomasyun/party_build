@@ -90,6 +90,9 @@ flutter:
     - images/ic_question_num.png
     - images/ic_exam_duration.png
     - images/ic_limit_score.png
+    - images/app_def.png
+    - images/ic_clock.png
+    - images/ic_location.png
 #    - images/a_dot_burr.jpeg
 #    - images/a_dot_ham.jpeg
 
