@@ -40,8 +40,8 @@ class RankState extends State<RankPage> {
   Widget _buildRichText(String text1,String text2) {
     return RichText(
         text: TextSpan(children: <TextSpan>[
-      TextSpan(text: text1, style: TextStyle(fontSize: 24, color: Colors.white,fontWeight: FontWeight.bold)),
-      TextSpan(text: text2, style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold))
+      TextSpan(text: text1, style: TextStyle(fontSize: 22, color: Colors.white)),
+      TextSpan(text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
     ]));
   }
 }
