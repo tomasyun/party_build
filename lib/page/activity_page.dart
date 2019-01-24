@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/page/branch_parks_page.dart';
-import 'package:party_build/page/promise_page.dart';
 import 'package:party_build/page/org_act_page.dart';
 import 'package:party_build/page/party_parks_page.dart';
+import 'package:party_build/page/promise_page.dart';
 import 'package:party_build/page/question_sur_page.dart';
 import 'package:party_build/page/traning_parks_page.dart';
 import 'package:party_build/page/vote_mrg_page.dart';
@@ -82,7 +82,7 @@ class ActivityState extends State<ActivityPage> {
                     "images/ic_public_promise.png",
                     "公开承诺",
                     EdgeInsets.only(top: 10.0, bottom: 30.0)),
-              )
+              ),
             ],
           ),
         ),
