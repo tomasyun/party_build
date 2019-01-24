@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/model/notice_model.dart';
+import 'package:party_build/model/letter_model.dart';
 
 // ignore: must_be_immutable
-class NoticeItem extends StatelessWidget {
-  NoticeModel model;
+class LetterItem extends StatelessWidget {
+  LetterModel model;
 
-  NoticeItem({this.model});
+  LetterItem({this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class NoticeItem extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(top: 10.0, left: 50.0),
+                  margin: EdgeInsets.only(top: 10.0,left: 50.0),
                   child: Text(
                     model.content,
                     style: TextStyle(
