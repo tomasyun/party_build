@@ -29,7 +29,7 @@ class RankState extends State<RankPage> {
         backgroundColor: Colors.red,
         bottom: PreferredSize(
             child: Container(
-              margin: EdgeInsets.only(bottom: 50.0),
+              margin: EdgeInsets.only(bottom: 20.0),
               color: Colors.red,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,7 +44,7 @@ class RankState extends State<RankPage> {
                 ],
               ),
             ),
-            preferredSize: Size(double.infinity, 200.0)),
+            preferredSize: Size(double.infinity, 100.0)),
       ),
       body: Center(
         child: _buildRankList(),

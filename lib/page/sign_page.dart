@@ -75,25 +75,26 @@ class SignPageState extends State<SignPage> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 20.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Image.asset("images/ic_location.png"),
-                        width: 16.0,
-                        height: 16.0,
-                        margin: EdgeInsets.only(top: 3.0),
-                      ),
-                      Container(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Image.asset("images/ic_location.png"),
+                      width: 16.0,
+                      height: 16.0,
+                      margin: EdgeInsets.only(top: 3.0),
+                    ),
+                    Expanded(
+                      child: Container(
                         margin: EdgeInsets.only(left: 15.0),
                         child: Text(
                           "陕西省西安市高新区丈八北路汇鑫IBC 1501室",
                           style: TextStyle(fontSize: 15.0, color: Colors.red),
+                          maxLines: 2,
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      flex: 1,
+                    )
+                  ],
                 ),
               ),
               Center(

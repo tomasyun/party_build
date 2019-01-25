@@ -22,11 +22,14 @@ class MeetingItem extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       _buildMeetingStateContainer(data.state),
-                      Container(
-                        margin: EdgeInsets.only(left: 15.0),
-                        child: Text(data.title,
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 15.0)),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 15.0),
+                          child: Text(data.title,
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 15.0)),
+                        ),
+                        flex: 1,
                       )
                     ],
                   ),
