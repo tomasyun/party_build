@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/credit_bloc.dart';
+import 'package:party_build/list/credit_list.dart';
+import 'package:party_build/model/credit_model.dart';
 
 class CreditPage extends StatefulWidget {
   @override
@@ -8,12 +11,30 @@ class CreditPage extends StatefulWidget {
 class CreditState extends State<CreditPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
-  List<Center> tabList;
+  CreditBloc _bloc = CreditBloc.newInstance;
+  String score = "0";
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 4, vsync: this);
+    _bloc.doGetCreditListRequest("0");
+    _controller.addListener(() {
+      switch (_controller.index) {
+        case 0:
+          _bloc.doGetCreditListRequest("0");
+          break;
+        case 1:
+          _bloc.doGetCreditListRequest("1");
+          break;
+        case 2:
+          _bloc.doGetCreditListRequest("2");
+          break;
+        case 3:
+          _bloc.doGetCreditListRequest("3");
+          break;
+      }
+    });
   }
 
   @override
@@ -38,7 +59,7 @@ class CreditState extends State<CreditPage>
                         children: <Widget>[
                           Container(
                             child: Text(
-                              "2500",
+                              score,
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white),
                             ),
@@ -86,21 +107,44 @@ class CreditState extends State<CreditPage>
       ),
       body: TabBarView(
         children: <Widget>[
-          Center(
-            child: Text("全部"),
-          ),
-          Center(
-            child: Text("本月"),
-          ),
-          Center(
-            child: Text("本周"),
-          ),
-          Center(
-            child: Text("本日"),
-          ),
+          Center(child: _buildCreditList()),
+          Center(child: _buildCreditList()),
+          Center(child: _buildCreditList()),
+          Center(child: _buildCreditList()),
         ],
         controller: _controller,
+        physics: NeverScrollableScrollPhysics(),
       ),
     );
+  }
+
+  Widget _buildCreditListView(Credit credit) {
+    return CreditList(
+      credit: credit,
+    );
+  }
+
+  Widget _buildCreditList() {
+    return _bloc.streamBuild(
+        loading: () {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.red),
+              ),
+            ),
+          );
+        },
+        success: (data) {
+          return _buildCreditListView(data);
+        },
+        error: (msg) {},
+        empty: () {
+          return Container(
+            child: Center(
+              child: Text("暂无数据"),
+            ),
+          );
+        });
   }
 }
