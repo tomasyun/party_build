@@ -32,6 +32,57 @@ class MinePageState extends State<MinePage> {
           _buildGestureDetectorAction(
               context, SettingPage(), "images/ic_setting.png")
         ],
+        bottom: PreferredSize(
+            child: Container(
+              padding: EdgeInsets.only(left: 15.0),
+              width: double.infinity,
+              color: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(right: 15.0, bottom: 25.0),
+                        child: GestureDetector(
+                          onTap: () => {},
+                          child: Image.asset(
+                            "images/ic_avatar.png",
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                "陕西缔科网络科技有限公司",
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.white),
+                                maxLines: 1,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 5.0),
+                              child: Text(
+                                "党委书记",
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            preferredSize: Size(double.infinity, 150.0)),
       ),
       body: Container(
         height: double.infinity,
@@ -39,56 +90,6 @@ class MinePageState extends State<MinePage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(left: 15.0),
-                width: double.infinity,
-                height: 150.0,
-                color: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(right: 15.0, bottom: 25.0),
-                          child: GestureDetector(
-                            onTap: () => {},
-                            child: Image.asset(
-                              "images/ic_avatar.png",
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                child: Text(
-                                  "陕西缔科网络科技有限公司",
-                                  style: TextStyle(
-                                      fontSize: 16.0, color: Colors.white),
-                                  maxLines: 1,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 5.0),
-                                child: Text(
-                                  "党委书记",
-                                  style: TextStyle(
-                                      fontSize: 16.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
               Container(
                 margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 color: Colors.white,
