@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/rank_bloc.dart';
+import 'package:party_build/list/rank_list.dart';
+import 'package:party_build/model/rank_model.dart';
 
 class RankPage extends StatefulWidget {
   @override
@@ -6,6 +9,14 @@ class RankPage extends StatefulWidget {
 }
 
 class RankState extends State<RankPage> {
+  RankBloc _bloc = RankBloc.newInstance;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc.doGetRankRequest();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +46,9 @@ class RankState extends State<RankPage> {
             ),
             preferredSize: Size(double.infinity, 200.0)),
       ),
+      body: Center(
+        child: _buildRankList(),
+      ),
     );
   }
 
@@ -43,7 +57,37 @@ class RankState extends State<RankPage> {
         text: TextSpan(children: <TextSpan>[
           TextSpan(
               text: text1, style: TextStyle(fontSize: 22, color: Colors.white)),
-      TextSpan(text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
-    ]));
+          TextSpan(text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
+        ]));
+  }
+
+  Widget _buildCreditRankListView(Rank rank) {
+    return RankList(
+      rank: rank,
+    );
+  }
+
+  Widget _buildRankList() {
+    return _bloc.streamBuild(
+        loading: () {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.red),
+              ),
+            ),
+          );
+        },
+        success: (data) {
+          return _buildCreditRankListView(data);
+        },
+        error: (msg) {},
+        empty: () {
+          return Container(
+            child: Center(
+              child: Text("暂无数据"),
+            ),
+          );
+        });
   }
 }
