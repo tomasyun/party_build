@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/suggest_bloc.dart';
+import 'package:party_build/model/suggest_model.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SuggestPage extends StatefulWidget {
@@ -6,9 +8,12 @@ class SuggestPage extends StatefulWidget {
   State<StatefulWidget> createState() => SuggestState();
 }
 
-class SuggestState extends State<SuggestPage> {
+class SuggestState extends State<SuggestPage> with SuggestBloc {
+  TextEditingController _controller = TextEditingController();
+
   _showSubmitSuccessful(BuildContext context) {
-    NavigatorState navigator= context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+    NavigatorState navigator =
+    context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
     Alert(
       context: context,
       title: "提交成功",
@@ -17,13 +22,13 @@ class SuggestState extends State<SuggestPage> {
       style: AlertStyle(isCloseButton: false),
       buttons: [
         DialogButton(
-          height:45.0 ,
+          height: 45.0,
           child: Text(
             "确定",
             style: TextStyle(fontSize: 15.0, color: Colors.white),
           ),
           color: Colors.red,
-          onPressed: () =>navigator.pop(context),
+          onPressed: () => navigator.pop(context),
         )
       ],
     ).show();
@@ -48,6 +53,7 @@ class SuggestState extends State<SuggestPage> {
               Container(
                 margin: EdgeInsets.only(top: 20.0, left: 15.0, right: 15.0),
                 child: TextField(
+                  controller: _controller,
                   maxLength: 50,
                   maxLines: 10,
                   cursorWidth: 3.0,
@@ -63,7 +69,7 @@ class SuggestState extends State<SuggestPage> {
               Container(
                 margin: EdgeInsets.only(top: 30.0, bottom: 200.0),
                 child: RaisedButton(
-                  onPressed: () => _showSubmitSuccessful(context),
+                  onPressed: () => _submit(),
                   color: Colors.red,
                   child: Text(
                     "提交反馈",
@@ -80,5 +86,19 @@ class SuggestState extends State<SuggestPage> {
         ),
       ),
     );
+  }
+
+  void _submit() {
+    doSubmitSuggestRequest(_controller.text.toString());
+  }
+
+  @override
+  void submitSuccess(Suggest suggest) {
+    if (suggest.code == "0000") {
+      setState(() {
+        _controller.text = "";
+      });
+      _showSubmitSuccessful(context);
+    }
   }
 }
