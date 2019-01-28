@@ -108,7 +108,13 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
   }
 
   void _login() {
-    doLogin(userNameController.text, passwordController.text);
+    if (userNameController.text == "") {
+      GlobalToast.showToast("请输入用户名");
+    } else if (passwordController.text == "") {
+      GlobalToast.showToast("情输入密码");
+    } else {
+      doLogin(userNameController.text, passwordController.text);
+    }
   }
 
   @override
@@ -124,8 +130,9 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
       sp.putString("avatar", data.avatar);
       sp.putBool("isManager", data.isManager);
       sp.putInt("isLoginOk", 1);
-      Navigator.of(context)
-          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Index()),(route)=>route==null);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => Index()),
+              (route) => route == null);
     } else {
       GlobalToast.showToast(model.msg);
     }

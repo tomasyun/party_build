@@ -45,7 +45,17 @@ class PasswordState extends State<PasswordPage> {
   }
 
   void submit() {
-    _bloc.doSubmit(_oldPasswordController.text, _newPasswordController.text);
+    if (_oldPasswordController.text == "") {
+      GlobalToast.showToast("请输入原密码");
+    } else if (_newPasswordController.text == "") {
+      GlobalToast.showToast("请输入新密码");
+    } else if (_againPasswordController.text == "") {
+      GlobalToast.showToast("请再次输入新密码");
+    } else if (_newPasswordController.text != _againPasswordController.text) {
+      GlobalToast.showToast("抱歉,两次密码不相同");
+    } else {
+      _bloc.doSubmit(_oldPasswordController.text, _newPasswordController.text);
+    }
   }
 
   Widget _buildRaisedButton() {

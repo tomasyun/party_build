@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/suggest_bloc.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/suggest_model.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -89,7 +90,11 @@ class SuggestState extends State<SuggestPage> with SuggestBloc {
   }
 
   void _submit() {
-    doSubmitSuggestRequest(_controller.text.toString());
+    if (_controller.text == "") {
+      GlobalToast.showToast("请先填写您的意见");
+    } else {
+      doSubmitSuggestRequest(_controller.text);
+    }
   }
 
   @override
