@@ -78,12 +78,12 @@ class MeetingItem extends StatelessWidget {
       return Container(
         child: Text(
           "进行中",
-          style: TextStyle(color: Colors.red, fontSize: 14.0),
+          style: TextStyle(color: Colors.white, fontSize: 14.0),
         ),
         padding: EdgeInsets.only(left: 5.0, right: 5.0, top: 2.0, bottom: 2.0),
         decoration: BoxDecoration(
             color: Colors.red,
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            borderRadius: BorderRadius.all(Radius.circular(5.0))),
       );
     } else if (state == "2") {
       return Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/page/base_info.dart';
 import 'package:party_build/page/collect_page.dart';
 import 'package:party_build/page/credit_page.dart';
@@ -115,7 +116,7 @@ class MinePageState extends State<MinePage> {
               _buildContainer(
                   context, SuggestPage(), "images/ic_suggest.png", "意见反馈"),
               _buildContainer(
-                  context, CollectPage(), "images/ic_collect.png", "收藏")
+                  context, null, "images/ic_collect.png", "收藏")
             ],
           ),
         ),
@@ -170,8 +171,14 @@ class MinePageState extends State<MinePage> {
       margin: EdgeInsets.only(top: 0.5),
       color: Colors.white,
       child: ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => widget)),
+        onTap: () {
+          if (widget == null) {
+            GlobalToast.showToast("暂未开通");
+          } else {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => widget));
+          }
+        },
         leading: Image.asset(
           url,
           width: 22.0,
