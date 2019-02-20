@@ -70,16 +70,16 @@ class InfoPageState extends State<InfoPage>
       body: TabBarView(
         children: <Widget>[
           Center(
-            child: _inflaterList(),
+            child: _inflateList(),
           ),
           Center(
-            child: _inflaterList(),
+            child: _inflateList(),
           ),
           Center(
-            child: _inflaterList(),
+            child: _inflateList(),
           ),
           Center(
-            child: _inflaterList(),
+            child: _inflateList(),
           ),
         ],
         controller: _controller,
@@ -92,7 +92,7 @@ class InfoPageState extends State<InfoPage>
     return InfoList(data: info.data);
   }
 
-  Widget _inflaterList() {
+  Widget _inflateList() {
     return _bloc.streamBuild(
         loading: () {
           return Container(
