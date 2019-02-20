@@ -20,7 +20,8 @@ class ExamOnItem extends StatelessWidget {
             child: ListTile(
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ExamInfoPage()));
+                    MaterialPageRoute(
+                        builder: (context) => ExamInfoPage(id: exam.id,)));
               },
               title: Text(
                 exam.title,
