@@ -21,6 +21,7 @@ class ExamQuestionItem extends StatelessWidget {
             ),
           ),
           Container(
+            margin: EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               children: _buildRadioList(),
             ),

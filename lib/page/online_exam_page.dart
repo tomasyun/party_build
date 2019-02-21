@@ -110,6 +110,7 @@ class OnlineExamState extends State<OnlineExamPage> {
               controller: _pageController,
               onPageChanged: _pageChanged,
               itemCount: _buildExamQuestions(data).length,
+              physics: NeverScrollableScrollPhysics(),
             ),
           );
         },
