@@ -6,8 +6,9 @@ import 'package:party_build/page/online_exam_page.dart';
 // ignore: must_be_immutable
 class ExamInfoPage extends StatefulWidget {
   String id;
+  String skipType;
 
-  ExamInfoPage({this.id});
+  ExamInfoPage({this.id, this.skipType});
 
   @override
   State<StatefulWidget> createState() => ExamInfoState();
@@ -127,16 +128,14 @@ class ExamInfoState extends State<ExamInfoPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          _buildContainer(
-                              "images/ic_total_score.png", "试卷总分",
+                          _buildContainer("images/ic_total_score.png", "试卷总分",
                               info.data.totalScore),
                           Container(
                             width: 0.5,
                             height: 120,
                             color: Colors.black12,
                           ),
-                          _buildContainer(
-                              "images/ic_limit_score.png", "及格分",
+                          _buildContainer("images/ic_limit_score.png", "及格分",
                               info.data.limitScore)
                         ],
                       ),
@@ -150,16 +149,14 @@ class ExamInfoState extends State<ExamInfoPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          _buildContainer(
-                              "images/ic_exam_duration.png", "考试时长",
+                          _buildContainer("images/ic_exam_duration.png", "考试时长",
                               info.data.examHours),
                           Container(
                             width: 0.5,
                             height: 120,
                             color: Colors.black12,
                           ),
-                          _buildContainer(
-                              "images/ic_question_num.png", "总题数",
+                          _buildContainer("images/ic_question_num.png", "总题数",
                               info.data.questionNum)
                         ],
                       ),
@@ -219,28 +216,55 @@ class ExamInfoState extends State<ExamInfoPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 600.0, left: 18.0, right: 15.0),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          OnlineExamPage(
-                            id: widget.id,
-                          )));
-                },
-                child: Text(
-                  "开始考试",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-                color: Colors.red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                padding: EdgeInsets.fromLTRB(130.0, 15.0, 130.0, 15.0),
-              ),
+              child: _buildRaisedButton(widget.skipType),
             )
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildRaisedButton(String type) {
+    if (type == "0") {
+      return RaisedButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  OnlineExamPage(
+                    id: widget.id,
+                  )));
+        },
+        child: Text(
+          "开始考试",
+          style: TextStyle(fontSize: 16, color: Colors.white),
+        ),
+        color: Colors.red,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        padding: EdgeInsets.fromLTRB(130.0, 15.0, 130.0, 15.0),
+      );
+    } else if (type == "1") {
+      return RaisedButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  OnlineExamPage(
+                    id: widget.id,
+                  )));
+        },
+        child: Text(
+          "查看考试结果",
+          style: TextStyle(fontSize: 16, color: Colors.white),
+        ),
+        color: Colors.red,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        padding: EdgeInsets.fromLTRB(115.0, 15.0, 115.0, 15.0),
+      );
+    } else {
+      return null;
+    }
   }
 }

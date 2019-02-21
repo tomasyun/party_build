@@ -21,7 +21,8 @@ class ExamOnItem extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => ExamInfoPage(id: exam.id,)));
+                        builder: (context) =>
+                            ExamInfoPage(id: exam.id, skipType: "0",)));
               },
               title: Text(
                 exam.title,
