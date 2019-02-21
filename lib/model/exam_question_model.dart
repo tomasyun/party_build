@@ -1,33 +1,36 @@
 import 'dart:convert' show json;
 
 class Question {
+
   String code;
   String msg;
   QuestionData data;
 
   Question.fromParams({this.code, this.msg, this.data});
 
-  factory Question(jsonStr) => jsonStr == null
-      ? null
-      : jsonStr is String
-          ? new Question.fromJson(json.decode(jsonStr))
-          : new Question.fromJson(jsonStr);
+  factory Question(jsonStr) =>
+      jsonStr == null ? null : jsonStr is String ? new Question.fromJson(
+          json.decode(jsonStr)) : new Question.fromJson(jsonStr);
 
   Question.fromJson(jsonRes) {
     code = jsonRes['code'];
     msg = jsonRes['msg'];
-    data = jsonRes['data'] == null
-        ? null
-        : new QuestionData.fromJson(jsonRes['data']);
+    data =
+    jsonRes['data'] == null ? null : new QuestionData.fromJson(jsonRes['data']);
   }
 
   @override
   String toString() {
-    return '{"code": ${code != null ? '${json.encode(code)}' : 'null'},"msg": ${msg != null ? '${json.encode(msg)}' : 'null'},"data": $data}';
+    return '{"code": ${code != null
+        ? '${json.encode(code)}'
+        : 'null'},"msg": ${msg != null
+        ? '${json.encode(msg)}'
+        : 'null'},"data": $data}';
   }
 }
 
 class QuestionData {
+
   int duration;
   int totalNum;
   List<QuestionList> questionList;
@@ -39,11 +42,12 @@ class QuestionData {
     totalNum = jsonRes['totalNum'];
     questionList = jsonRes['questionList'] == null ? null : [];
 
-    for (var questionListItem
-        in questionList == null ? [] : jsonRes['questionList']) {
-      questionList.add(questionListItem == null
-          ? null
-          : new QuestionList.fromJson(questionListItem));
+    for (var questionListItem in questionList == null
+        ? []
+        : jsonRes['questionList']) {
+      questionList.add(
+          questionListItem == null ? null : new QuestionList.fromJson(
+              questionListItem));
     }
   }
 
@@ -54,10 +58,11 @@ class QuestionData {
 }
 
 class QuestionList {
+
   String score;
   String content;
   String id;
-  bool type;
+  String type;
   List<OptionModel> questionOptionsList;
 
   QuestionList.fromParams(
@@ -70,21 +75,31 @@ class QuestionList {
     type = jsonRes['type'];
     questionOptionsList = jsonRes['questionOptionsList'] == null ? null : [];
 
-    for (var questionOptionsListItem
-        in questionOptionsList == null ? [] : jsonRes['questionOptionsList']) {
-      questionOptionsList.add(questionOptionsListItem == null
-          ? null
-          : new OptionModel.fromJson(questionOptionsListItem));
+    for (var questionOptionsListItem in questionOptionsList == null
+        ? []
+        : jsonRes['questionOptionsList']) {
+      questionOptionsList.add(
+          questionOptionsListItem == null ? null : new OptionModel.fromJson(
+              questionOptionsListItem));
     }
   }
 
   @override
   String toString() {
-    return '{"score": ${score != null ? '${json.encode(score)}' : 'null'},"content": ${content != null ? '${json.encode(content)}' : 'null'},"id": ${id != null ? '${json.encode(id)}' : 'null'},"type": $type,"questionOptionsList": $questionOptionsList}';
+    return '{"score": ${score != null
+        ? '${json.encode(score)}'
+        : 'null'},"content": ${content != null
+        ? '${json.encode(content)}'
+        : 'null'},"id": ${id != null
+        ? '${json.encode(id)}'
+        : 'null'},"type": ${type != null
+        ? '${json.encode(type)}'
+        : 'null'},"questionOptionsList": $questionOptionsList}';
   }
 }
 
 class OptionModel {
+
   String content;
   String id;
   String name;
@@ -104,6 +119,16 @@ class OptionModel {
 
   @override
   String toString() {
-    return '{"content": ${content != null ? '${json.encode(content)}' : 'null'},"id": ${id != null ? '${json.encode(id)}' : 'null'},"name": ${name != null ? '${json.encode(name)}' : 'null'},"questionId": ${questionId != null ? '${json.encode(questionId)}' : 'null'},"sort": ${sort != null ? '${json.encode(sort)}' : 'null'}}';
+    return '{"content": ${content != null
+        ? '${json.encode(content)}'
+        : 'null'},"id": ${id != null
+        ? '${json.encode(id)}'
+        : 'null'},"name": ${name != null
+        ? '${json.encode(name)}'
+        : 'null'},"questionId": ${questionId != null ? '${json.encode(
+        questionId)}' : 'null'},"sort": ${sort != null
+        ? '${json.encode(sort)}'
+        : 'null'}}';
   }
 }
+
