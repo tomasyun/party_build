@@ -26,6 +26,7 @@ class VoteInfoState extends State<VoteInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 245, 245, 245),
       appBar: AppBar(
         title: Text(
           "投票详情",
@@ -63,93 +64,109 @@ class VoteInfoState extends State<VoteInfoPage> {
       alignment: AlignmentDirectional.bottomCenter,
       children: <Widget>[
         Container(
-          color: Colors.black12,
-          padding: EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Text(
-                  info.data.title,
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30.0),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: Text("截止日期:",
-                          style:
-                              TextStyle(color: Colors.black45, fontSize: 14.0)),
+          height: double.infinity,
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      info.data.title,
+                      style: TextStyle(fontSize: 18.0, color: Colors.black),
                     ),
-                    Container(
-                      child: Text(info.data.limitDate,
-                          style:
-                              TextStyle(color: Colors.black45, fontSize: 14.0)),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Container(
-                              child: Text("投票类型:",
-                                  style: TextStyle(
-                                      color: Colors.black45, fontSize: 14.0)),
-                            ),
-                            Container(
-                              child: _buildVoteTypeText(info.data.voteType),
-                            )
-                          ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 30.0),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: Text("截止日期:",
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14.0)),
                         ),
-                      ),
-                      flex: 1,
-                    )
-                  ],
-                ),
+                        Container(
+                          child: Text(info.data.limitDate,
+                              style: TextStyle(
+                                  color: Colors.black45, fontSize: 14.0)),
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Container(
+                                  child: Text("投票类型:",
+                                      style: TextStyle(
+                                          color: Colors.black45,
+                                          fontSize: 14.0)),
+                                ),
+                                Container(
+                                  child: _buildVoteTypeText(info.data.voteType),
+                                )
+                              ],
+                            ),
+                          ),
+                          flex: 1,
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      "补充党支部组织委员,选举一名任命",
+                      style: TextStyle(fontSize: 16.0, color: Colors.red),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(25.0),
+                    width: 300.0,
+                    child: Column(
+                      children: _buildRadioList(info.data),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                margin: EdgeInsets.only(top: 10.0),
-                child: Text(
-                  "补充党支部组织委员,选举一名任命",
-                  style: TextStyle(fontSize: 16.0, color: Colors.red),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(25.0),
-                width: 300.0,
-                height: 300.0,
-                child: Column(
-                  children: _buildRadioList(info.data),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
         Container(
           width: double.infinity,
           height: 80.0,
           color: Colors.white,
-          child: RaisedButton(
-            onPressed: () {
-              GlobalToast.showToast("提交成功");
-            },
-            child: Text(
-              "提交",
-              style: TextStyle(fontSize: 16.0, color: Colors.white),
-            ),
-            padding: EdgeInsets.only(
-                left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
-            color: Colors.red,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: 1.0,
+                color: Colors.black12,
+              ),
+              Container(
+                height: 79.0,
+                alignment: AlignmentDirectional.center,
+                child: RaisedButton(
+                  onPressed: () {
+                    GlobalToast.showToast("提交成功");
+                  },
+                  child: Text(
+                    "提交",
+                    style: TextStyle(fontSize: 16.0, color: Colors.white),
+                  ),
+                  padding: EdgeInsets.only(
+                      left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
+                  color: Colors.red,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                ),
+              )
+            ],
           ),
-          alignment: AlignmentDirectional.center,
         )
       ],
     );
