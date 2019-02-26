@@ -94,6 +94,18 @@ flutter:
     - images/app_def.png
     - images/ic_clock.png
     - images/ic_location.png
+    - images/ic_branch_union.png
+    - images/ic_union_committee.png
+    - images/ic_women_committee.png
+    - images/ic_related_system.png
+    - images/ic_pub_info.png.png
+    - images/ic_chess.png
+    - images/ic_dance.png
+    - images/ic_tennis.png
+    - images/ic_basketball.png
+    - images/ic_camera.png
+    - images/ic_badminton.png
+    - images/ic_swimming.png
 #    - images/a_dot_burr.jpeg
 #    - images/a_dot_ham.jpeg
 

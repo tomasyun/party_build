@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/mail_bloc.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/item/leaders_item.dart';
 import 'package:party_build/model/leaders_model.dart';
 
@@ -9,6 +10,8 @@ class MailPage extends StatefulWidget {
 }
 
 class MailState extends State<MailPage> with MailBloc {
+  String position = "请选择对象";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +37,7 @@ class MailState extends State<MailPage> with MailBloc {
                     child: Row(
                       children: <Widget>[
                         Text(
-                          "请选择对象",
+                          position,
                           style: TextStyle(fontSize: 16.0, color: Colors.black),
                         ),
                         Expanded(
@@ -68,7 +71,7 @@ class MailState extends State<MailPage> with MailBloc {
                         hintText: "请在此输入您要反馈的内容,感谢您使用智慧党建云平台。",
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)))),
+                            BorderRadius.all(Radius.circular(15.0)))),
                   ),
                 ),
                 Container(
@@ -112,8 +115,13 @@ class MailState extends State<MailPage> with MailBloc {
   List<LeadersItem> _buildLeadersList(Leaders leaders) {
     return leaders.data
         .map((item) => LeadersItem(
-              data: item,
-            ))
+      data: item,
+      onPress: (item) {
+        setState(() {
+          position = item.position;
+        });
+      },
+    ))
         .toList();
   }
 }

@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/model/leaders_model.dart';
 
+typedef void OnPress(LeaderData data);
+
 // ignore: must_be_immutable
 class LeadersItem extends StatelessWidget {
   LeaderData data;
+  OnPress onPress;
 
-  LeadersItem({this.data});
+  LeadersItem({this.data, this.onPress});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        child: Column(
+    return Column(
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-          child: Center(
-            child: Text(
-              data.position,
-              style: TextStyle(fontSize: 16.0, color: Colors.black),
+        GestureDetector(
+          onTap: () {
+            onPress(data);
+          },
+          child: Container(
+            color: Colors.white,
+            padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+            child: Center(
+              child: Text(
+                data.position,
+                style: TextStyle(fontSize: 16.0, color: Colors.black),
+              ),
             ),
           ),
         ),
@@ -27,6 +35,6 @@ class LeadersItem extends StatelessWidget {
           color: Colors.black12,
         )
       ],
-    ));
+    );
   }
 }
