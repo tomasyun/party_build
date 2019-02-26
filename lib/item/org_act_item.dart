@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/model/org_act_model.dart';
+import 'package:party_build/page/org_act_info_page.dart';
 
 // ignore: must_be_immutable
 class OrgActItem extends StatelessWidget {
@@ -9,60 +10,66 @@ class OrgActItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(15.0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      _buildMeetingStateContainer(model.state),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(left: 15.0),
-                          child: Text(
-                            model.title,
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 15.0),
-                            maxLines: 1,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => OrgActInfoPage(id: model.id)));
+      },
+      child: Container(
+        width: double.infinity,
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(15.0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        _buildMeetingStateContainer(model.state),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              model.title,
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 15.0),
+                              maxLines: 1,
+                            ),
                           ),
-                        ),
-                        flex: 1,
-                      )
-                    ],
+                          flex: 1,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          model.limitDate,
-                          style:
-                              TextStyle(color: Colors.black45, fontSize: 13.0),
+                  Container(
+                    margin: EdgeInsets.only(top: 10.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            model.limitDate,
+                            style: TextStyle(
+                                color: Colors.black45, fontSize: 13.0),
+                          ),
+                          padding: EdgeInsets.only(top: 3.0),
                         ),
-                        padding: EdgeInsets.only(top: 3.0),
-                      ),
-                      _buildMeetingDateDesc(model.state),
-                    ],
+                        _buildMeetingDateDesc(model.state),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 0.5,
-            color: Colors.black12,
-          )
-        ],
+            Container(
+              width: double.infinity,
+              height: 0.5,
+              color: Colors.black12,
+            )
+          ],
+        ),
       ),
     );
   }
