@@ -87,7 +87,8 @@ class MeetingInfoState extends State<MeetingInfoPage> {
       child: Column(
         children: <Widget>[
           Container(
-            child: Image.asset("images/app_def.png"),
+            child: Image.network(
+                "http://p1.img.cctvpic.com/photoworkspace/2018/05/18/2018051814175817985.jpg"),
           ),
           Container(
             width: double.infinity,
