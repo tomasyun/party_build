@@ -153,12 +153,19 @@ class MeetingInfoState extends State<MeetingInfoPage> {
             ),
             margin: EdgeInsets.only(right: 30.0),
           ),
-          Container(
-            child: Text(
-              subTitle,
-              style: TextStyle(
-                  fontSize: 16.0, color: Colors.black, letterSpacing: 1.0),
+          Expanded(
+            child: Container(
+              child: Text(
+                subTitle,
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                  letterSpacing: 1.0,
+                ),
+              ),
             ),
+            flex: 1,
           )
         ],
       ),
