@@ -26,7 +26,8 @@ class SignPageState extends State<SignPage> {
               Container(
                 width: double.infinity,
                 height: 200.0,
-                child: Image.asset("images/app_def.png"),
+                child: Image.network(
+                    "http://p1.img.cctvpic.com/photoworkspace/2018/05/18/2018051814175817985.jpg"),
               ),
               Container(
                 padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 20.0),
