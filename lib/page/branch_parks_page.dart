@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/notice_bloc.dart';
+import 'package:party_build/bloc/union_bloc.dart';
+import 'package:party_build/list/notice_list.dart';
+import 'package:party_build/list/union_list.dart';
+import 'package:party_build/model/notice_model.dart';
+import 'package:party_build/model/union_model.dart';
 
 class BranchParksPage extends StatefulWidget {
   @override
@@ -8,11 +14,55 @@ class BranchParksPage extends StatefulWidget {
 class BranchParksState extends State<BranchParksPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+  NoticeBloc _noticeBloc = NoticeBloc.newInstance;
+  UnionBloc _unionBloc = UnionBloc.newInstance;
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 4, vsync: this);
+    _noticeBloc.doGetNoticeRequest(
+        title: "",
+        type: "3",
+        draw: "0",
+        start: "0",
+        length: "10");
+    _controller.addListener(() {
+      switch (_controller.index) {
+        case 0:
+          _noticeBloc.doGetNoticeRequest(
+              title: "",
+              type: "3",
+              draw: "0",
+              start: "0",
+              length: "10");
+          break;
+        case 1:
+          _unionBloc.doGetUnionRequest(
+              articleType: "15",
+              childrenType: "32",
+              draw: "0",
+              start: "0",
+              length: "10");
+          break;
+        case 2:
+          _unionBloc.doGetUnionRequest(
+              articleType: "15",
+              childrenType: "33",
+              draw: "0",
+              start: "0",
+              length: "10");
+          break;
+        case 3:
+          _unionBloc.doGetUnionRequest(
+              articleType: "15",
+              childrenType: "34",
+              draw: "0",
+              start: "0",
+              length: "10");
+          break;
+      }
+    });
   }
 
   @override
@@ -49,18 +99,86 @@ class BranchParksState extends State<BranchParksPage>
         child: TabBarView(
           children: [
             Center(
+              child: _buildNoticeList(),
             ),
             Center(
+              child: _buildUnionList(),
             ),
             Center(
+              child: _buildUnionList(),
             ),
             Center(
+              child: _buildUnionList(),
             )
           ],
           controller: _controller,
-          physics: NeverScrollableScrollPhysics(),//禁止滑动
+          physics: NeverScrollableScrollPhysics(), //禁止滑动
         ),
       ),
     );
+  }
+
+  Widget _buildNoticeListView(Notice notice) {
+    return NoticeList(
+      notice: notice,
+    );
+  }
+
+  Widget _buildUnionListView(Union union) {
+    return UnionList(
+      data: union.data,
+    );
+  }
+
+  Widget _buildNoticeList() {
+    return _noticeBloc.streamBuild(loading: () {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.red),
+          ),
+        ),
+      );
+    }, success: (data) {
+      return _buildNoticeListView(data);
+    }, empty: () {
+      return Container(
+        child: Center(
+          child: Text("暂无数据"),
+        ),
+      );
+    }, error: (msg) {
+      return Container(
+        child: Center(
+          child: Text(msg),
+        ),
+      );
+    });
+  }
+
+  Widget _buildUnionList() {
+    return _unionBloc.streamBuild(loading: () {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.red),
+          ),
+        ),
+      );
+    }, success: (data) {
+      return _buildUnionListView(data);
+    }, empty: () {
+      return Container(
+        child: Center(
+          child: Text("暂无数据"),
+        ),
+      );
+    }, error: (msg) {
+      return Container(
+        child: Center(
+          child: Text(msg),
+        ),
+      );
+    });
   }
 }

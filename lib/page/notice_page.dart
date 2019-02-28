@@ -14,7 +14,12 @@ class NoticeState extends State<NoticePage> {
   @override
   void initState() {
     super.initState();
-    _bloc.doGetNoticeRequest(type: "1", draw: "0", start: "0", length: "10");
+    _bloc.doGetNoticeRequest(
+        title: "",
+        type: "1",
+        draw: "0",
+        start: "0",
+        length: "10");
   }
 
   @override
