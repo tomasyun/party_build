@@ -18,7 +18,7 @@ class RegulationState extends State<RegulationPage> {
         articleType: "8",
         childrenType: "",
         draw: "0",
-        start: "",
+        start: "0",
         length: "10");
   }
 

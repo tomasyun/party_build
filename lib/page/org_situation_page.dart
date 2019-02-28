@@ -15,8 +15,8 @@ class OrgSituationState extends State<OrgSituationPage> {
   void initState() {
     super.initState();
     _bloc.doGetUnionRequest(
-        articleType: "",
-        childrenType: "9",
+        articleType: "9",
+        childrenType: "",
         draw: "0",
         start: "0",
         length: "10");

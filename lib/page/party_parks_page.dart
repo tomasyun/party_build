@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/union_bloc.dart';
+import 'package:party_build/list/union_list.dart';
+import 'package:party_build/model/union_model.dart';
 
 class PartyParksPage extends StatefulWidget {
   @override
@@ -6,6 +9,19 @@ class PartyParksPage extends StatefulWidget {
 }
 
 class PartyParksState extends State<PartyParksPage> {
+  UnionBloc _bloc = UnionBloc.newInstance;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc.doGetUnionRequest(
+        articleType: "14",
+        childrenType: "",
+        draw: "0",
+        start: "0",
+        length: "10");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +33,39 @@ class PartyParksState extends State<PartyParksPage> {
         centerTitle: true,
         backgroundColor: Colors.red,
       ),
+      body: _buildPartyParksList(),
     );
+  }
+
+  Widget _buildPartyParksListView(Union union) {
+    return UnionList(
+      data: union.data,
+    );
+  }
+
+  Widget _buildPartyParksList() {
+    return _bloc.streamBuild(loading: () {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.red),
+          ),
+        ),
+      );
+    }, success: (data) {
+      return _buildPartyParksListView(data);
+    }, error: (msg) {
+      return Container(
+        child: Center(
+          child: Text(msg),
+        ),
+      );
+    }, empty: () {
+      return Container(
+        child: Center(
+          child: Text("暂无数据"),
+        ),
+      );
+    });
   }
 }
