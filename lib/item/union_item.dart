@@ -13,8 +13,7 @@ class UnionItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                InfoDetailPage(
+            builder: (context) => InfoDetailPage(
                   id: model.id,
                   receiveId: 1,
                 )));
