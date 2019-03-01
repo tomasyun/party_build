@@ -19,7 +19,7 @@ class RankList extends StatelessWidget {
     return rank.data.creditInfoList
         .map((item) => RankItem(
               model: item,
-      userId: rank.data.id,
+              userId: rank.data.id,
             ))
         .toList();
   }
