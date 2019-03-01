@@ -143,4 +143,5 @@ class BaseInfoState extends State<BaseInfoPage> {
       ),
     );
   }
+  
 }
