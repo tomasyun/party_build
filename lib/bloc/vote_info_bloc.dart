@@ -13,6 +13,7 @@ class VoteInfoBloc extends BlocProvider<VoteInfo> {
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
+    print(data);
     Response response = await Dio(options).post("voteBrief", data: data);
     doRequest(response: response, dispose: (map) => VoteInfo.fromJson(map));
   }

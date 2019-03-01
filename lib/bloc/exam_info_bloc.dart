@@ -13,6 +13,7 @@ class ExamInfoBloc extends BlocProvider<ExamInfo> {
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
+    print(data);
     Response response = await Dio(options).post("examRule", data: data);
     doRequest(response: response, dispose: (map) => ExamInfo.fromJson(map));
   }

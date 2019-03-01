@@ -13,7 +13,11 @@ class InfoItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => InfoDetailPage(id: model.id)));
+            builder: (context) =>
+                InfoDetailPage(
+                  id: model.id,
+                  receiveId: 0,
+                )));
       },
       child: Container(
         color: Colors.white,

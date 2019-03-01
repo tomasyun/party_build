@@ -13,6 +13,7 @@ class NoticeInfoBloc extends BlocProvider<NoticeInfo> {
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
+    print(data);
     Response response = await Dio(options).post("noticeInfo", data: data);
     doRequest(response: response, dispose: (map) => NoticeInfo.fromJson(map));
   }

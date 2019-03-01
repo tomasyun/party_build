@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_view.dart';
+import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:party_build/bloc/notice_info_bloc.dart';
 import 'package:party_build/model/notice_info_model.dart';
 
@@ -60,78 +60,72 @@ class NoticeInfoState extends State<NoticeInfoPage> {
   }
 
   Widget _buildContainer(NoticeInfo info) {
-    return Container(
-      margin: EdgeInsets.only(top: 20.0),
-      child: HtmlView(
-        data: info.data.content,
-        stylingOptions: null,
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Container(
+        padding: EdgeInsets.all(15.0),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Text(
+                  info.data.title,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        "发布人:",
+                        style: TextStyle(fontSize: 14.0, color: Colors.black45),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 2.0, left: 3.0),
+                      child: _buildText(
+                        info.data.name,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Text(info.data.publishDate,
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                fontSize: 14.0, color: Colors.black45)),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20.0),
+                child: HtmlText(
+                  data: info.data.content,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
-//    return SingleChildScrollView(
-//        scrollDirection: Axis.vertical,
-//
-//      child: Container(
-//        padding: EdgeInsets.all(15.0),
-//        child: Center(
-//          child: Column(
-//            children: <Widget>[
-//              Container(
-//                child: Text(
-//                  info.data.title,
-//                  style: TextStyle(
-//                      fontSize: 18.0,
-//                      color: Colors.black,
-//                      fontWeight: FontWeight.bold),
-//                ),
-//              ),
-//              Container(
-//                margin: EdgeInsets.only(top: 20.0),
-//                padding: EdgeInsets.symmetric(horizontal: 15.0),
-//                child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.end,
-//                  children: <Widget>[
-//                    Container(
-//                      child: Text(
-//                        "发布人:",
-//                        style: TextStyle(fontSize: 16.0, color: Colors.black45),
-//                      ),
-//                    ),
-//                    Container(
-//                      child: _buildText(
-//                        info.data.name,
-//                      ),
-//                    ),
-//                    Expanded(
-//                      flex: 1,
-//                      child: Container(
-//                        child: Text(info.data.publishDate,
-//                            textAlign: TextAlign.right,
-//                            style: TextStyle(
-//                                fontSize: 16.0, color: Colors.black45)),
-//                      ),
-//                    )
-//                  ],
-//                ),
-//              ),
-//              Container(
-//                margin: EdgeInsets.only(top: 20.0),
-//                child: Text(info.data.content,
-//                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
-//    );
   }
 
   Widget _buildText(String name) {
-    if (name != null) {
+    if (name != null && name.length < 5) {
       return Text(name,
-          style: TextStyle(fontSize: 16.0, color: Colors.black45));
+          style: TextStyle(fontSize: 14.0, color: Colors.black45));
     } else {
-      return Text("****",
-          style: TextStyle(fontSize: 16.0, color: Colors.black45));
+      return Text("-- --",
+          style: TextStyle(fontSize: 14.0, color: Colors.black45));
     }
   }
 }

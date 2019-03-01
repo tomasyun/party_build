@@ -14,6 +14,7 @@ class PasswordBloc extends BlocProvider<PasswordModel> {
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data =
         FormData.from({"oldPassword": oldPassword, "newPassword": newPassword});
+    print(data);
     Response response = await Dio(options).post("updatePassword", data: data);
     doRequest(
         response: response, dispose: (map) => PasswordModel.fromJson(map));

@@ -23,6 +23,7 @@ class NoticeBloc extends BlocProvider<Notice> {
       "start": start,
       "length": length
     });
+    print(data);
     Response response = await Dio(options).post("noticeByType", data: data);
     doRequest(response: response, dispose: (map) => Notice.fromJson(map));
   }

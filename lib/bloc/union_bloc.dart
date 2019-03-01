@@ -24,6 +24,7 @@ class UnionBloc extends BlocProvider<Union> {
       "start": start,
       "length": length
     });
+    print(data);
     Response response = await Dio(options).post("findArticle", data: data);
     doRequest(response: response, dispose: (map) => Union.fromJson(map));
   }

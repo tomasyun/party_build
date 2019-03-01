@@ -13,6 +13,7 @@ class MeetingInfoBloc extends BlocProvider<MeetingInfo> {
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
+    print(data);
     Response response = await Dio(options).post("conferenceBrief", data: data);
     doRequest(response: response, dispose: (map) => MeetingInfo.fromJson(map));
   }
