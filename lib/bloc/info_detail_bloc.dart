@@ -25,7 +25,7 @@ class InfoDetailBloc extends BlocProvider<InfoDetail> {
       token = value;
     });
     Options options =
-    Options(baseUrl: BASE_URL, headers: {"Authorization": token});
+        Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
     print(data);
     Dio dio = Dio(options);

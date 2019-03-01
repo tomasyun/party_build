@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:party_build/model/rank_model.dart';
 
 // ignore: must_be_immutable
-class RankItem extends StatelessWidget {
+class RankItem extends StatefulWidget {
   RankModel model;
+  String userId;
 
-  RankItem({this.model});
+  RankItem({this.model, this.userId});
 
+  @override
+  State<StatefulWidget> createState() => RankItemState();
+}
+
+class RankItemState extends State<RankItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,12 +23,7 @@ class RankItem extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Text(
-                    model.rank,
-                    style: TextStyle(fontSize: 15.0, color: Colors.black45),
-                  ),
-                ),
+                _buildRankText(widget.model.rank),
                 Container(
                   margin: EdgeInsets.only(left: 10.0),
                   child: Image.asset(
@@ -31,21 +32,9 @@ class RankItem extends StatelessWidget {
                     height: 40.0,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    model.name,
-                    style: TextStyle(fontSize: 15.0, color: Colors.black45),
-                  ),
-                ),
+                _buildNameText(widget.model.name),
                 Expanded(
-                  child: Container(
-                    child: Text(
-                      model.score + "分",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 15.0, color: Colors.black45),
-                    ),
-                  ),
+                  child: _buildScoreText(widget.model.score),
                   flex: 1,
                 )
               ],
@@ -59,5 +48,63 @@ class RankItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildRankText(String rank) {
+    if (widget.userId == widget.model.id) {
+      return Container(
+        child: Text(
+          rank,
+          style: TextStyle(fontSize: 15.0, color: Colors.red),
+        ),
+      );
+    } else {
+      return Container(
+        child: Text(
+          rank,
+          style: TextStyle(fontSize: 15.0, color: Colors.black45),
+        ),
+      );
+    }
+  }
+
+  Widget _buildNameText(String name) {
+    if (widget.userId == widget.model.id) {
+      return Container(
+        margin: EdgeInsets.only(left: 10.0),
+        child: Text(
+          name,
+          style: TextStyle(fontSize: 15.0, color: Colors.red),
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.only(left: 10.0),
+        child: Text(
+          name,
+          style: TextStyle(fontSize: 15.0, color: Colors.black45),
+        ),
+      );
+    }
+  }
+
+  Widget _buildScoreText(String score) {
+    if (widget.userId == widget.model.id) {
+      return Container(
+        child: Text(
+          score + "分",
+          textAlign: TextAlign.right,
+          style: TextStyle(fontSize: 15.0, color: Colors.red),
+        ),
+      );
+    } else {
+      return Container(
+        child: Text(
+          score + "分",
+          textAlign: TextAlign.right,
+          style: TextStyle(fontSize: 15.0, color: Colors.black45),
+        ),
+      );
+    }
   }
 }
