@@ -71,5 +71,4 @@ class UnionItem extends StatelessWidget {
       ),
     );
   }
-
 }
