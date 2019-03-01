@@ -5,11 +5,12 @@ import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/model/notice_model.dart';
 
 class NoticeBloc extends BlocProvider<Notice> {
-  void doGetNoticeRequest({String title,
-    String type,
-    String draw,
-    String start,
-    String length}) async {
+  void doGetNoticeRequest(
+      {String title,
+      String type,
+      String draw,
+      String start,
+      String length}) async {
     String token;
     await SpUtils().getString("token").then((value) {
       token = value;
