@@ -30,8 +30,8 @@ class BaseInfoState extends State<BaseInfoPage> {
         body: _buildBaseInfoView());
   }
 
-  Widget _buildContainer(EdgeInsetsGeometry edge, String title1, String title2,
-      int maxLines) {
+  Widget _buildContainer(
+      EdgeInsetsGeometry edge, String title1, String title2, int maxLines) {
     return Container(
       margin: edge,
       child: Row(
