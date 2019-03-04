@@ -70,7 +70,7 @@ class MailState extends State<MailPage> with MailBloc {
                         hintText: "请在此输入您要反馈的内容,感谢您使用智慧党建云平台。",
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(15.0)))),
+                                BorderRadius.all(Radius.circular(15.0)))),
                   ),
                 ),
                 Container(
@@ -114,13 +114,13 @@ class MailState extends State<MailPage> with MailBloc {
   List<LeadersItem> _buildLeadersList(Leaders leaders) {
     return leaders.data
         .map((item) => LeadersItem(
-      data: item,
-      onPress: (item) {
-        setState(() {
-          position = item.position;
-        });
-      },
-    ))
+              data: item,
+              onPress: (item) {
+                setState(() {
+                  position = item.position;
+                });
+              },
+            ))
         .toList();
   }
 }

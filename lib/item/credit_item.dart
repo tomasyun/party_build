@@ -32,7 +32,7 @@ class CreditItem extends StatelessWidget {
                         child: Text(
                           data.auditDate,
                           style:
-                          TextStyle(fontSize: 14.0, color: Colors.black45),
+                              TextStyle(fontSize: 14.0, color: Colors.black45),
                         ),
                       )
                     ],
