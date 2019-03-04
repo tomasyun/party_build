@@ -93,7 +93,7 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
                           child: Text(
                             "立即登录",
                             style:
-                            TextStyle(fontSize: 15.0, color: Colors.white),
+                                TextStyle(fontSize: 15.0, color: Colors.white),
                           ),
                           textColor: Colors.white,
                           padding: EdgeInsets.only(
@@ -136,7 +136,7 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
       sp.putInt("isLoginOk", 1);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => Index()),
-              (route) => route == null);
+          (route) => route == null);
     } else {
       GlobalToast.showToast(model.msg);
     }
