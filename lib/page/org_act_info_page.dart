@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/org_act_info_bloc.dart';
+import 'package:party_build/model/org_act_info_model.dart';
 
 // ignore: must_be_immutable
 class OrgActInfoPage extends StatefulWidget {
@@ -36,12 +37,38 @@ class OrgActInfoState extends State<OrgActInfoPage> {
       body: Container(
           height: double.infinity,
           child: SingleChildScrollView(
-            child: _buildOrgActInfoContent(),
+            child: _buildOrgActInfoBody(),
           )),
     );
   }
 
-  Widget _buildOrgActInfoContent() {
+  Widget _buildOrgActInfoBody() {
+    return _bloc.streamBuild(loading: () {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.red),
+          ),
+        ),
+      );
+    }, success: (data) {
+      return _buildOrgActInfoContent(data);
+    }, error: (msg) {
+      return Container(
+        child: Center(
+          child: Text(msg),
+        ),
+      );
+    }, empty: () {
+      return Container(
+        child: Center(
+          child: Text("暂无数据"),
+        ),
+      );
+    });
+  }
+
+  Widget _buildOrgActInfoContent(OrgActInfo info) {
     return Container(
       margin: EdgeInsets.only(bottom: 100.0),
       child: Column(
@@ -57,31 +84,31 @@ class OrgActInfoState extends State<OrgActInfoPage> {
             color: Colors.white,
             child: Column(
               children: <Widget>[
-                _buildContainer("主题", "聚焦两会,关注民生"),
+                _buildContainer("主题", info.data.theme),
                 Container(
                   width: double.infinity,
                   height: 1.0,
                   color: Colors.black12,
                 ),
-                _buildContainer("时间", "2018-12-25"),
+                _buildContainer("时间", info.data.startDate),
                 Container(
                   width: double.infinity,
                   height: 1.0,
                   color: Colors.black12,
                 ),
-                _buildContainer("地点", "陕西省西安市高新区丈八一路汇鑫IBC 1005室"),
+                _buildContainer("地点", info.data.address),
                 Container(
                   width: double.infinity,
                   height: 1.0,
                   color: Colors.black12,
                 ),
-                _buildContainer("主讲", "贠拓"),
+                _buildContainer("主讲", info.data.speaker),
                 Container(
                   width: double.infinity,
                   height: 1.0,
                   color: Colors.black12,
                 ),
-                _buildContainer("类别", "党员支部大会"),
+                _buildCategoryContainer("类别", info.data.category),
               ],
             ),
           ),
@@ -109,7 +136,7 @@ class OrgActInfoState extends State<OrgActInfoPage> {
             child: Text(
               title,
               style: TextStyle(
-                  fontSize: 16.0, color: Colors.black45, letterSpacing: 5.0),
+                  fontSize: 14.0, color: Colors.black45, letterSpacing: 5.0),
             ),
             margin: EdgeInsets.only(right: 30.0),
           ),
@@ -119,7 +146,7 @@ class OrgActInfoState extends State<OrgActInfoPage> {
                 subTitle,
                 maxLines: 2,
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                   color: Colors.black,
                   letterSpacing: 1.0,
                 ),
@@ -131,6 +158,20 @@ class OrgActInfoState extends State<OrgActInfoPage> {
       ),
       padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
     );
+  }
+
+  Widget _buildCategoryContainer(String title, String categoryId) {
+    if (categoryId == "0") {
+      return _buildContainer(title, "支部党员大会");
+    } else if (categoryId == "1") {
+      return _buildContainer(title, "支部委员会");
+    } else if (categoryId == "2") {
+      return _buildContainer(title, "党小组会");
+    } else if (categoryId == "3") {
+      return _buildContainer(title, "党课");
+    } else {
+      return Container();
+    }
   }
 
   Widget _buildBriefExpansionPanelList({String title, String content}) {
@@ -150,7 +191,7 @@ class OrgActInfoState extends State<OrgActInfoPage> {
                   child: Text(
                     title,
                     style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 14.0,
                         color: Colors.black45,
                         letterSpacing: 5.0),
                   ),
@@ -187,7 +228,7 @@ class OrgActInfoState extends State<OrgActInfoPage> {
                   child: Text(
                     title,
                     style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 14.0,
                         color: Colors.black45,
                         letterSpacing: 5.0),
                   ),

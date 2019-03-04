@@ -14,7 +14,7 @@ class OrgActInfoBloc extends BlocProvider<OrgActInfo> {
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
     print(data);
-    Response response = await Dio(options).post("conferenceBrief", data: data);
+    Response response = await Dio(options).post("orgActBrief", data: data);
     doRequest(response: response, dispose: (map) => OrgActInfo.fromJson(map));
   }
 

@@ -48,7 +48,7 @@ class LetterItem extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(top: 10.0,left: 50.0),
+                  margin: EdgeInsets.only(top: 10.0, left: 50.0),
                   child: Text(
                     model.content,
                     style: TextStyle(
@@ -56,7 +56,6 @@ class LetterItem extends StatelessWidget {
                       color: Colors.black45,
                       letterSpacing: 0.8,
                     ),
-                    maxLines: 2,
                     textAlign: TextAlign.left,
                   ),
                 ),

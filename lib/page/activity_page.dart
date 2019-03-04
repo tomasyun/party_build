@@ -108,7 +108,7 @@ class ActivityState extends State<ActivityPage> {
           ),
           Text(
             title,
-            style: TextStyle(fontSize: 20.0, color: Colors.white),
+            style: TextStyle(fontSize: 18.0, color: Colors.white),
           )
         ],
       ),
