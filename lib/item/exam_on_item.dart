@@ -20,8 +20,7 @@ class ExamOnItem extends StatelessWidget {
             child: ListTile(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        ExamInfoPage(
+                    builder: (context) => ExamInfoPage(
                           id: exam.id,
                           skipType: "0",
                         )));
