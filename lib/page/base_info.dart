@@ -41,7 +41,7 @@ class BaseInfoState extends State<BaseInfoPage> {
             child: Text(
               title1,
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 14.0,
                 color: Colors.black,
               ),
               textAlign: TextAlign.left,
@@ -51,7 +51,7 @@ class BaseInfoState extends State<BaseInfoPage> {
             flex: 7,
             child: Text(
               title2,
-              style: TextStyle(fontSize: 16.0, color: Colors.black54),
+              style: TextStyle(fontSize: 14.0, color: Colors.black54),
               textAlign: TextAlign.right,
               maxLines: maxLines,
             ),
@@ -99,7 +99,7 @@ class BaseInfoState extends State<BaseInfoPage> {
                   Expanded(
                     child: Text(
                       "头像",
-                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                      style: TextStyle(fontSize: 14.0, color: Colors.black),
                     ),
                   ),
                   Container(

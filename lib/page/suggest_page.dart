@@ -59,7 +59,7 @@ class SuggestState extends State<SuggestPage> with SuggestBloc {
                   maxLines: 10,
                   cursorWidth: 3.0,
                   cursorColor: Colors.red,
-                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  style: TextStyle(fontSize: 14.0, color: Colors.black),
                   decoration: InputDecoration(
                       hintText: "感谢您使用智慧党建云平台,使用过程中有任何意见请反馈给我们。",
                       border: OutlineInputBorder(
@@ -74,7 +74,7 @@ class SuggestState extends State<SuggestPage> with SuggestBloc {
                   color: Colors.red,
                   child: Text(
                     "提交反馈",
-                    style: TextStyle(fontSize: 16.0, color: Colors.white),
+                    style: TextStyle(fontSize: 15.0, color: Colors.white),
                   ),
                   padding: EdgeInsets.only(
                       left: 130.0, right: 130.0, top: 15.0, bottom: 15.0),

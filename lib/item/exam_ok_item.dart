@@ -28,8 +28,8 @@ class ExamOkItem extends StatelessWidget {
                           Container(
                             child: Text(
                               exam.title,
-                              style:
-                              TextStyle(fontSize: 16.0, color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 14.0, color: Colors.black),
                             ),
                           ),
                           Container(
@@ -75,10 +75,12 @@ class ExamOkItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) =>
-                    ExamInfoPage(id: exam.id, skipType: "1",)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                ExamInfoPage(
+                  id: exam.id,
+                  skipType: "1",
+                )));
       },
     );
   }
@@ -91,7 +93,7 @@ class ExamOkItem extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.red),
           child: Text(
             score,
-            style: TextStyle(fontSize: 16.0, color: Colors.white),
+            style: TextStyle(fontSize: 15.0, color: Colors.white),
           ));
     } else if (isPass == "1") {
       return Container(
@@ -100,7 +102,7 @@ class ExamOkItem extends StatelessWidget {
               BoxDecoration(shape: BoxShape.circle, color: Colors.green),
           child: Text(
             score,
-            style: TextStyle(fontSize: 16.0, color: Colors.white),
+            style: TextStyle(fontSize: 15.0, color: Colors.white),
           ));
     } else {
       return null;

@@ -55,14 +55,15 @@ class RankItemState extends State<RankItem> {
       return Container(
         child: Text(
           rank,
-          style: TextStyle(fontSize: 15.0, color: Colors.red),
+          style: TextStyle(
+              fontSize: 14.0, color: Colors.red, fontWeight: FontWeight.bold),
         ),
       );
     } else {
       return Container(
         child: Text(
           rank,
-          style: TextStyle(fontSize: 15.0, color: Colors.black45),
+          style: TextStyle(fontSize: 14.0, color: Colors.black45),
         ),
       );
     }
@@ -74,7 +75,8 @@ class RankItemState extends State<RankItem> {
         margin: EdgeInsets.only(left: 10.0),
         child: Text(
           name,
-          style: TextStyle(fontSize: 15.0, color: Colors.red),
+          style: TextStyle(
+              fontSize: 14.0, color: Colors.red, fontWeight: FontWeight.bold),
         ),
       );
     } else {
@@ -82,7 +84,7 @@ class RankItemState extends State<RankItem> {
         margin: EdgeInsets.only(left: 10.0),
         child: Text(
           name,
-          style: TextStyle(fontSize: 15.0, color: Colors.black45),
+          style: TextStyle(fontSize: 14.0, color: Colors.black45),
         ),
       );
     }
@@ -94,7 +96,8 @@ class RankItemState extends State<RankItem> {
         child: Text(
           score + "分",
           textAlign: TextAlign.right,
-          style: TextStyle(fontSize: 15.0, color: Colors.red),
+          style: TextStyle(
+              fontSize: 14.0, color: Colors.red, fontWeight: FontWeight.bold),
         ),
       );
     } else {
@@ -102,7 +105,7 @@ class RankItemState extends State<RankItem> {
         child: Text(
           score + "分",
           textAlign: TextAlign.right,
-          style: TextStyle(fontSize: 15.0, color: Colors.black45),
+          style: TextStyle(fontSize: 14.0, color: Colors.black45),
         ),
       );
     }

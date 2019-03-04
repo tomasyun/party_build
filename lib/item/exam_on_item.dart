@@ -19,14 +19,16 @@ class ExamOnItem extends StatelessWidget {
             color: Colors.white,
             child: ListTile(
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExamInfoPage(id: exam.id, skipType: "0",)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        ExamInfoPage(
+                          id: exam.id,
+                          skipType: "0",
+                        )));
               },
               title: Text(
                 exam.title,
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
+                style: TextStyle(fontSize: 14.0, color: Colors.black),
               ),
               subtitle: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -35,7 +37,7 @@ class ExamOnItem extends StatelessWidget {
                     child: Container(
                       child: Text(
                         exam.limitDate,
-                        style: TextStyle(color: Colors.black45),
+                        style: TextStyle(fontSize: 14.0, color: Colors.black45),
                       ),
                     ),
                   ),

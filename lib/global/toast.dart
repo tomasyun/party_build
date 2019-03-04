@@ -8,6 +8,7 @@ class GlobalToast {
         textColor: Colors.white,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.black,
+        fontSize: 14.0,
         toastLength: Toast.LENGTH_SHORT);
   }
 }

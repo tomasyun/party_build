@@ -23,7 +23,7 @@ class ExamQuestionState extends State<ExamQuestionItem> {
             margin: EdgeInsets.all(15.0),
             child: Text(
               widget.list.content,
-              style: TextStyle(fontSize: 18.0, color: Colors.black),
+              style: TextStyle(fontSize: 16.0, color: Colors.black),
             ),
           ),
           Container(
@@ -48,7 +48,7 @@ class ExamQuestionState extends State<ExamQuestionItem> {
         },
         title: Text(
           widget.list.questionOptionsList[i].content,
-          style: TextStyle(fontSize: 15.0, color: Colors.black),
+          style: TextStyle(fontSize: 14.0, color: Colors.black),
         ),
       );
       _list.add(item);

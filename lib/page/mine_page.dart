@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/page/base_info.dart';
-import 'package:party_build/page/collect_page.dart';
 import 'package:party_build/page/credit_page.dart';
 import 'package:party_build/page/letter_page.dart';
 import 'package:party_build/page/notice_page.dart';
@@ -63,7 +62,7 @@ class MinePageState extends State<MinePage> {
                               child: Text(
                                 "陕西缔科网络科技有限公司",
                                 style: TextStyle(
-                                    fontSize: 16.0, color: Colors.white),
+                                    fontSize: 15.0, color: Colors.white),
                                 maxLines: 1,
                               ),
                             ),
@@ -72,7 +71,7 @@ class MinePageState extends State<MinePage> {
                               child: Text(
                                 "党委书记",
                                 style: TextStyle(
-                                    fontSize: 16.0, color: Colors.white),
+                                    fontSize: 15.0, color: Colors.white),
                               ),
                             )
                           ],
@@ -115,8 +114,7 @@ class MinePageState extends State<MinePage> {
                   context, LetterPage(), "images/ic_letter.png", "信箱"),
               _buildContainer(
                   context, SuggestPage(), "images/ic_suggest.png", "意见反馈"),
-              _buildContainer(
-                  context, null, "images/ic_collect.png", "收藏")
+              _buildContainer(context, null, "images/ic_collect.png", "收藏")
             ],
           ),
         ),
@@ -158,7 +156,7 @@ class MinePageState extends State<MinePage> {
                   margin: EdgeInsets.only(left: 15.0),
                   child: Text(
                     title,
-                    style: TextStyle(fontSize: 15.0, color: Colors.black),
+                    style: TextStyle(fontSize: 14.0, color: Colors.black),
                   ))
             ],
           ),
@@ -187,7 +185,7 @@ class MinePageState extends State<MinePage> {
         title: Text(
           title,
           style: TextStyle(
-            fontSize: 15.0,
+            fontSize: 14.0,
             color: Colors.black,
           ),
         ),

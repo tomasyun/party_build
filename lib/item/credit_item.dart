@@ -24,14 +24,15 @@ class CreditItem extends StatelessWidget {
                       Container(
                         child: Text(
                           data.title,
-                          style: TextStyle(fontSize: 15.0, color: Colors.black),
+                          style: TextStyle(fontSize: 14.0, color: Colors.black),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 10.0),
                         child: Text(
                           data.auditDate,
-                          style: TextStyle(fontSize: 15.0, color: Colors.black),
+                          style:
+                          TextStyle(fontSize: 14.0, color: Colors.black45),
                         ),
                       )
                     ],

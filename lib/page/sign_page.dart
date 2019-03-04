@@ -48,14 +48,14 @@ class SignPageState extends State<SignPage> {
                             child: Text(
                               "2018年12月11日",
                               style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black45),
+                                  fontSize: 14.0, color: Colors.black45),
                             ),
                           ),
                           Container(
                             child: Text(
                               "星期五",
                               style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black45),
+                                  fontSize: 14.0, color: Colors.black45),
                             ),
                             padding: EdgeInsets.only(left: 15.0),
                           ),
@@ -64,7 +64,7 @@ class SignPageState extends State<SignPage> {
                             child: Text(
                               "上午12:00",
                               style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black45),
+                                  fontSize: 14.0, color: Colors.black45),
                             ),
                           )
                         ],
@@ -89,7 +89,7 @@ class SignPageState extends State<SignPage> {
                         margin: EdgeInsets.only(left: 15.0),
                         child: Text(
                           "陕西省西安市高新区丈八北路汇鑫IBC 1501室",
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
+                          style: TextStyle(fontSize: 14.0, color: Colors.red),
                           maxLines: 2,
                         ),
                       ),
@@ -106,7 +106,7 @@ class SignPageState extends State<SignPage> {
                       BoxDecoration(shape: BoxShape.circle, color: Colors.red),
                   child: Text(
                     "会议签到",
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+                    style: TextStyle(fontSize: 14.0, color: Colors.white),
                   ),
                 ),
               )

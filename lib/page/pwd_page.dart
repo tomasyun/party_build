@@ -65,7 +65,7 @@ class PasswordState extends State<PasswordPage> {
               onPressed: submit,
               child: Text(
                 "确认修改",
-                style: TextStyle(color: Colors.white, fontSize: 16.0),
+                style: TextStyle(color: Colors.white, fontSize: 15.0),
               ),
               color: Colors.red,
               padding: EdgeInsets.only(
@@ -89,7 +89,7 @@ class PasswordState extends State<PasswordPage> {
         onPressed: () => {},
         child: Text(
           "修改成功",
-          style: TextStyle(color: Colors.white, fontSize: 16.0),
+          style: TextStyle(color: Colors.white, fontSize: 14.0),
         ),
         color: Colors.grey,
         padding:
@@ -112,12 +112,13 @@ class PasswordState extends State<PasswordPage> {
           Expanded(
             child: Text(
               text,
-              style: TextStyle(fontSize: 16.0, color: Colors.black),
+              style: TextStyle(fontSize: 14.0, color: Colors.black),
             ),
             flex: 3,
           ),
           Expanded(
             child: TextField(
+              style: TextStyle(fontSize: 14.0),
               controller: controller,
               maxLines: 1,
               cursorColor: Colors.red,

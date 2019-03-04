@@ -31,7 +31,7 @@ class UnionItem extends StatelessWidget {
                   Container(
                     child: Text(
                       model.title,
-                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                      style: TextStyle(fontSize: 14.0, color: Colors.black),
                     ),
                   ),
                   Container(

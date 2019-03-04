@@ -56,8 +56,9 @@ class RankState extends State<RankPage> {
     return RichText(
         text: TextSpan(children: <TextSpan>[
           TextSpan(
-              text: text1, style: TextStyle(fontSize: 22, color: Colors.white)),
-          TextSpan(text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
+              text: text1, style: TextStyle(fontSize: 20, color: Colors.white)),
+          TextSpan(
+              text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
         ]));
   }
 

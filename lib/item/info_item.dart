@@ -33,7 +33,7 @@ class InfoItem extends StatelessWidget {
                       model.title,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 15.0,
+                          fontSize: 14.0,
                           fontWeight: FontWeight.normal),
                       maxLines: 2,
                     ),
@@ -57,7 +57,7 @@ class InfoItem extends StatelessWidget {
                           child: Text(
                             model.commentNum + "数",
                             style: TextStyle(
-                                color: Colors.black45, fontSize: 13.0),
+                                color: Colors.black45, fontSize: 14.0),
                             maxLines: 1,
                           ),
                         )

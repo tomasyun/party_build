@@ -34,7 +34,7 @@ class OrgActItem extends StatelessWidget {
                             child: Text(
                               model.title,
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 15.0),
+                                  color: Colors.black, fontSize: 14.0),
                               maxLines: 1,
                             ),
                           ),
@@ -52,7 +52,7 @@ class OrgActItem extends StatelessWidget {
                           child: Text(
                             model.limitDate,
                             style: TextStyle(
-                                color: Colors.black45, fontSize: 13.0),
+                                color: Colors.black45, fontSize: 14.0),
                           ),
                           padding: EdgeInsets.only(top: 3.0),
                         ),

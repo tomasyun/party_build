@@ -29,7 +29,7 @@ class LetterItem extends StatelessWidget {
                         margin: EdgeInsets.only(left: 10.0),
                         child: Text(
                           model.name,
-                          style: TextStyle(fontSize: 15.0, color: Colors.black),
+                          style: TextStyle(fontSize: 14.0, color: Colors.black),
                         ),
                       ),
                       Expanded(

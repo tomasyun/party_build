@@ -33,7 +33,10 @@ class SettingState extends State<SettingPage> {
                 margin: EdgeInsets.only(top: 10.0),
                 color: Colors.white,
                 child: ListTile(
-                  title: Text("密码修改"),
+                  title: Text(
+                    "密码修改",
+                    style: TextStyle(fontSize: 15.0, color: Colors.black),
+                  ),
                   trailing: Icon(Icons.keyboard_arrow_right),
                 ),
               ),
@@ -44,7 +47,10 @@ class SettingState extends State<SettingPage> {
                 margin: EdgeInsets.only(top: 1.0),
                 color: Colors.white,
                 child: ListTile(
-                  title: Text("版本更新"),
+                  title: Text(
+                    "版本更新",
+                    style: TextStyle(fontSize: 15.0, color: Colors.black),
+                  ),
                   trailing: Icon(Icons.keyboard_arrow_right),
                 ),
               ),
@@ -55,7 +61,7 @@ class SettingState extends State<SettingPage> {
                 onPressed: _loginOut,
                 child: Text(
                   "退出登录",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 15.0),
                 ),
                 color: Colors.red,
                 padding: EdgeInsets.only(

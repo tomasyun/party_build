@@ -53,7 +53,7 @@ class StudiesState extends State<StudiesPage> {
                                     child: Text(
                                       "任务内容",
                                       style: TextStyle(
-                                          fontSize: 16.0,
+                                          fontSize: 14.0,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -101,7 +101,7 @@ class StudiesState extends State<StudiesPage> {
                                   child: Text(
                                     "学习课件",
                                     style: TextStyle(
-                                        fontSize: 16.0,
+                                        fontSize: 14.0,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -142,7 +142,7 @@ class StudiesState extends State<StudiesPage> {
                         child: Text(
                           "学习成果",
                           style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 14.0,
                               color: Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
@@ -152,7 +152,7 @@ class StudiesState extends State<StudiesPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Container(
-                              child: Icon(Icons.arrow_forward),
+                              child: Icon(Icons.keyboard_arrow_right),
                               margin: EdgeInsets.only(right: 10.0),
                             ),
                           ],

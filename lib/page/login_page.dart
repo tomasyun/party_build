@@ -45,22 +45,22 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
                     Container(
                       child: Text(
                         "中国能源建设集团甘肃省",
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                     ),
                     Container(
                       child: Text(
                         "电力设计院有限公司",
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          left: 30, top: 15, right: 30, bottom: 15),
+                          left: 30, top: 30, right: 30, bottom: 15),
                       child: TextField(
                         controller: userNameController,
                         keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(fontSize: 15, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "请输入用户名",
                           border: OutlineInputBorder(
@@ -75,7 +75,7 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
                       child: TextField(
                         controller: passwordController,
                         keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(fontSize: 15, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "请输入密码",
                           border: OutlineInputBorder(
@@ -90,12 +90,16 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
                       child: RaisedButton(
                           onPressed: _login,
                           color: Colors.red,
-                          child: Text("立即登录"),
+                          child: Text(
+                            "立即登录",
+                            style:
+                            TextStyle(fontSize: 15.0, color: Colors.white),
+                          ),
                           textColor: Colors.white,
                           padding: EdgeInsets.only(
                               right: 120, left: 120, top: 15, bottom: 15),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0))),
+                              borderRadius: BorderRadius.circular(20.0))),
                     )
                   ],
                 ),

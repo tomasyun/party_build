@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/mail_bloc.dart';
-import 'package:party_build/global/toast.dart';
 import 'package:party_build/item/leaders_item.dart';
 import 'package:party_build/model/leaders_model.dart';
 
@@ -38,7 +37,7 @@ class MailState extends State<MailPage> with MailBloc {
                       children: <Widget>[
                         Text(
                           position,
-                          style: TextStyle(fontSize: 16.0, color: Colors.black),
+                          style: TextStyle(fontSize: 14.0, color: Colors.black),
                         ),
                         Expanded(
                           child: Row(
@@ -66,7 +65,7 @@ class MailState extends State<MailPage> with MailBloc {
                     maxLength: 50,
                     cursorColor: Colors.red,
                     cursorWidth: 3.0,
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    style: TextStyle(fontSize: 14.0, color: Colors.black),
                     decoration: InputDecoration(
                         hintText: "请在此输入您要反馈的内容,感谢您使用智慧党建云平台。",
                         border: OutlineInputBorder(
@@ -80,7 +79,7 @@ class MailState extends State<MailPage> with MailBloc {
                     onPressed: () => {},
                     child: Text(
                       "提交反馈",
-                      style: TextStyle(fontSize: 16.0, color: Colors.white),
+                      style: TextStyle(fontSize: 15.0, color: Colors.white),
                     ),
                     color: Colors.red,
                     padding: EdgeInsets.fromLTRB(130.0, 15.0, 130.0, 15.0),

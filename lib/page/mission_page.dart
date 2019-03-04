@@ -48,11 +48,8 @@ class MissionState extends State<MissionPage> {
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => GardenParksPage())),
-                child: _buildContainer(
-                    Colors.red,
-                    "images/ic_garden_parks.png",
-                    "团员园地",
-                    EdgeInsets.only(top: 10.0)),
+                child: _buildContainer(Colors.red, "images/ic_garden_parks.png",
+                    "团员园地", EdgeInsets.only(top: 10.0)),
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
@@ -97,11 +94,10 @@ class MissionState extends State<MissionPage> {
           ),
           Text(
             title,
-            style: TextStyle(fontSize: 20.0, color: Colors.white),
+            style: TextStyle(fontSize: 16.0, color: Colors.white),
           )
         ],
       ),
     );
   }
 }
-

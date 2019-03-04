@@ -24,7 +24,7 @@ class LeadersItem extends StatelessWidget {
             child: Center(
               child: Text(
                 data.position,
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
+                style: TextStyle(fontSize: 15.0, color: Colors.black),
               ),
             ),
           ),

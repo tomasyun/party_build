@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/meeting_model.dart';
 import 'package:party_build/page/meeting_info_page.dart';
 
@@ -35,7 +34,7 @@ class MeetingItem extends StatelessWidget {
                             margin: EdgeInsets.only(left: 15.0),
                             child: Text(data.title,
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 15.0)),
+                                    color: Colors.black, fontSize: 14.0)),
                           ),
                           flex: 1,
                         )
@@ -51,7 +50,7 @@ class MeetingItem extends StatelessWidget {
                           child: Text(
                             data.limitDate,
                             style: TextStyle(
-                                color: Colors.black45, fontSize: 13.0),
+                                color: Colors.black45, fontSize: 14.0),
                           ),
                           padding: EdgeInsets.only(top: 3.0),
                         ),

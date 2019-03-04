@@ -24,7 +24,7 @@ class VoteItem extends StatelessWidget {
                     child: Text(
                       model.title,
                       textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 15.0, color: Colors.black),
+                      style: TextStyle(fontSize: 14.0, color: Colors.black),
                     ),
                   ),
                   Container(
