@@ -35,7 +35,7 @@ class InfoDetailState extends State<InfoDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "资讯详情",
+          "详情",
           style: TextStyle(color: Colors.white, fontSize: 18.0),
         ),
         centerTitle: true,
@@ -86,7 +86,7 @@ class InfoDetailState extends State<InfoDetailPage> {
                 margin: EdgeInsets.only(top: 20.0),
                 padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       child: Text(
@@ -95,7 +95,7 @@ class InfoDetailState extends State<InfoDetailPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 2.0, left: 3.0),
+                      margin: EdgeInsets.only(left: 3.0),
                       child: _buildText(
                         detail.data.publicUnit,
                       ),

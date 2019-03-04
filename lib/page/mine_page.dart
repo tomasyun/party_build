@@ -165,31 +165,48 @@ class MinePageState extends State<MinePage> {
 
   Widget _buildContainer(
       BuildContext context, Widget widget, String url, String title) {
-    return Container(
-      margin: EdgeInsets.only(top: 0.5),
-      color: Colors.white,
-      child: ListTile(
-        onTap: () {
-          if (widget == null) {
-            GlobalToast.showToast("暂未开通");
-          } else {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => widget));
-          }
-        },
-        leading: Image.asset(
-          url,
-          width: 22.0,
-          height: 22.0,
+    return GestureDetector(
+      onTap: () {
+        if (widget == null) {
+          GlobalToast.showToast("暂未开通");
+        } else {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => widget));
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.all(15.0),
+        margin: EdgeInsets.only(top: 0.5),
+        color: Colors.white,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Image.asset(
+                url,
+                width: 22.0,
+                height: 22.0,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 15.0),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 14.0, color: Colors.black),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: AlignmentDirectional.centerEnd,
+                child: Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Colors.black45,
+                ),
+              ),
+              flex: 1,
+            )
+          ],
         ),
-        title: Text(
-          title,
-          style: TextStyle(
-            fontSize: 14.0,
-            color: Colors.black,
-          ),
-        ),
-        trailing: Icon(Icons.keyboard_arrow_right),
       ),
     );
   }
