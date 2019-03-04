@@ -167,8 +167,8 @@ class MeetingInfoState extends State<MeetingInfoPage> {
     }
   }
 
-  Widget _buildBottomContainer(conferenceStateId, String action,
-      String signState, String leaveState) {
+  Widget _buildBottomContainer(
+      conferenceStateId, String action, String signState, String leaveState) {
     if (conferenceStateId == "0") {
       switch (action) {
         case "Q":
@@ -363,12 +363,13 @@ class MeetingInfoState extends State<MeetingInfoPage> {
     return Container();
   }
 
-  Widget _buildMeetingOnContainer({String title,
-    String title2,
-    Color color,
-    Color color2,
-    VoidCallback onPress,
-    VoidCallback onPress2}) {
+  Widget _buildMeetingOnContainer(
+      {String title,
+      String title2,
+      Color color,
+      Color color2,
+      VoidCallback onPress,
+      VoidCallback onPress2}) {
     return Container(
       height: 79.0,
       alignment: AlignmentDirectional.center,
@@ -408,10 +409,11 @@ class MeetingInfoState extends State<MeetingInfoPage> {
     );
   }
 
-  Widget _buildRaisedButton({String title,
-    EdgeInsetsGeometry edge,
-    Color color,
-    VoidCallback onPressed}) {
+  Widget _buildRaisedButton(
+      {String title,
+      EdgeInsetsGeometry edge,
+      Color color,
+      VoidCallback onPressed}) {
     return RaisedButton(
       onPressed: onPressed,
       child: Text(
