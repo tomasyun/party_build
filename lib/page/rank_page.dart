@@ -55,11 +55,10 @@ class RankState extends State<RankPage> {
   Widget _buildRichText(String text1, String text2) {
     return RichText(
         text: TextSpan(children: <TextSpan>[
-          TextSpan(
-              text: text1, style: TextStyle(fontSize: 20, color: Colors.white)),
-          TextSpan(
-              text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
-        ]));
+      TextSpan(
+          text: text1, style: TextStyle(fontSize: 20, color: Colors.white)),
+      TextSpan(text: text2, style: TextStyle(fontSize: 14, color: Colors.white))
+    ]));
   }
 
   Widget _buildCreditRankListView(Rank rank) {

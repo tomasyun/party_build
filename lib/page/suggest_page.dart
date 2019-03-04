@@ -14,7 +14,7 @@ class SuggestState extends State<SuggestPage> with SuggestBloc {
 
   _showSubmitSuccessful(BuildContext context) {
     NavigatorState navigator =
-    context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+        context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
     Alert(
       context: context,
       title: "提交成功",
