@@ -175,7 +175,7 @@ class ExamInfoState extends State<ExamInfoPage> {
                             child: Text(
                               "考试时间",
                               style:
-                              TextStyle(fontSize: 16, color: Colors.black),
+                                  TextStyle(fontSize: 16, color: Colors.black),
                             ),
                           ),
                           Container(
@@ -229,8 +229,7 @@ class ExamInfoState extends State<ExamInfoPage> {
       return RaisedButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  OnlineExamPage(
+              builder: (context) => OnlineExamPage(
                     id: widget.id,
                   )));
         },
@@ -248,8 +247,7 @@ class ExamInfoState extends State<ExamInfoPage> {
       return RaisedButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  OnlineExamPage(
+              builder: (context) => OnlineExamPage(
                     id: widget.id,
                   )));
         },
