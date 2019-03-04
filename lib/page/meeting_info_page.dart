@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/meeting_info_bloc.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/meeting_info_model.dart';
+import 'package:party_build/page/leave_reason_page.dart';
+import 'package:party_build/page/meeting_summary_page.dart';
 
 // ignore: must_be_immutable
 class MeetingInfoPage extends StatefulWidget {
@@ -141,22 +144,8 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                 height: 1.0,
                 color: Colors.black12,
               ),
-              Container(
-                height: 79.0,
-                alignment: AlignmentDirectional.center,
-                child: RaisedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "查看会议纪要",
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
-                  ),
-                  padding: EdgeInsets.only(
-                      left: 120.0, top: 15.0, bottom: 15.0, right: 120.0),
-                  color: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                ),
-              )
+              _buildBottomContainer(info.data.conferenceState, info.data.action,
+                  info.data.signUpState, info.data.leaveState)
             ],
           ),
         )
@@ -176,6 +165,264 @@ class MeetingInfoState extends State<MeetingInfoPage> {
     } else {
       return Container();
     }
+  }
+
+  Widget _buildBottomContainer(conferenceStateId, String action,
+      String signState, String leaveState) {
+    if (conferenceStateId == "0") {
+      switch (action) {
+        case "Q":
+          return _buildMeetingOnContainer(
+              title: "报名",
+              title2: "请假",
+              color: Colors.red,
+              color2: Colors.red,
+              onPress: () {
+                GlobalToast.showToast("报名时间未到");
+              },
+              onPress2: () {
+                GlobalToast.showToast("当前不能请假");
+              });
+          break;
+        case "O":
+          if (signState == "0") {
+            if (leaveState == "0") {
+              return _buildMeetingOnContainer(
+                  title: "报名",
+                  title2: "请假",
+                  color: Colors.red,
+                  color2: Colors.red,
+                  onPress: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LeaveReasonPage()));
+                  },
+                  onPress2: () {
+                    GlobalToast.showToast("开始报名");
+                  });
+            } else {
+              return Container(
+                height: 79.0,
+                alignment: AlignmentDirectional.center,
+                child: _buildRaisedButton(
+                    title: "已请假",
+                    edge: EdgeInsets.only(
+                        left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                    color: Color.fromARGB(255, 249, 125, 108),
+                    onPressed: () {}),
+              );
+            }
+          } else {
+            return Container(
+              height: 79.0,
+              alignment: AlignmentDirectional.center,
+              child: _buildRaisedButton(
+                  title: "已报名",
+                  edge: EdgeInsets.only(
+                      left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                  color: Color.fromARGB(255, 249, 125, 108),
+                  onPressed: () {}),
+            );
+          }
+          break;
+        case "H":
+          if (signState == "0") {
+            if (leaveState == "0") {
+              return _buildMeetingOnContainer(
+                  title: "报名",
+                  title2: "请假",
+                  color: Colors.red,
+                  color2: Colors.red,
+                  onPress: () {
+                    GlobalToast.showToast("当前不能请假");
+                  },
+                  onPress2: () {
+                    GlobalToast.showToast("报名时间已结束");
+                  });
+            } else {
+              return Container(
+                height: 79.0,
+                alignment: AlignmentDirectional.center,
+                child: _buildRaisedButton(
+                    title: "已请假",
+                    edge: EdgeInsets.only(
+                        left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                    color: Color.fromARGB(255, 249, 125, 108),
+                    onPressed: () {}),
+              );
+            }
+          } else {
+            return Container(
+              height: 79.0,
+              alignment: AlignmentDirectional.center,
+              child: _buildRaisedButton(
+                  title: "已报名",
+                  edge: EdgeInsets.only(
+                      left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                  color: Color.fromARGB(255, 249, 125, 108),
+                  onPressed: () {}),
+            );
+          }
+          break;
+      }
+    } else if (conferenceStateId == "1") {
+      switch (action) {
+        case "Q":
+          return _buildMeetingOnContainer(
+              title: "报名",
+              title2: "请假",
+              color: Colors.red,
+              color2: Colors.red,
+              onPress: () {
+                GlobalToast.showToast("报名时间未到");
+              },
+              onPress2: () {
+                GlobalToast.showToast("当前不能请假");
+              });
+          break;
+        case "O":
+          if (signState == "0") {
+            if (leaveState == "0") {
+              return Container(
+                height: 79.0,
+                alignment: AlignmentDirectional.center,
+                child: _buildRaisedButton(
+                    title: "会议进行中",
+                    edge: EdgeInsets.only(
+                        left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                    color: Color.fromARGB(255, 249, 125, 108),
+                    onPressed: () {}),
+              );
+            } else {
+              return Container(
+                height: 79.0,
+                alignment: AlignmentDirectional.center,
+                child: _buildRaisedButton(
+                    title: "已请假",
+                    edge: EdgeInsets.only(
+                        left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                    color: Color.fromARGB(255, 249, 125, 108),
+                    onPressed: () {}),
+              );
+            }
+          } else {
+            return Container(
+              height: 79.0,
+              alignment: AlignmentDirectional.center,
+              child: _buildRaisedButton(
+                  title: "已报名",
+                  edge: EdgeInsets.only(
+                      left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                  color: Color.fromARGB(255, 249, 125, 108),
+                  onPressed: () {}),
+            );
+          }
+          break;
+        case "H":
+          if (signState == "0") {
+            if (leaveState == "0") {
+              return _buildMeetingOnContainer(
+                  title: "报名",
+                  title2: "请假",
+                  color: Colors.red,
+                  color2: Colors.red,
+                  onPress: () {
+                    GlobalToast.showToast("当前不能请假");
+                  },
+                  onPress2: () {
+                    GlobalToast.showToast("报名时间已结束");
+                  });
+            } else {
+              return Container(
+                height: 79.0,
+                alignment: AlignmentDirectional.center,
+                child: _buildRaisedButton(
+                    title: "已请假",
+                    edge: EdgeInsets.only(
+                        left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                    color: Color.fromARGB(255, 249, 125, 108),
+                    onPressed: () {}),
+              );
+            }
+          } else {
+            return Container(
+              height: 79.0,
+              alignment: AlignmentDirectional.center,
+              child: _buildRaisedButton(
+                  title: "已报名",
+                  edge: EdgeInsets.only(
+                      left: 120, top: 15.0, right: 120.0, bottom: 15.0),
+                  color: Color.fromARGB(255, 249, 125, 108),
+                  onPressed: () {}),
+            );
+          }
+          break;
+      }
+    } else if (conferenceStateId == "2") {
+      return _buildMeetingOkContainer();
+    }
+    return Container();
+  }
+
+  Widget _buildMeetingOnContainer({String title,
+    String title2,
+    Color color,
+    Color color2,
+    VoidCallback onPress,
+    VoidCallback onPress2}) {
+    return Container(
+      height: 79.0,
+      alignment: AlignmentDirectional.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildRaisedButton(
+              title: title,
+              edge: EdgeInsets.only(
+                  left: 60.0, top: 15.0, right: 60.0, bottom: 15.0),
+              color: color,
+              onPressed: onPress),
+          _buildRaisedButton(
+              title: title2,
+              edge: EdgeInsets.only(
+                  left: 60.0, top: 15.0, right: 60.0, bottom: 15.0),
+              color: color2,
+              onPressed: onPress2),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMeetingOkContainer() {
+    return Container(
+      height: 79.0,
+      alignment: AlignmentDirectional.center,
+      child: _buildRaisedButton(
+          title: "查看会议纪要",
+          edge: EdgeInsets.only(
+              left: 120.0, top: 15.0, right: 120.0, bottom: 15.0),
+          color: Color.fromARGB(255, 249, 125, 108),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MeetingSummaryPage()));
+          }),
+    );
+  }
+
+  Widget _buildRaisedButton({String title,
+    EdgeInsetsGeometry edge,
+    Color color,
+    VoidCallback onPressed}) {
+    return RaisedButton(
+      onPressed: onPressed,
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 15.0, color: Colors.white),
+      ),
+      padding: edge,
+      color: color,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+    );
   }
 
   Widget _buildContainer(String title, String subTitle) {

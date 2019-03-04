@@ -92,9 +92,10 @@ Widget _buildMeetingStateContainer(String state) {
         style: TextStyle(color: Colors.white, fontSize: 14.0),
       ),
       padding: EdgeInsets.only(left: 5.0, right: 5.0, top: 2.0, bottom: 2.0),
-      decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.all(Radius.circular(5.0))),
+      color: Colors.red,
+//      decoration: BoxDecoration(
+//          color: Colors.red,
+//          borderRadius: BorderRadius.all(Radius.circular(5.0))),
     );
   } else if (state == "2") {
     return Container(
