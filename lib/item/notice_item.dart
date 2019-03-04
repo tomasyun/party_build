@@ -36,7 +36,7 @@ class NoticeItem extends StatelessWidget {
                           child: Text(
                             model.name,
                             style:
-                            TextStyle(fontSize: 14.0, color: Colors.black),
+                                TextStyle(fontSize: 14.0, color: Colors.black),
                           ),
                         ),
                         Expanded(
