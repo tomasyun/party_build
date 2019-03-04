@@ -236,7 +236,7 @@ class ExamInfoState extends State<ExamInfoPage> {
         },
         child: Text(
           "开始考试",
-          style: TextStyle(fontSize: 16, color: Colors.white),
+          style: TextStyle(fontSize: 14, color: Colors.white),
         ),
         color: Colors.red,
         shape: RoundedRectangleBorder(
@@ -255,7 +255,7 @@ class ExamInfoState extends State<ExamInfoPage> {
         },
         child: Text(
           "查看考试结果",
-          style: TextStyle(fontSize: 16, color: Colors.white),
+          style: TextStyle(fontSize: 14, color: Colors.white),
         ),
         color: Colors.red,
         shape: RoundedRectangleBorder(

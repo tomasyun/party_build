@@ -418,7 +418,7 @@ class MeetingInfoState extends State<MeetingInfoPage> {
       onPressed: onPressed,
       child: Text(
         title,
-        style: TextStyle(fontSize: 15.0, color: Colors.white),
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
       ),
       padding: edge,
       color: color,

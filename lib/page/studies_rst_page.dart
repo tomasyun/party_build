@@ -34,7 +34,7 @@ class StudiesRslState extends State<StudiesRslPage> {
                     cursorColor: Colors.red,
                     cursorWidth: 3.0,
                     keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    style: TextStyle(fontSize: 14.0, color: Colors.black),
                     decoration: InputDecoration(
                       hintText: "请填写学习成果",
                       border: OutlineInputBorder(
@@ -49,7 +49,7 @@ class StudiesRslState extends State<StudiesRslPage> {
                     onPressed: () => {},
                     child: Text(
                       "提交",
-                      style: TextStyle(fontSize: 16.0, color: Colors.white),
+                      style: TextStyle(fontSize: 14.0, color: Colors.white),
                       maxLines: 1,
                     ),
                     color: Colors.red,

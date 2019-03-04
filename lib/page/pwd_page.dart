@@ -65,7 +65,7 @@ class PasswordState extends State<PasswordPage> {
               onPressed: submit,
               child: Text(
                 "确认修改",
-                style: TextStyle(color: Colors.white, fontSize: 15.0),
+                style: TextStyle(color: Colors.white, fontSize: 14.0),
               ),
               color: Colors.red,
               padding: EdgeInsets.only(

@@ -79,7 +79,7 @@ class MailState extends State<MailPage> with MailBloc {
                     onPressed: () => {},
                     child: Text(
                       "提交反馈",
-                      style: TextStyle(fontSize: 15.0, color: Colors.white),
+                      style: TextStyle(fontSize: 14.0, color: Colors.white),
                     ),
                     color: Colors.red,
                     padding: EdgeInsets.fromLTRB(130.0, 15.0, 130.0, 15.0),

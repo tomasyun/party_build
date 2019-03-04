@@ -74,7 +74,7 @@ class SuggestState extends State<SuggestPage> with SuggestBloc {
                   color: Colors.red,
                   child: Text(
                     "提交反馈",
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+                    style: TextStyle(fontSize: 14.0, color: Colors.white),
                   ),
                   padding: EdgeInsets.only(
                       left: 130.0, right: 130.0, top: 15.0, bottom: 15.0),

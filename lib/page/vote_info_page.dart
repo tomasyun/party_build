@@ -74,7 +74,10 @@ class VoteInfoState extends State<VoteInfoPage> {
                   Container(
                     child: Text(
                       info.data.title,
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   Container(
@@ -117,12 +120,15 @@ class VoteInfoState extends State<VoteInfoPage> {
                     margin: EdgeInsets.only(top: 10.0),
                     child: Text(
                       "补充党支部组织委员,选举一名任命",
-                      style: TextStyle(fontSize: 16.0, color: Colors.red),
+                      style: TextStyle(fontSize: 14.0, color: Colors.red),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(25.0),
-                    width: 300.0,
+                    margin: EdgeInsets.only(
+                      top: 30.0,
+                      bottom: 30.0,
+                    ),
+                    width: double.infinity,
                     child: Column(
                       children: _buildRadioList(info.data),
                     ),
@@ -156,7 +162,7 @@ class VoteInfoState extends State<VoteInfoPage> {
                   },
                   child: Text(
                     "提交",
-                    style: TextStyle(fontSize: 16.0, color: Colors.white),
+                    style: TextStyle(fontSize: 14.0, color: Colors.white),
                   ),
                   padding: EdgeInsets.only(
                       left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
