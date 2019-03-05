@@ -12,6 +12,7 @@ class VoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        color: Colors.white,
         width: double.infinity,
         child: Column(
           children: <Widget>[

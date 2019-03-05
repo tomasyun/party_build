@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:party_build/model/exam_question_model.dart';
+import 'package:party_build/model/survey_question_model.dart';
 
 // ignore: must_be_immutable
-class ExamQuestionItem extends StatefulWidget {
-  QuestionList list;
+class SurveyQuestionItem extends StatefulWidget {
+  SurveyQuestionData questionData;
   int position;
 
-  ExamQuestionItem({this.position, this.list});
+  SurveyQuestionItem({this.questionData, this.position});
 
   @override
-  State<StatefulWidget> createState() => ExamQuestionState();
+  State<StatefulWidget> createState() => SurveyQuestionState();
 }
 
-class ExamQuestionState extends State<ExamQuestionItem> {
+class SurveyQuestionState extends State<SurveyQuestionItem> {
   int groupValue;
 
   @override
@@ -25,7 +25,7 @@ class ExamQuestionState extends State<ExamQuestionItem> {
             color: Colors.white,
             margin: EdgeInsets.all(15.0),
             child: Text(
-              widget.position.toString() + ". " + widget.list.content,
+              widget.position.toString() + ". " + widget.questionData.content,
               style: TextStyle(
                   fontSize: 15.0,
                   color: Colors.black,
@@ -46,7 +46,7 @@ class ExamQuestionState extends State<ExamQuestionItem> {
 
   List<RadioListTile> _buildRadioList() {
     List<RadioListTile> _list = List<RadioListTile>();
-    for (int i = 0; i < widget.list.questionOptionsList.length; i++) {
+    for (int i = 0; i < widget.questionData.questionOptionsList.length; i++) {
       var item = RadioListTile(
         value: i,
         groupValue: groupValue,
@@ -54,7 +54,7 @@ class ExamQuestionState extends State<ExamQuestionItem> {
           updateGroupValue(T);
         },
         title: Text(
-          widget.list.questionOptionsList[i].content,
+          widget.questionData.questionOptionsList[i].content,
           style: TextStyle(fontSize: 15.0, color: Colors.black),
         ),
       );

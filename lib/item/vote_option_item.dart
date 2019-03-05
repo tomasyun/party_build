@@ -10,9 +10,7 @@ class VoteOptionItem extends StatefulWidget {
   VoteOptionItem({this.value, this.model});
 
   @override
-  State<StatefulWidget> createState() {
-    return null;
-  }
+  State<StatefulWidget> createState() => VoteOptionState();
 }
 
 class VoteOptionState extends State<VoteOptionItem> {

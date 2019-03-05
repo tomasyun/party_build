@@ -16,6 +16,7 @@ class RankItemState extends State<RankItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: Column(
         children: <Widget>[
           Container(
