@@ -193,11 +193,14 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                   color: Colors.red,
                   color2: Colors.red,
                   onPress: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LeaveReasonPage()));
+                    GlobalToast.showToast("开始报名");
                   },
                   onPress2: () {
-                    GlobalToast.showToast("开始报名");
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            LeaveReasonPage(
+                              meetingId: widget.id,
+                            )));
                   });
             } else {
               return Container(
@@ -403,8 +406,11 @@ class MeetingInfoState extends State<MeetingInfoPage> {
               left: 120.0, top: 15.0, right: 120.0, bottom: 15.0),
           color: Color.fromARGB(255, 249, 125, 108),
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => MeetingSummaryPage()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    MeetingSummaryPage(
+                      meetingId: widget.id,
+                    )));
           }),
     );
   }

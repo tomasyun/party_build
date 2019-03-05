@@ -52,7 +52,7 @@ class ExamQuestionState extends State<ExamQuestionItem> {
         },
         title: Text(
           widget.list.questionOptionsList[i].content,
-          style: TextStyle(fontSize: 14.0, color: Colors.black),
+          style: TextStyle(fontSize: 15.0, color: Colors.black),
         ),
       );
       _list.add(item);

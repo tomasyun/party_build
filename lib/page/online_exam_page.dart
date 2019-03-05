@@ -83,7 +83,7 @@ class OnlineExamState extends State<OnlineExamPage> {
                         child: _buildExamQuestions(data)[index],
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 15.0),
+                        margin: EdgeInsets.only(top: 40.0),
                         child: RaisedButton(
                           onPressed: () {
                             if (index + 1 < _buildExamQuestions(data).length) {
@@ -100,8 +100,8 @@ class OnlineExamState extends State<OnlineExamPage> {
                           child: _buildText(
                               index + 1, _buildExamQuestions(data).length),
                           padding: EdgeInsets.only(
-                              left: 130.0,
-                              right: 130.0,
+                              left: 145.0,
+                              right: 145.0,
                               top: 15.0,
                               bottom: 15.0),
                         ),
