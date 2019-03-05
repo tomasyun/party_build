@@ -196,10 +196,18 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                     GlobalToast.showToast("开始报名");
                   },
                   onPress2: () {
+//                    Future future =
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => LeaveReasonPage(
                               meetingId: widget.id,
                             )));
+//                    future.then((value) {
+//                      if (value == "pop") {
+//                        setState(() {
+//                          _bloc.doGetMeetingInfoRequest(id: widget.id);
+//                        });
+//                      }
+//                    });
                   });
             } else {
               return Container(
@@ -235,10 +243,10 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                   color: Colors.red,
                   color2: Colors.red,
                   onPress: () {
-                    GlobalToast.showToast("当前不能请假");
+                    GlobalToast.showToast("报名时间已结束");
                   },
                   onPress2: () {
-                    GlobalToast.showToast("报名时间已结束");
+                    GlobalToast.showToast("当前不能请假");
                   });
             } else {
               return Container(
@@ -328,10 +336,10 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                   color: Colors.red,
                   color2: Colors.red,
                   onPress: () {
-                    GlobalToast.showToast("当前不能请假");
+                    GlobalToast.showToast("报名时间已结束");
                   },
                   onPress2: () {
-                    GlobalToast.showToast("报名时间已结束");
+                    GlobalToast.showToast("当前不能请假");
                   });
             } else {
               return Container(

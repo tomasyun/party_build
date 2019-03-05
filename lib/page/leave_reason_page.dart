@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:party_build/bloc/leave_reason_bloc.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/response_rst_model.dart';
+import 'package:party_build/page/success_rst_page.dart';
 
 // ignore: must_be_immutable
 class LeaveReasonPage extends StatefulWidget {
@@ -82,7 +83,15 @@ class LeaveReasonState extends State<LeaveReasonPage> with LeaveReasonBloc {
   @override
   void onSuccess(ResponseRstModel model) {
     if (model.code == "0000") {
-      GlobalToast.showToast(model.msg);
+//      GlobalToast.showToast(model.msg);
+//      Navigator.of(context).pop("pop");
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) =>
+                  SuccessRstPage(
+                    skipId: "2",
+                  )),
+              (route) => route == null);
     }
   }
 }
