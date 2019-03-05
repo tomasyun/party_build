@@ -175,7 +175,7 @@ class ExamInfoState extends State<ExamInfoPage> {
                             child: Text(
                               "考试时间",
                               style:
-                              TextStyle(fontSize: 14, color: Colors.black),
+                                  TextStyle(fontSize: 14, color: Colors.black),
                             ),
                           ),
                           Container(
