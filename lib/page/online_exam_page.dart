@@ -50,12 +50,15 @@ class OnlineExamState extends State<OnlineExamPage> {
   }
 
   List<ExamQuestionItem> _buildExamQuestions(Question question) {
-    return question.data.questionList
-        .map((item) =>
-        ExamQuestionItem(
-          list: item,
-        ))
-        .toList();
+    List<ExamQuestionItem> list = List<ExamQuestionItem>();
+    for (int i = 0; i < question.data.questionList.length; i++) {
+      var item = ExamQuestionItem(
+        position: i + 1,
+        list: question.data.questionList[i],
+      );
+      list.add(item);
+    }
+    return list;
   }
 
   Widget _buildExamQuestion() {
@@ -128,12 +131,12 @@ class OnlineExamState extends State<OnlineExamPage> {
     if (indexStart < indexEnd) {
       return Text(
         "下一题",
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
       );
     } else {
       return Text(
         "提交",
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
       );
     }
   }

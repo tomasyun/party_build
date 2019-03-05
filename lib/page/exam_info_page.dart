@@ -54,14 +54,14 @@ class ExamInfoState extends State<ExamInfoPage> {
                 Container(
                   child: Text(
                     key,
-                    style: TextStyle(color: Colors.black, fontSize: 16),
+                    style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 10.0),
                   child: Text(
                     value,
-                    style: TextStyle(color: Colors.black, fontSize: 16),
+                    style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                 ),
               ],
@@ -109,7 +109,7 @@ class ExamInfoState extends State<ExamInfoPage> {
               child: Center(
                 child: Text(
                   info.data.title,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -175,7 +175,7 @@ class ExamInfoState extends State<ExamInfoPage> {
                             child: Text(
                               "考试时间",
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
+                              TextStyle(fontSize: 14, color: Colors.black),
                             ),
                           ),
                           Container(
@@ -187,21 +187,22 @@ class ExamInfoState extends State<ExamInfoPage> {
                                   child: Text(
                                     info.data.examStartTime,
                                     style: TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                        fontSize: 14, color: Colors.black),
                                   ),
                                 ),
                                 Container(
+                                  margin: EdgeInsets.symmetric(vertical: 10.0),
                                   child: Text(
                                     "至",
                                     style: TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                        fontSize: 14, color: Colors.black),
                                   ),
                                 ),
                                 Container(
                                   child: Text(
                                     info.data.examEndTime,
                                     style: TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                        fontSize: 14, color: Colors.black),
                                   ),
                                 ),
                               ],

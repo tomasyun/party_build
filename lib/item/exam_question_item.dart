@@ -4,8 +4,9 @@ import 'package:party_build/model/exam_question_model.dart';
 // ignore: must_be_immutable
 class ExamQuestionItem extends StatefulWidget {
   QuestionList list;
+  int position;
 
-  ExamQuestionItem({this.list});
+  ExamQuestionItem({this.position, this.list});
 
   @override
   State<StatefulWidget> createState() => ExamQuestionState();
@@ -22,8 +23,11 @@ class ExamQuestionState extends State<ExamQuestionItem> {
           Container(
             margin: EdgeInsets.all(15.0),
             child: Text(
-              widget.list.content,
-              style: TextStyle(fontSize: 16.0, color: Colors.black),
+              widget.position.toString() + ". " + widget.list.content,
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
