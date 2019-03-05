@@ -8,7 +8,7 @@ import 'package:party_build/page/integrity_page.dart';
 import 'package:party_build/page/mail_page.dart';
 import 'package:party_build/page/meeting_page.dart';
 import 'package:party_build/page/mission_page.dart';
-import 'package:party_build/page/studies_page.dart';
+import 'package:party_build/page/task_page.dart';
 import 'package:party_build/page/union_page.dart';
 
 //首页
@@ -213,7 +213,7 @@ class HomePageState extends State<HomePage> {
                               onTap: () => Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          StudiesPage())),
+                                          TaskPage())),
                             ),
                             GestureDetector(
                               child: Container(
