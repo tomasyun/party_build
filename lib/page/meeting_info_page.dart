@@ -197,8 +197,7 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                   },
                   onPress2: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            LeaveReasonPage(
+                        builder: (context) => LeaveReasonPage(
                               meetingId: widget.id,
                             )));
                   });
@@ -407,8 +406,7 @@ class MeetingInfoState extends State<MeetingInfoPage> {
           color: Color.fromARGB(255, 249, 125, 108),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    MeetingSummaryPage(
+                builder: (context) => MeetingSummaryPage(
                       meetingId: widget.id,
                     )));
           }),

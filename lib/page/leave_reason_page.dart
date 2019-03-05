@@ -44,7 +44,7 @@ class LeaveReasonState extends State<LeaveReasonPage> with LeaveReasonBloc {
                       hintText: "因出差未归，不能按时参会",
                       border: OutlineInputBorder(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(15.0)))),
+                              BorderRadius.all(Radius.circular(15.0)))),
                 ),
               ),
               Container(
