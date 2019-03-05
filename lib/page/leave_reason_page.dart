@@ -87,11 +87,10 @@ class LeaveReasonState extends State<LeaveReasonPage> with LeaveReasonBloc {
 //      Navigator.of(context).pop("pop");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (context) =>
-                  SuccessRstPage(
+              builder: (context) => SuccessRstPage(
                     skipId: "2",
                   )),
-              (route) => route == null);
+          (route) => route == null);
     }
   }
 }
