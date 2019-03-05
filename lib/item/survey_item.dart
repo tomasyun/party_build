@@ -13,8 +13,7 @@ class SurveyItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                OnlineSurveyPage(
+            builder: (context) => OnlineSurveyPage(
                   surveyId: model.id,
                 )));
       },
