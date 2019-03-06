@@ -13,8 +13,7 @@ class TaskItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                StudiesPage(
+            builder: (context) => StudiesPage(
                   taskId: model.id,
                 )));
       },
