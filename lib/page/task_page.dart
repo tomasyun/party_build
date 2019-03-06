@@ -42,7 +42,10 @@ class TaskState extends State<TaskPage> {
         ),
       );
     }, success: (data) {
-      return _buildTaskListView(data);
+      return Container(
+        color: Colors.black12,
+        child: _buildTaskListView(data),
+      );
     }, error: (msg) {
       return Container(
         child: Center(
