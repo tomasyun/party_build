@@ -75,16 +75,13 @@ class MailState extends State<MailPage> with MailBloc {
                         hintText: "请在此输入您要反馈的内容,感谢您使用智慧党建云平台。",
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(15.0)))),
+                                BorderRadius.all(Radius.circular(15.0)))),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 50.0, bottom: 100.0),
                   child: RaisedButton(
-                    onPressed: () =>
-                    {
-                    submitFeedback()
-                    },
+                    onPressed: () => {submitFeedback()},
                     child: Text(
                       "提交反馈",
                       style: TextStyle(fontSize: 14.0, color: Colors.white),
@@ -146,8 +143,7 @@ class MailState extends State<MailPage> with MailBloc {
   void onSendSuccess(ResponseRstModel model) {
     if (model.code == "0000") {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              SuccessRstPage(
+          builder: (context) => SuccessRstPage(
                 skipId: "4",
               )));
       setState(() {
