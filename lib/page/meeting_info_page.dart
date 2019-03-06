@@ -121,12 +121,12 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                   Container(
                     margin: EdgeInsets.only(top: 15.0),
                     child: _buildBriefExpansionPanelList(
-                        title: "简介", content: "陕西缔科网络科技有限公司"),
+                        title: "简介", content: info.data.brief),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15.0),
                     child: _buildParticipantsExpansionPanelList(
-                        title: "参会人", content: "12"),
+                        title: "参会人", attender: info.data.attender),
                   )
                 ],
               ),
@@ -509,7 +509,8 @@ class MeetingInfoState extends State<MeetingInfoPage> {
         ]);
   }
 
-  Widget _buildParticipantsExpansionPanelList({String title, String content}) {
+  Widget _buildParticipantsExpansionPanelList(
+      {String title, List<dynamic> attender}) {
     return ExpansionPanelList(
         expansionCallback: (int panelIndex, bool isExpanded) {
           setState(() {
@@ -536,13 +537,25 @@ class MeetingInfoState extends State<MeetingInfoPage> {
             body: Container(
               padding: EdgeInsets.all(15.0),
               width: double.infinity,
-              child: Text(
-                content,
-                style: TextStyle(fontSize: 14.0, color: Colors.black),
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: ListBody(
+                  children: _buildParticipantsBody(attender),
+                ),
               ),
             ),
             isExpanded: _participants,
           ),
         ]);
+  }
+
+  Widget _buildParticipantsItem(String attender) {
+    return Container(
+      child: Text(attender),
+    );
+  }
+
+  List<Widget> _buildParticipantsBody(List<dynamic> attender) {
+    return attender.map((item) => _buildParticipantsItem(item)).toList();
   }
 }

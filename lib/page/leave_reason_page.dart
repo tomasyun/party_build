@@ -85,12 +85,16 @@ class LeaveReasonState extends State<LeaveReasonPage> with LeaveReasonBloc {
     if (model.code == "0000") {
 //      GlobalToast.showToast(model.msg);
 //      Navigator.of(context).pop("pop");
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => SuccessRstPage(
-                    skipId: "2",
-                  )),
-          (route) => route == null);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) =>
+                SuccessRstPage(
+                  skipId: "2",
+                )),
+      );
+      setState(() {
+        _controller.text = "";
+      });
     }
   }
 }
