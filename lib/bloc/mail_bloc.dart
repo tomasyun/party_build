@@ -39,7 +39,7 @@ abstract class MailBloc {
     });
     print(token);
     Options options =
-    Options(baseUrl: BASE_URL, headers: {"Authorization": token});
+        Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"content": content});
     print(data);
     Response response = await Dio(options).post("suggestFeedback", data: data);
