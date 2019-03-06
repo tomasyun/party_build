@@ -163,9 +163,8 @@ class StudiesState extends State<StudiesPage> {
               ),
             ),
             GestureDetector(
-              onTap: () =>
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => StudiesRslPage())),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => StudiesRslPage())),
               child: Container(
                 margin: EdgeInsets.only(bottom: 10.0),
                 color: Colors.white,
