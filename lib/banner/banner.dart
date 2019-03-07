@@ -88,7 +88,7 @@ class BannerState extends State<BannerWidget> {
             child: widget.build == null
                 ? FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                image: widget.entity[index % widget.entity.length].bUrl,
+                    image: widget.entity[index % widget.entity.length].bUrl,
                     fit: BoxFit.cover)
                 : widget.build(
                     index, widget.entity[index % widget.entity.length]));
