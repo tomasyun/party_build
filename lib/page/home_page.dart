@@ -142,7 +142,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.orange,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -164,11 +164,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MeetingPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      MeetingPage())),
                         ),
                         GestureDetector(
                           child: Container(
@@ -180,7 +179,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.green,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -202,11 +201,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ActivityPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ActivityPage())),
                         ),
                       ],
                     ),
@@ -227,7 +225,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.blue,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -249,11 +247,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          TaskPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      TaskPage())),
                         ),
                         GestureDetector(
                           child: Container(
@@ -265,7 +262,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -314,7 +311,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.orange,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -336,11 +333,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          IntegrityPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      IntegrityPage())),
                         ),
                         GestureDetector(
                           child: Container(
@@ -352,7 +348,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.green,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -374,11 +370,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          UnionPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      UnionPage())),
                         ),
                       ],
                     ),
@@ -399,7 +394,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -421,11 +416,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MissionPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      MissionPage())),
                         ),
                         GestureDetector(
                           child: Container(
@@ -437,7 +431,7 @@ class HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.blue,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                    BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -459,11 +453,10 @@ class HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          onTap: () =>
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MailPage())),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      MailPage())),
                         ),
                       ],
                     ),
