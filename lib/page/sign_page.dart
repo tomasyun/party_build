@@ -16,12 +16,9 @@ String getLocationStr(AMapLocation loc) {
 
   if (loc.isSuccess()) {
     if (loc.hasAddress()) {
-      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc
-          .longitude}\n 地址:${loc.formattedAddress} 城市:${loc.city} 省:${loc
-          .province}";
+      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc.longitude}\n 地址:${loc.formattedAddress} 城市:${loc.city} 省:${loc.province}";
     } else {
-      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc
-          .longitude}\n ";
+      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc.longitude}\n ";
     }
   } else {
     return "定位失败: \n错误:{code=${loc.code},description=${loc.description}";
@@ -157,11 +154,11 @@ class SignPageState extends State<SignPage> {
 
   void _checkPermission() async {
     bool hasPermission =
-    await SimplePermissions.checkPermission(Permission.WhenInUseLocation);
+        await SimplePermissions.checkPermission(Permission.WhenInUseLocation);
     if (!hasPermission) {
       PermissionStatus requestPermissionResult =
-      await SimplePermissions.requestPermission(
-          Permission.WhenInUseLocation);
+          await SimplePermissions.requestPermission(
+              Permission.WhenInUseLocation);
       if (requestPermissionResult != PermissionStatus.authorized) {
         GlobalToast.showToast("申请定位权限失败");
         return;
