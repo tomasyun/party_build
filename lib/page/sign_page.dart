@@ -1,4 +1,7 @@
+import 'package:amap_plugin/amap_location.dart';
 import 'package:flutter/material.dart';
+import 'package:party_build/global/toast.dart';
+import 'package:simple_permissions/simple_permissions.dart';
 
 //签到
 class SignPage extends StatefulWidget {
@@ -6,7 +9,36 @@ class SignPage extends StatefulWidget {
   State<StatefulWidget> createState() => SignPageState();
 }
 
+String getLocationStr(AMapLocation loc) {
+  if (loc == null) {
+    return "正在定位";
+  }
+
+  if (loc.isSuccess()) {
+    if (loc.hasAddress()) {
+      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc
+          .longitude}\n 地址:${loc.formattedAddress} 城市:${loc.city} 省:${loc
+          .province}";
+    } else {
+      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc
+          .longitude}\n ";
+    }
+  } else {
+    return "定位失败: \n错误:{code=${loc.code},description=${loc.description}";
+  }
+}
+
 class SignPageState extends State<SignPage> {
+  String location;
+
+  @override
+  void initState() {
+    super.initState();
+    AMapLocationClient.startup(new AMapLocationOption(
+        desiredAccuracy: CLLocationAccuracy.kCLLocationAccuracyHundredMeters));
+    location = getLocationStr(null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,14 +131,20 @@ class SignPageState extends State<SignPage> {
                 ),
               ),
               Center(
-                child: Container(
-                  padding: EdgeInsets.all(50.0),
-                  margin: EdgeInsets.only(top: 60.0),
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-                  child: Text(
-                    "会议签到",
-                    style: TextStyle(fontSize: 14.0, color: Colors.white),
+                child: GestureDetector(
+                  onTap: () {
+                    //1 开始定位
+                    _checkPermission();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(50.0),
+                    margin: EdgeInsets.only(top: 60.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.red),
+                    child: Text(
+                      "会议签到",
+                      style: TextStyle(fontSize: 14.0, color: Colors.white),
+                    ),
                   ),
                 ),
               )
@@ -115,5 +153,36 @@ class SignPageState extends State<SignPage> {
         ),
       ),
     );
+  }
+
+  void _checkPermission() async {
+    bool hasPermission =
+    await SimplePermissions.checkPermission(Permission.WhenInUseLocation);
+    if (!hasPermission) {
+      PermissionStatus requestPermissionResult =
+      await SimplePermissions.requestPermission(
+          Permission.WhenInUseLocation);
+      if (requestPermissionResult != PermissionStatus.authorized) {
+        GlobalToast.showToast("申请定位权限失败");
+        return;
+      }
+    }
+    AMapLocationClient.onLocationUpate.listen((AMapLocation loc) {
+      if (!mounted) return;
+      setState(() {
+        location = getLocationStr(loc);
+        print(location);
+      });
+    });
+
+    AMapLocationClient.startLocation();
+  }
+
+  @override
+  void dispose() {
+    //注意这里关闭
+    AMapLocationClient.stopLocation();
+    AMapLocationClient.shutdown();
+    super.dispose();
   }
 }

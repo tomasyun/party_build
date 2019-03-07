@@ -79,16 +79,16 @@ class BannerState extends State<BannerWidget> {
       controller: controller,
       onPageChanged: onPageChanged,
       itemBuilder: (context, index) {
-        return GestureDetector(
+        return InkWell(
             onTap: () {
-              if (widget.bannerPress != null)
+              if (widget.bannerPress != null) {
                 widget.bannerPress(selectIndex, widget.entity[selectIndex]);
+              }
             },
             child: widget.build == null
                 ? FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image:
-                        widget.entity[index % widget.entity.length].bUrl,
+                image: widget.entity[index % widget.entity.length].bUrl,
                     fit: BoxFit.cover)
                 : widget.build(
                     index, widget.entity[index % widget.entity.length]));
@@ -142,4 +142,3 @@ class BannerState extends State<BannerWidget> {
     super.dispose();
   }
 }
-

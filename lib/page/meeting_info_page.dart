@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/meeting_info_bloc.dart';
+import 'package:party_build/bloc/sign_up_bloc.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/meeting_info_model.dart';
+import 'package:party_build/model/response_rst_model.dart';
 import 'package:party_build/page/leave_reason_page.dart';
 import 'package:party_build/page/meeting_summary_page.dart';
 
@@ -15,10 +17,10 @@ class MeetingInfoPage extends StatefulWidget {
   State<StatefulWidget> createState() => MeetingInfoState();
 }
 
-class MeetingInfoState extends State<MeetingInfoPage> {
-  MeetingInfoBloc _bloc = MeetingInfoBloc.newInstance;
+class MeetingInfoState extends State<MeetingInfoPage> with SignUpBloc {
   bool _brief = false;
   bool _participants = false;
+  MeetingInfoBloc _bloc = MeetingInfoBloc.newInstance;
 
   @override
   void initState() {
@@ -193,7 +195,7 @@ class MeetingInfoState extends State<MeetingInfoPage> {
                   color: Colors.red,
                   color2: Colors.red,
                   onPress: () {
-                    GlobalToast.showToast("开始报名");
+                    doSignUpRequest(id: widget.id);
                   },
                   onPress2: () {
 //                    Future future =
@@ -557,5 +559,17 @@ class MeetingInfoState extends State<MeetingInfoPage> {
 
   List<Widget> _buildParticipantsBody(List<dynamic> attender) {
     return attender.map((item) => _buildParticipantsItem(item)).toList();
+  }
+
+  @override
+  void onSuccess(ResponseRstModel model) {
+    // TODO: implement onSuccess
+    //报名成功回调
+    if (model.code == "0000") {
+      GlobalToast.showToast(model.msg);
+      setState(() {
+        _bloc.doGetMeetingInfoRequest(id: widget.id);
+      });
+    }
   }
 }

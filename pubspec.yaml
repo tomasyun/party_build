@@ -29,11 +29,11 @@ dependencies:
   flutter_marquee:
     git: https://github.com/LiuC520/flutter_marquee.git
   html: any
+  simple_permissions:
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
+  amap_plugin:
+    path: amap_plugin
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
