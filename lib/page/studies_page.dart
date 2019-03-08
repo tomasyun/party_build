@@ -165,8 +165,7 @@ class StudiesState extends State<StudiesPage> {
             ),
             GestureDetector(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      StudiesRslPage(
+                  builder: (BuildContext context) => StudiesRslPage(
                         taskId: widget.taskId,
                       ))),
               child: Container(
@@ -225,8 +224,7 @@ class CourseItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                CourseInfoPage(
+            builder: (context) => CourseInfoPage(
                   courseId: model.courseId,
                   taskId: taskId,
                 )));
@@ -268,11 +266,10 @@ class CourseList extends StatelessWidget {
 
   List<CourseItem> _buildCourseListBody() {
     return studies.data.courseList
-        .map((item) =>
-        CourseItem(
-          model: item,
-          taskId: studies.data.id,
-        ))
+        .map((item) => CourseItem(
+              model: item,
+              taskId: studies.data.id,
+            ))
         .toList();
   }
 }

@@ -31,10 +31,7 @@ class OnlineExamState extends State<OnlineExamPage> {
     super.initState();
     modelList = List<ExamRstModel>();
     _bloc.getExamQuestionsRequest(widget.id);
-    RxBus.register<ExamRstModel>().listen((event) =>
-    {
-    modelList.add(event)
-    });
+    RxBus.register<ExamRstModel>().listen((event) => {modelList.add(event)});
   }
 
   @override

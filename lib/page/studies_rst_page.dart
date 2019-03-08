@@ -55,10 +55,7 @@ class StudiesRslState extends State<StudiesRslPage> with StudiesObtainBloc {
                 Container(
                   margin: EdgeInsets.only(top: 50.0),
                   child: RaisedButton(
-                    onPressed: () =>
-                    {
-                    _sendObtain()
-                    },
+                    onPressed: () => {_sendObtain()},
                     child: Text(
                       "提交",
                       style: TextStyle(fontSize: 14.0, color: Colors.white),
@@ -93,7 +90,7 @@ class StudiesRslState extends State<StudiesRslPage> with StudiesObtainBloc {
 
   void _sendObtainSuccess() {
     NavigatorState navigator =
-    context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+        context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
     Alert(
         context: context,
         title: "提交成功",
