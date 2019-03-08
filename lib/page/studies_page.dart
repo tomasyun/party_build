@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:party_build/bloc/studies_bloc.dart';
 import 'package:party_build/model/studies_model.dart';
+import 'package:party_build/page/course_info_page.dart';
 import 'package:party_build/page/studies_rst_page.dart';
 
 // ignore: must_be_immutable
@@ -164,7 +165,10 @@ class StudiesState extends State<StudiesPage> {
             ),
             GestureDetector(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => StudiesRslPage())),
+                  builder: (BuildContext context) =>
+                      StudiesRslPage(
+                        taskId: widget.taskId,
+                      ))),
               child: Container(
                 margin: EdgeInsets.only(bottom: 10.0),
                 color: Colors.white,
@@ -212,21 +216,32 @@ class StudiesState extends State<StudiesPage> {
 // ignore: must_be_immutable
 class CourseItem extends StatelessWidget {
   CourseModel model;
+  String taskId;
 
-  CourseItem({this.model});
+  CourseItem({this.model, this.taskId});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
-      child: Text(
-        model.title,
-        style: TextStyle(
-            fontSize: 14.0,
-            color: Colors.black,
-            decoration: TextDecoration.underline,
-            decorationColor: Colors.lightBlue,
-            decorationStyle: TextDecorationStyle.solid),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                CourseInfoPage(
+                  courseId: model.courseId,
+                  taskId: taskId,
+                )));
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        child: Text(
+          model.title,
+          style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.black,
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.lightBlue,
+              decorationStyle: TextDecorationStyle.solid),
+        ),
       ),
     );
   }
@@ -253,7 +268,11 @@ class CourseList extends StatelessWidget {
 
   List<CourseItem> _buildCourseListBody() {
     return studies.data.courseList
-        .map((item) => CourseItem(model: item))
+        .map((item) =>
+        CourseItem(
+          model: item,
+          taskId: studies.data.id,
+        ))
         .toList();
   }
 }

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/online_exam_bloc.dart';
-import 'package:party_build/global/toast.dart';
+import 'package:party_build/global/rxbus.dart';
 import 'package:party_build/item/exam_question_item.dart';
 import 'package:party_build/model/exam_question_model.dart';
+import 'package:party_build/model/option_rst_model.dart';
 
 // ignore: must_be_immutable
 class OnlineExamPage extends StatefulWidget {
   String id;
+  String limitScore;
+  String examCost;
+  String examTime;
 
-  OnlineExamPage({this.id});
+  OnlineExamPage({this.id, this.limitScore, this.examCost, this.examTime});
 
   @override
   State<StatefulWidget> createState() => OnlineExamState();
@@ -18,12 +22,19 @@ class OnlineExamState extends State<OnlineExamPage> {
   int _currentPageIndex = 0;
   var _pageController = new PageController(initialPage: 0);
   int groupValue = 1;
+
+  List<ExamRstModel> modelList;
   OnlineExamBloc _bloc = OnlineExamBloc.newInstance;
 
   @override
   void initState() {
     super.initState();
+    modelList = List<ExamRstModel>();
     _bloc.getExamQuestionsRequest(widget.id);
+    RxBus.register<ExamRstModel>().listen((event) =>
+    {
+    modelList.add(event)
+    });
   }
 
   @override
@@ -88,9 +99,8 @@ class OnlineExamState extends State<OnlineExamPage> {
                           onPressed: () {
                             if (index + 1 < _buildExamQuestions(data).length) {
                               _pageController.jumpToPage(index + 1);
-                            } else {
-                              GlobalToast.showToast("提交成功");
-                            }
+                              setState(() {});
+                            } else {}
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius:

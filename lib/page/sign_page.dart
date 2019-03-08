@@ -1,6 +1,8 @@
 import 'package:amap_plugin/amap_location.dart';
 import 'package:flutter/material.dart';
+import 'package:party_build/bloc/sign_in_bloc.dart';
 import 'package:party_build/global/toast.dart';
+import 'package:party_build/model/response_rst_model.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 
 //签到
@@ -25,7 +27,7 @@ String getLocationStr(AMapLocation loc) {
   }
 }
 
-class SignPageState extends State<SignPage> {
+class SignPageState extends State<SignPage> with SignInBloc {
   String location;
 
   @override
@@ -182,4 +184,7 @@ class SignPageState extends State<SignPage> {
     AMapLocationClient.shutdown();
     super.dispose();
   }
+
+  @override
+  void onSuccess(ResponseRstModel model) {}
 }

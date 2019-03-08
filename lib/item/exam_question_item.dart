@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/global/rxbus.dart';
 import 'package:party_build/model/exam_question_model.dart';
+import 'package:party_build/model/option_rst_model.dart';
 
 // ignore: must_be_immutable
 class ExamQuestionItem extends StatefulWidget {
@@ -54,7 +56,9 @@ class ExamQuestionState extends State<ExamQuestionItem> {
           updateGroupValue(T);
         },
         title: Text(
-          widget.list.questionOptionsList[i].content,
+          widget.list.questionOptionsList[i].name +
+              "  " +
+              widget.list.questionOptionsList[i].content,
           style: TextStyle(fontSize: 15.0, color: Colors.black),
         ),
       );
@@ -66,6 +70,9 @@ class ExamQuestionState extends State<ExamQuestionItem> {
   void updateGroupValue(int value) {
     setState(() {
       groupValue = value;
+      RxBus.post(ExamRstModel(
+          answer: widget.list.questionOptionsList[value].name,
+          questionId: widget.list.questionOptionsList[value].questionId));
     });
   }
 }

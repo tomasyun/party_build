@@ -217,7 +217,7 @@ class ExamInfoState extends State<ExamInfoPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 600.0, left: 18.0, right: 15.0),
-              child: _buildRaisedButton(widget.skipType),
+              child: _buildRaisedButton(info, widget.skipType),
             )
           ],
         ),
@@ -225,13 +225,16 @@ class ExamInfoState extends State<ExamInfoPage> {
     );
   }
 
-  Widget _buildRaisedButton(String type) {
+  Widget _buildRaisedButton(ExamInfo info, String type) {
     if (type == "0") {
       return RaisedButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OnlineExamPage(
                     id: widget.id,
+                limitScore: info.data.limitScore,
+                examCost: "5",
+                examTime: info.data.examStartTime,
                   )));
         },
         child: Text(
