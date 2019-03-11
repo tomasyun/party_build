@@ -1,7 +1,6 @@
 import 'dart:convert' show json;
 
 class Question {
-
   String code;
   String msg;
   QuestionData data;
@@ -9,14 +8,18 @@ class Question {
   Question.fromParams({this.code, this.msg, this.data});
 
   factory Question(jsonStr) =>
-      jsonStr == null ? null : jsonStr is String ? new Question.fromJson(
-          json.decode(jsonStr)) : new Question.fromJson(jsonStr);
+      jsonStr == null
+          ? null
+          : jsonStr is String
+          ? new Question.fromJson(json.decode(jsonStr))
+          : new Question.fromJson(jsonStr);
 
   Question.fromJson(jsonRes) {
     code = jsonRes['code'];
     msg = jsonRes['msg'];
-    data =
-    jsonRes['data'] == null ? null : new QuestionData.fromJson(jsonRes['data']);
+    data = jsonRes['data'] == null
+        ? null
+        : new QuestionData.fromJson(jsonRes['data']);
   }
 
   @override
@@ -30,7 +33,6 @@ class Question {
 }
 
 class QuestionData {
-
   int duration;
   int totalNum;
   List<QuestionList> questionList;
@@ -42,12 +44,11 @@ class QuestionData {
     totalNum = jsonRes['totalNum'];
     questionList = jsonRes['questionList'] == null ? null : [];
 
-    for (var questionListItem in questionList == null
-        ? []
-        : jsonRes['questionList']) {
-      questionList.add(
-          questionListItem == null ? null : new QuestionList.fromJson(
-              questionListItem));
+    for (var questionListItem
+    in questionList == null ? [] : jsonRes['questionList']) {
+      questionList.add(questionListItem == null
+          ? null
+          : new QuestionList.fromJson(questionListItem));
     }
   }
 
@@ -58,7 +59,6 @@ class QuestionData {
 }
 
 class QuestionList {
-
   String score;
   String content;
   String id;
@@ -75,12 +75,11 @@ class QuestionList {
     type = jsonRes['type'];
     questionOptionsList = jsonRes['questionOptionsList'] == null ? null : [];
 
-    for (var questionOptionsListItem in questionOptionsList == null
-        ? []
-        : jsonRes['questionOptionsList']) {
-      questionOptionsList.add(
-          questionOptionsListItem == null ? null : new OptionModel.fromJson(
-              questionOptionsListItem));
+    for (var questionOptionsListItem
+    in questionOptionsList == null ? [] : jsonRes['questionOptionsList']) {
+      questionOptionsList.add(questionOptionsListItem == null
+          ? null
+          : new OptionModel.fromJson(questionOptionsListItem));
     }
   }
 
@@ -99,15 +98,19 @@ class QuestionList {
 }
 
 class OptionModel {
-
   String content;
   String id;
   String name;
   String questionId;
   String sort;
+  bool isSelect = false;
 
-  OptionModel.fromParams(
-      {this.content, this.id, this.name, this.questionId, this.sort});
+  OptionModel.fromParams({this.content,
+    this.id,
+    this.name,
+    this.questionId,
+    this.sort,
+    this.isSelect});
 
   OptionModel.fromJson(jsonRes) {
     content = jsonRes['content'];
@@ -131,4 +134,3 @@ class OptionModel {
         : 'null'}}';
   }
 }
-
