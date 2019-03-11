@@ -232,9 +232,9 @@ class ExamInfoState extends State<ExamInfoPage> {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OnlineExamPage(
                     id: widget.id,
-                score: info.data.limitScore,
-                cost: "5",
-                time: info.data.examStartTime,
+                    score: info.data.limitScore,
+                    cost: "5",
+                    time: info.data.examStartTime,
                   )));
         },
         child: Text(
