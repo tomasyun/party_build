@@ -7,10 +7,9 @@ class Question {
 
   Question.fromParams({this.code, this.msg, this.data});
 
-  factory Question(jsonStr) =>
-      jsonStr == null
-          ? null
-          : jsonStr is String
+  factory Question(jsonStr) => jsonStr == null
+      ? null
+      : jsonStr is String
           ? new Question.fromJson(json.decode(jsonStr))
           : new Question.fromJson(jsonStr);
 
@@ -24,11 +23,7 @@ class Question {
 
   @override
   String toString() {
-    return '{"code": ${code != null
-        ? '${json.encode(code)}'
-        : 'null'},"msg": ${msg != null
-        ? '${json.encode(msg)}'
-        : 'null'},"data": $data}';
+    return '{"code": ${code != null ? '${json.encode(code)}' : 'null'},"msg": ${msg != null ? '${json.encode(msg)}' : 'null'},"data": $data}';
   }
 }
 
@@ -45,7 +40,7 @@ class QuestionData {
     questionList = jsonRes['questionList'] == null ? null : [];
 
     for (var questionListItem
-    in questionList == null ? [] : jsonRes['questionList']) {
+        in questionList == null ? [] : jsonRes['questionList']) {
       questionList.add(questionListItem == null
           ? null
           : new QuestionList.fromJson(questionListItem));
@@ -76,7 +71,7 @@ class QuestionList {
     questionOptionsList = jsonRes['questionOptionsList'] == null ? null : [];
 
     for (var questionOptionsListItem
-    in questionOptionsList == null ? [] : jsonRes['questionOptionsList']) {
+        in questionOptionsList == null ? [] : jsonRes['questionOptionsList']) {
       questionOptionsList.add(questionOptionsListItem == null
           ? null
           : new OptionModel.fromJson(questionOptionsListItem));
@@ -85,15 +80,7 @@ class QuestionList {
 
   @override
   String toString() {
-    return '{"score": ${score != null
-        ? '${json.encode(score)}'
-        : 'null'},"content": ${content != null
-        ? '${json.encode(content)}'
-        : 'null'},"id": ${id != null
-        ? '${json.encode(id)}'
-        : 'null'},"type": ${type != null
-        ? '${json.encode(type)}'
-        : 'null'},"questionOptionsList": $questionOptionsList}';
+    return '{"score": ${score != null ? '${json.encode(score)}' : 'null'},"content": ${content != null ? '${json.encode(content)}' : 'null'},"id": ${id != null ? '${json.encode(id)}' : 'null'},"type": ${type != null ? '${json.encode(type)}' : 'null'},"questionOptionsList": $questionOptionsList}';
   }
 }
 
@@ -105,12 +92,13 @@ class OptionModel {
   String sort;
   bool isSelect = false;
 
-  OptionModel.fromParams({this.content,
-    this.id,
-    this.name,
-    this.questionId,
-    this.sort,
-    this.isSelect});
+  OptionModel.fromParams(
+      {this.content,
+      this.id,
+      this.name,
+      this.questionId,
+      this.sort,
+      this.isSelect});
 
   OptionModel.fromJson(jsonRes) {
     content = jsonRes['content'];
@@ -122,15 +110,6 @@ class OptionModel {
 
   @override
   String toString() {
-    return '{"content": ${content != null
-        ? '${json.encode(content)}'
-        : 'null'},"id": ${id != null
-        ? '${json.encode(id)}'
-        : 'null'},"name": ${name != null
-        ? '${json.encode(name)}'
-        : 'null'},"questionId": ${questionId != null ? '${json.encode(
-        questionId)}' : 'null'},"sort": ${sort != null
-        ? '${json.encode(sort)}'
-        : 'null'}}';
+    return '{"content": ${content != null ? '${json.encode(content)}' : 'null'},"id": ${id != null ? '${json.encode(id)}' : 'null'},"name": ${name != null ? '${json.encode(name)}' : 'null'},"questionId": ${questionId != null ? '${json.encode(questionId)}' : 'null'},"sort": ${sort != null ? '${json.encode(sort)}' : 'null'}}';
   }
 }
