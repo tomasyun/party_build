@@ -7,8 +7,7 @@ class ExamSub {
 
   ExamSub.fromParams({this.limitScore, this.testAnswers, this.examRecord});
 
-  factory ExamSub(jsonStr) =>
-      jsonStr == null
+  factory ExamSub(jsonStr) => jsonStr == null
       ? null
       : jsonStr is String
           ? new ExamSub.fromJson(json.decode(jsonStr))
