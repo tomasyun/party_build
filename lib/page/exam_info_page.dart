@@ -252,8 +252,7 @@ class ExamInfoState extends State<ExamInfoPage> {
       return RaisedButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  ExamRstInfoPage(
+              builder: (context) => ExamRstInfoPage(
                     id: widget.id,
                   )));
         },
