@@ -182,11 +182,10 @@ class OnlineExamState extends State<OnlineExamPage> with SaveExamAnswerBloc {
     if (model.code == "0000") {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (context) =>
-                  ExamRstInfoPage(
+              builder: (context) => ExamRstInfoPage(
                     id: widget.id,
                   )),
-              (route) => route == null);
+          (route) => route == null);
     }
   }
 }
