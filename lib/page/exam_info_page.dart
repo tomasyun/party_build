@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/exam_info_bloc.dart';
 import 'package:party_build/model/exam_info_model.dart';
+import 'package:party_build/page/exam_rst_info_page.dart';
 import 'package:party_build/page/online_exam_page.dart';
 
 // ignore: must_be_immutable
@@ -251,7 +252,8 @@ class ExamInfoState extends State<ExamInfoPage> {
       return RaisedButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => OnlineExamPage(
+              builder: (context) =>
+                  ExamRstInfoPage(
                     id: widget.id,
                   )));
         },

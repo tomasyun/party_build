@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/global/rxbus.dart';
 import 'package:party_build/model/exam_question_model.dart';
-import 'package:party_build/model/option_rst_model.dart';
+import 'package:party_build/model/exam_sub_model.dart';
 
 // ignore: must_be_immutable
 class ExamQuesItem extends StatefulWidget {
@@ -89,7 +89,7 @@ class ExamQuesState extends State<ExamQuesItem> {
       this.value = value;
 
       answer = models[value].name;
-      RxBus.post(ExamRstModel(answer: answer, questionId: widget.questions.id),
+      RxBus.post(ExamSubModel(answer: answer, questionId: widget.questions.id),
           tag: "单选题");
     });
   }
@@ -123,7 +123,7 @@ class ExamQuesState extends State<ExamQuesItem> {
           answer = switchStringFromList(answers);
         }
       }
-      RxBus.post(ExamRstModel(answer: answer, questionId: widget.questions.id),
+      RxBus.post(ExamSubModel(answer: answer, questionId: widget.questions.id),
           tag: "多选题");
     });
   }

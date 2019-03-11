@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/online_exam_bloc.dart';
+import 'package:party_build/bloc/save_exam_answer_bloc.dart';
 import 'package:party_build/global/rxbus.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/item/exam_ques_item.dart';
 import 'package:party_build/model/exam_question_model.dart';
-import 'package:party_build/model/option_rst_model.dart';
+import 'package:party_build/model/exam_rst_model.dart';
+import 'package:party_build/model/exam_sub_model.dart';
+import 'package:party_build/page/exam_rst_info_page.dart';
 
 // ignore: must_be_immutable
 class OnlineExamPage extends StatefulWidget {
@@ -18,25 +22,28 @@ class OnlineExamPage extends StatefulWidget {
   State<StatefulWidget> createState() => OnlineExamState();
 }
 
-class OnlineExamState extends State<OnlineExamPage> {
+class OnlineExamState extends State<OnlineExamPage> with SaveExamAnswerBloc {
   int _curIndex = 0;
   var _controller = new PageController(initialPage: 0);
   int group = 1;
 
-  List<ExamRstModel> _models;
+  List<ExamSubModel> _models;
   OnlineExamBloc _bloc = OnlineExamBloc.newInstance;
-  ExamRstModel _model;
+  ExamSubModel _model;
+  bool _isSelect = false;
 
   @override
   void initState() {
     super.initState();
-    _models = List<ExamRstModel>();
+    _models = List<ExamSubModel>();
     _bloc.getExamQuestionsRequest(widget.id);
-    RxBus.register<ExamRstModel>(tag: "单选题").listen((event) {
+    RxBus.register<ExamSubModel>(tag: "单选题").listen((event) {
       _model = event;
+      _isSelect = true;
     });
-    RxBus.register<ExamRstModel>(tag: "多选题").listen((event) {
+    RxBus.register<ExamSubModel>(tag: "多选题").listen((event) {
       _model = event;
+      _isSelect = true;
     });
   }
 
@@ -100,11 +107,26 @@ class OnlineExamState extends State<OnlineExamPage> {
                         margin: EdgeInsets.only(top: 40.0),
                         child: RaisedButton(
                           onPressed: () {
-                            _models.add(_model);
-                            print(_models);
-                            if (index + 1 < _buildExamQuestions(data).length) {
-                              _controller.jumpToPage(index + 1);
-                            } else {}
+                            if (_isSelect) {
+                              _isSelect = false;
+                              _models.add(_model);
+                              if (index + 1 <
+                                  _buildExamQuestions(data).length) {
+                                _controller.jumpToPage(index + 1);
+                              } else {
+                                ExamSubData data = ExamSubData.fromParams(
+                                    examCost: widget.cost,
+                                    examRuleId: widget.id,
+                                    examTime: widget.time);
+                                ExamSub sub = ExamSub.fromParams(
+                                    limitScore: widget.score,
+                                    testAnswers: _models,
+                                    examRecord: data);
+                                doSaveExamAnswerRequest(json: sub.toString());
+                              }
+                            } else {
+                              GlobalToast.showToast("请选择");
+                            }
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius:
@@ -152,6 +174,19 @@ class OnlineExamState extends State<OnlineExamPage> {
         "提交",
         style: TextStyle(fontSize: 14.0, color: Colors.white),
       );
+    }
+  }
+
+  @override
+  void onSuccess(ExamRst model) {
+    if (model.code == "0000") {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) =>
+                  ExamRstInfoPage(
+                    id: widget.id,
+                  )),
+              (route) => route == null);
     }
   }
 }

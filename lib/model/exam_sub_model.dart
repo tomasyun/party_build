@@ -1,19 +1,20 @@
 import 'dart:convert' show json;
 
-class ExamRst {
+class ExamSub {
   String limitScore;
-  List<ExamRstModel> testAnswers;
-  ExamRstdata examRecord;
+  List<ExamSubModel> testAnswers;
+  ExamSubData examRecord;
 
-  ExamRst.fromParams({this.limitScore, this.testAnswers, this.examRecord});
+  ExamSub.fromParams({this.limitScore, this.testAnswers, this.examRecord});
 
-  factory ExamRst(jsonStr) => jsonStr == null
+  factory ExamSub(jsonStr) =>
+      jsonStr == null
       ? null
       : jsonStr is String
-          ? new ExamRst.fromJson(json.decode(jsonStr))
-          : new ExamRst.fromJson(jsonStr);
+          ? new ExamSub.fromJson(json.decode(jsonStr))
+          : new ExamSub.fromJson(jsonStr);
 
-  ExamRst.fromJson(jsonRes) {
+  ExamSub.fromJson(jsonRes) {
     limitScore = jsonRes['limitScore'];
     testAnswers = jsonRes['testAnswers'] == null ? null : [];
 
@@ -21,12 +22,12 @@ class ExamRst {
         in testAnswers == null ? [] : jsonRes['testAnswers']) {
       testAnswers.add(testAnswersItem == null
           ? null
-          : new ExamRstModel.fromJson(testAnswersItem));
+          : new ExamSubModel.fromJson(testAnswersItem));
     }
 
     examRecord = jsonRes['examRecord'] == null
         ? null
-        : new ExamRstdata.fromJson(jsonRes['examRecord']);
+        : new ExamSubData.fromJson(jsonRes['examRecord']);
   }
 
   @override
@@ -35,14 +36,14 @@ class ExamRst {
   }
 }
 
-class ExamRstdata {
+class ExamSubData {
   String examCost;
   String examRuleId;
   String examTime;
 
-  ExamRstdata.fromParams({this.examCost, this.examRuleId, this.examTime});
+  ExamSubData.fromParams({this.examCost, this.examRuleId, this.examTime});
 
-  ExamRstdata.fromJson(jsonRes) {
+  ExamSubData.fromJson(jsonRes) {
     examCost = jsonRes['examCost'];
     examRuleId = jsonRes['examRuleId'];
     examTime = jsonRes['examTime'];
@@ -54,15 +55,15 @@ class ExamRstdata {
   }
 }
 
-class ExamRstModel {
+class ExamSubModel {
   String answer;
   String questionId;
 
-  ExamRstModel({this.answer, this.questionId});
+  ExamSubModel({this.answer, this.questionId});
 
-  ExamRstModel.fromParams({this.answer, this.questionId});
+  ExamSubModel.fromParams({this.answer, this.questionId});
 
-  ExamRstModel.fromJson(jsonRes) {
+  ExamSubModel.fromJson(jsonRes) {
     answer = jsonRes['answer'];
     questionId = jsonRes['questionId'];
   }

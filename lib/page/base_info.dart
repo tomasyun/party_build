@@ -113,31 +113,31 @@ class BaseInfoState extends State<BaseInfoPage> {
               ),
             ),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "用户名", info.data.username, 2),
+                EdgeInsets.only(top: 15.0), "用户名", info.data.username, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "姓名", info.data.name, 2),
+                EdgeInsets.only(top: 15.0), "姓名", info.data.name, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "党员编号", info.data.partyNo, 2),
+                EdgeInsets.only(top: 15.0), "党员编号", info.data.partyNo, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "所属党支部", info.data.belongBranch, 2),
+                EdgeInsets.only(top: 15.0), "所属党支部", info.data.belongBranch, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "进入党支部时间", info.data.enterDate, 2),
+                EdgeInsets.only(top: 15.0), "进入党支部时间", info.data.enterDate, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "所属类型", info.data.enterType, 2),
+                EdgeInsets.only(top: 15.0), "所属类型", info.data.enterType, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "单位", info.data.company, 2),
+                EdgeInsets.only(top: 15.0), "单位", info.data.company, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "出生日期", info.data.birthday, 2),
+                EdgeInsets.only(top: 15.0), "出生日期", info.data.birthday, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "联系电话", info.data.phone, 2),
+                EdgeInsets.only(top: 15.0), "联系电话", info.data.phone, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "民族", info.data.ethnic, 2),
+                EdgeInsets.only(top: 15.0), "民族", info.data.ethnic, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "籍贯", info.data.birthPlace, 2),
+                EdgeInsets.only(top: 15.0), "籍贯", info.data.birthPlace, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "最高学历", info.data.education, 2),
+                EdgeInsets.only(top: 15.0), "最高学历", info.data.education, 2),
             _buildContainer(
-                EdgeInsets.only(top: 10.0), "简介", info.data.brief, 6)
+                EdgeInsets.only(top: 15.0), "简介", info.data.brief, 6)
           ],
         ),
       ),
