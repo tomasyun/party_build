@@ -266,8 +266,7 @@ class UnionState extends State<UnionPage> {
 
   void skipPage(String title, int skipType) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) =>
-            UnionCommonPage(
+        builder: (context) => UnionCommonPage(
               skipType: skipType,
               pageTitle: title,
             )));
