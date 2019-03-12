@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/course_hours_bloc.dart';
 import 'package:party_build/bloc/course_info_bloc.dart';
+import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/course_info_model.dart';
 import 'package:party_build/model/response_rst_model.dart';
 
@@ -107,6 +108,13 @@ class CourseInfoState extends State<CourseInfoPage> with CourseHoursBloc {
   void onSuccess(ResponseRstModel model) {
     if (model.code == "0000") {
       Navigator.of(context).pop();
+    } else if (model.code == "0001") {
+      GlobalToast.showToast(model.msg);
     }
+  }
+
+  @override
+  void onError(String error) {
+    GlobalToast.showToast(error);
   }
 }

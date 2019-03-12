@@ -22,7 +22,6 @@ class SurveyQuestionState extends State<SurveyQuestionItem> {
         children: <Widget>[
           Container(
             width: double.infinity,
-            color: Colors.white,
             margin: EdgeInsets.all(15.0),
             child: Text(
               widget.position.toString() + ". " + widget.questionData.content,

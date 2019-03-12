@@ -75,7 +75,7 @@ class UnionState extends State<UnionPage> {
                         title: "相关制度",
                         skipType: 3),
                     _buildExpandedSquare(
-                        icon: "images/ic_pub_info.png.png",
+                        icon: "images/ic_pub_info.png",
                         title: "公开信息",
                         skipType: 4),
                     Expanded(

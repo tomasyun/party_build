@@ -13,8 +13,8 @@ abstract class CourseHoursBloc {
     print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
-    Response response = await Dio(options)
-        .post("courseInfo", data: {"id": id, "taskId": taskId, "flag": flag});
+    FormData data = FormData.from({"id": id, "taskId": taskId, "flag": flag});
+    Response response = await Dio(options).post("courseInfo", data: data);
     doRequest(
         response: response, dispose: (map) => ResponseRstModel.fromJson(map));
   }
@@ -25,9 +25,11 @@ abstract class CourseHoursBloc {
     _api.doRequest(
         response: response,
         success: (map) => onSuccess(dispose(map)),
-        error: (errorMsg) {},
+        error: (errorMsg) => onError(errorMsg),
         empty: () {});
   }
 
   void onSuccess(ResponseRstModel model);
+
+  void onError(String error);
 }
