@@ -128,8 +128,8 @@ class OnlineSurveyState extends State<OnlineSurveyPage>
                           _pageController.jumpToPage(index + 1);
                         } else {
                           SurveyAnswerRes answerRes =
-                          SurveyAnswerRes.fromParams(
-                              id: widget.surveyId, answers: _models);
+                              SurveyAnswerRes.fromParams(
+                                  id: widget.surveyId, answers: _models);
                           doSaveSurveyAnswerRequest(json: answerRes.toString());
                         }
                       } else {
@@ -177,11 +177,10 @@ class OnlineSurveyState extends State<OnlineSurveyPage>
     if (model.code == "0000") {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (context) =>
-                  SuccessRstPage(
+              builder: (context) => SuccessRstPage(
                     skipId: "4",
                   )),
-              (route) => route == null);
+          (route) => route == null);
     }
   }
 }
