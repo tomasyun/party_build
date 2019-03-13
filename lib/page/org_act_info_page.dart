@@ -39,6 +39,7 @@ class OrgActInfoState extends State<OrgActInfoPage> {
           child: SingleChildScrollView(
             child: _buildOrgActInfoBody(),
           )),
+      backgroundColor: Color.fromARGB(225, 245, 245, 245),
     );
   }
 

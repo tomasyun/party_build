@@ -96,13 +96,17 @@ class VoteItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        skipVoteInfo(context, model.id);
+        skipVoteInfo(context, model.id, model.isVoter);
       },
     );
   }
 
-  void skipVoteInfo(BuildContext context, String id) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => VoteInfoPage(id: id)));
+  void skipVoteInfo(BuildContext context, String id, String isVoter) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) =>
+            VoteInfoPage(
+              id: id,
+              isVoter: isVoter,
+            )));
   }
 }

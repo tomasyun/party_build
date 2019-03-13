@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/rank_bloc.dart';
+import 'package:party_build/global/rxbus.dart';
 import 'package:party_build/list/rank_list.dart';
 import 'package:party_build/model/rank_model.dart';
 
@@ -11,10 +12,18 @@ class RankPage extends StatefulWidget {
 class RankState extends State<RankPage> {
   RankBloc _bloc = RankBloc.newInstance;
 
+  String mRank = "";
+  String mScore = "";
+
   @override
   void initState() {
     super.initState();
     _bloc.doGetRankRequest();
+    RxBus.register<String>().listen((event) {
+      if (event == "refresh") {
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -34,13 +43,13 @@ class RankState extends State<RankPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  _buildRichText("26", "名"),
+                  _buildRichText(mRank, "名"),
                   Image.asset(
                     "images/ic_avatar.png",
                     width: 50.0,
                     height: 50.0,
                   ),
-                  _buildRichText("245", "分"),
+                  _buildRichText(mScore, "分"),
                 ],
               ),
             ),
@@ -67,6 +76,11 @@ class RankState extends State<RankPage> {
     );
   }
 
+  void init(Rank rank) {
+    mRank = rank.data.mrank;
+    mScore = rank.data.mscore;
+  }
+
   Widget _buildRankList() {
     return _bloc.streamBuild(
         loading: () {
@@ -79,6 +93,7 @@ class RankState extends State<RankPage> {
           );
         },
         success: (data) {
+          init(data);
           return _buildCreditRankListView(data);
         },
         error: (msg) {},
@@ -88,6 +103,9 @@ class RankState extends State<RankPage> {
               child: Text("暂无数据"),
             ),
           );
+        },
+        finished: () {
+          RxBus.post("refresh");
         });
   }
 }

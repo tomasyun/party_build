@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/credit_bloc.dart';
+import 'package:party_build/global/rxbus.dart';
 import 'package:party_build/list/credit_list.dart';
 import 'package:party_build/model/credit_model.dart';
 
@@ -33,6 +34,11 @@ class CreditState extends State<CreditPage>
         case 3:
           _bloc.doGetCreditListRequest("3");
           break;
+      }
+    });
+    RxBus.register<String>().listen((event) {
+      if (event == "refresh") {
+        setState(() {});
       }
     });
   }
@@ -124,6 +130,10 @@ class CreditState extends State<CreditPage>
     );
   }
 
+  void initScore(Credit credit) {
+    score = credit.data.totalScore.toString();
+  }
+
   Widget _buildCreditList() {
     return _bloc.streamBuild(
         loading: () {
@@ -136,6 +146,7 @@ class CreditState extends State<CreditPage>
           );
         },
         success: (data) {
+          initScore(data);
           return _buildCreditListView(data);
         },
         error: (msg) {},
@@ -145,6 +156,9 @@ class CreditState extends State<CreditPage>
               child: Text("暂无数据"),
             ),
           );
+        },
+        finished: () {
+          RxBus.post("refresh");
         });
   }
 }
