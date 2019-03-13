@@ -103,8 +103,7 @@ class VoteItem extends StatelessWidget {
 
   void skipVoteInfo(BuildContext context, String id, String isVoter) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) =>
-            VoteInfoPage(
+        builder: (context) => VoteInfoPage(
               id: id,
               isVoter: isVoter,
             )));
