@@ -27,8 +27,8 @@ class OnlineExamState extends State<OnlineExamPage> with SaveExamAnswerBloc {
   var _controller = new PageController(initialPage: 0);
   int group = 1;
 
-  List<ExamSubModel> _models;
   OnlineExamBloc _bloc = OnlineExamBloc.newInstance;
+  List<ExamSubModel> _models;
   ExamSubModel _model;
   bool _isSelect = false;
 

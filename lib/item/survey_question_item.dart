@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/global/rxbus.dart';
+import 'package:party_build/model/survey_answer_model.dart';
 import 'package:party_build/model/survey_question_model.dart';
 
 // ignore: must_be_immutable
@@ -14,6 +16,16 @@ class SurveyQuestionItem extends StatefulWidget {
 
 class SurveyQuestionState extends State<SurveyQuestionItem> {
   int groupValue;
+  String answer;
+  List<String> answers;
+  List<SurveyQuestionModel> _models;
+
+  @override
+  void initState() {
+    super.initState();
+    answers = List<String>();
+    _models = widget.questionData.questionOptionsList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +47,7 @@ class SurveyQuestionState extends State<SurveyQuestionItem> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
-              children: _buildRadioList(),
+              children: _buildSurveyQuesOptionList(widget.questionData.typeId),
             ),
           ),
         ],
@@ -45,7 +57,7 @@ class SurveyQuestionState extends State<SurveyQuestionItem> {
 
   List<RadioListTile> _buildRadioList() {
     List<RadioListTile> _list = List<RadioListTile>();
-    for (int i = 0; i < widget.questionData.questionOptionsList.length; i++) {
+    for (int i = 0; i < _models.length; i++) {
       var item = RadioListTile(
         value: i,
         groupValue: groupValue,
@@ -53,7 +65,7 @@ class SurveyQuestionState extends State<SurveyQuestionItem> {
           updateGroupValue(T);
         },
         title: Text(
-          widget.questionData.questionOptionsList[i].content,
+          _models[i].content,
           style: TextStyle(fontSize: 15.0, color: Colors.black),
         ),
       );
@@ -65,6 +77,60 @@ class SurveyQuestionState extends State<SurveyQuestionItem> {
   void updateGroupValue(int value) {
     setState(() {
       groupValue = value;
+      answer = _models[value].content;
+      RxBus.post(AnswerModel(answer: answer, userId: widget.questionData.id),
+          tag: "1");
     });
+  }
+
+  List<Widget> _buildSurveyQuesOptionList(String type) {
+    if (type == "1") {
+      return _buildRadioList();
+    } else if (type == "2") {
+      return _buildCheckboxList();
+    }
+    return null;
+  }
+
+  List<CheckboxListTile> _buildCheckboxList() {
+    List<CheckboxListTile> _list = List<CheckboxListTile>();
+    for (int i = 0; i < _models.length; i++) {
+      var item = CheckboxListTile(
+        value: _models[i].isSelect,
+        onChanged: (bool) {
+          updateIsSelect(i, bool);
+        },
+        title: Text(
+          _models[i].name + "  " + _models[i].content,
+          style: TextStyle(fontSize: 15.0, color: Colors.black),
+        ),
+        controlAffinity: ListTileControlAffinity.platform,
+      );
+      _list.add(item);
+    }
+    return _list;
+  }
+
+  void updateIsSelect(int i, bool isSelect) {
+    setState(() {
+      _models[i].isSelect = isSelect;
+      if (answers.length > 0) answers.clear();
+      for (int k = 0; k < _models.length; k++) {
+        if (_models[k].isSelect == true) {
+          answers.add(_models[k].content);
+          answer = switchStringFromList(answers);
+        }
+      }
+      RxBus.post(AnswerModel(answer: answer, userId: widget.questionData.id),
+          tag: "2");
+    });
+  }
+
+  String switchStringFromList(List<String> list) {
+    String newAnswer = "";
+    for (int i = 0; i < list.length; i++) {
+      newAnswer = newAnswer + list[i] + "|";
+    }
+    return newAnswer;
   }
 }

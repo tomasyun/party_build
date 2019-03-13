@@ -63,6 +63,7 @@ class SurveyQuestionModel {
   String content;
   String id;
   String name;
+  bool isSelect = false;
 
   SurveyQuestionModel.fromParams({this.content, this.id, this.name});
 
