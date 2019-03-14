@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 class SuccessRstPage extends StatefulWidget {
   String skipId;
 
-  String meetingId;
-
-  SuccessRstPage({this.skipId, this.meetingId});
+  SuccessRstPage({this.skipId});
 
   @override
   State<StatefulWidget> createState() => SuccessRstState();
@@ -90,7 +88,7 @@ class SuccessRstState extends State<SuccessRstPage> {
                 margin: EdgeInsets.only(top: 50.0),
                 child: RaisedButton(
                   onPressed: () {
-                    onFinish();
+                    onFinish(context);
                   },
                   child: Text(
                     "完成",
@@ -110,15 +108,20 @@ class SuccessRstState extends State<SuccessRstPage> {
     );
   }
 
-  void onFinish() {
-    if (widget.skipId == "0") { //报名
+  void onFinish(BuildContext context) {
+    if (widget.skipId == "0") {
+      //报名
       Navigator.of(context).pop("0");
     } else if (widget.skipId == "1") {
       //暂时不实现
-    } else if (widget.skipId == "2") { //请假
-    } else if (widget.skipId == "3") { //投票
-    } else if (widget.skipId == "4") { //问卷
-
+    } else if (widget.skipId == "2") {
+      //请假
+      Navigator.of(context).pop("2");
+    } else if (widget.skipId == "3") {
+      //投票
+    } else if (widget.skipId == "4") {
+      //问卷
+      Navigator.of(context).pop();
     }
   }
 }

@@ -84,15 +84,19 @@ class SettingState extends State<SettingPage> {
       context: context,
       title: "退出登录?",
       desc: "退出登录可能会使你现有记录归零，确定退出?",
-      style: AlertStyle(isCloseButton: false),
+      style: AlertStyle(
+        isCloseButton: false,
+        titleStyle: TextStyle(fontSize: 18.0),
+        descStyle: TextStyle(fontSize: 16.0),
+      ),
       buttons: [
         DialogButton(
           height: 45.0,
           child: Text(
             "确定",
-            style: TextStyle(fontSize: 15.0, color: Colors.white),
+            style: TextStyle(fontSize: 14.0, color: Colors.white),
           ),
-          color: Colors.red,
+          color: Colors.blue[600],
           onPressed: () {
             SpUtils sp = SpUtils();
             sp.putInt("isLoginOk", 0);
@@ -105,7 +109,7 @@ class SettingState extends State<SettingPage> {
           height: 45.0,
           child: Text(
             "取消",
-            style: TextStyle(fontSize: 15.0, color: Colors.white),
+            style: TextStyle(fontSize: 14.0, color: Colors.white),
           ),
           color: Colors.red,
           onPressed: () => navigator.pop(context),

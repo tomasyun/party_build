@@ -171,7 +171,7 @@ class OrgActInfoState extends State<OrgActInfoPage> {
     } else if (categoryId == "3") {
       return _buildContainer(title, "党课");
     } else {
-      return Container();
+      return _buildContainer(title, "");
     }
   }
 

@@ -95,17 +95,24 @@ class StudiesRslState extends State<StudiesRslPage> with StudiesObtainBloc {
         context: context,
         title: "提交成功",
         desc: "恭喜您完成了本次学习任务",
-        style: AlertStyle(isCloseButton: false),
+        style: AlertStyle(
+          isCloseButton: false,
+          titleStyle: TextStyle(fontSize: 18.0),
+          descStyle: TextStyle(fontSize: 16.0),
+        ),
         buttons: [
           DialogButton(
               height: 45.0,
               child: Text(
                 "确定",
-                style: TextStyle(fontSize: 15.0, color: Colors.white),
+                style: TextStyle(fontSize: 14.0, color: Colors.white),
               ),
               color: Colors.red,
               onPressed: () {
                 navigator.pop(context);
+                setState(() {
+                  Navigator.of(context).pop();
+                });
               })
         ]).show();
   }

@@ -8,6 +8,7 @@ import 'package:party_build/model/exam_question_model.dart';
 import 'package:party_build/model/exam_rst_model.dart';
 import 'package:party_build/model/exam_sub_model.dart';
 import 'package:party_build/page/exam_rst_info_page.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 // ignore: must_be_immutable
 class OnlineExamPage extends StatefulWidget {
@@ -49,17 +50,62 @@ class OnlineExamState extends State<OnlineExamPage> with SaveExamAnswerBloc {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "在线考试",
-          style: TextStyle(fontSize: 18.0, color: Colors.white),
+    return WillPopScope(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "在线考试",
+            style: TextStyle(fontSize: 18.0, color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.red,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.red,
+        body: _buildExamQuestion(),
       ),
-      body: _buildExamQuestion(),
+      onWillPop: _goBackWarning,
     );
+  }
+
+  Future<bool> _goBackWarning() {
+    NavigatorState navigator =
+        context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+    Alert(
+        context: context,
+        title: "退出考试?",
+        desc: "考试中途退出，会记零分，您确定退出?",
+        style: AlertStyle(
+          isCloseButton: false,
+          titleStyle: TextStyle(fontSize: 18.0),
+          descStyle: TextStyle(fontSize: 16.0),
+        ),
+        buttons: [
+          DialogButton(
+            height: 45.0,
+            child: Text(
+              "确定",
+              style: TextStyle(fontSize: 14.0, color: Colors.white),
+            ),
+            color: Colors.blue[600],
+            onPressed: () {
+              navigator.pop(context);
+              setState(() {
+                Navigator.of(context).pop();
+              });
+            },
+          ),
+          DialogButton(
+            height: 45.0,
+            child: Text(
+              "取消",
+              style: TextStyle(fontSize: 14.0, color: Colors.white),
+            ),
+            color: Colors.red,
+            onPressed: () {
+              navigator.pop(context);
+            },
+          ),
+        ]).show();
+    return Future.value(false);
   }
 
   void _pageChanged(int index) {

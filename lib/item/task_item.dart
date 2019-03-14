@@ -89,12 +89,19 @@ class TaskItem extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.only(left: 8.0, top: 3.0),
                             child: Text(
+                              strToNumber(model.curHours).toStringAsFixed(2),
+                              style:
+                                  TextStyle(fontSize: 14.0, color: Colors.red),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 3.0),
+                            child: Text(
                               "/" + model.totalHours,
                               style: TextStyle(
                                   fontSize: 14.0, color: Colors.black45),
                             ),
                           ),
-                          Container()
                         ],
                       ),
                     )
@@ -120,5 +127,9 @@ class TaskItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double strToNumber(String str) {
+    return double.parse(str);
   }
 }

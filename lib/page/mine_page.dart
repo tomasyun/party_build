@@ -55,6 +55,7 @@ class MinePageState extends State<MinePage> {
                         ),
                       ),
                       Container(
+                        margin: EdgeInsets.only(top: 5.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

@@ -85,11 +85,10 @@ class LeaveReasonState extends State<LeaveReasonPage> with LeaveReasonBloc {
     if (model.code == "0000") {
 //      GlobalToast.showToast(model.msg);
 //      Navigator.of(context).pop("pop");
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => SuccessRstPage(
                   skipId: "2",
-              meetingId: widget.meetingId,
                 )),
       );
       setState(() {

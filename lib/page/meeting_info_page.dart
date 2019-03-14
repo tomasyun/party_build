@@ -166,7 +166,7 @@ class MeetingInfoState extends State<MeetingInfoPage> with SignUpBloc {
     } else if (categoryId == "3") {
       return _buildContainer(title, "党课");
     } else {
-      return Container();
+      return _buildContainer(title, "");
     }
   }
 
@@ -200,17 +200,19 @@ class MeetingInfoState extends State<MeetingInfoPage> with SignUpBloc {
                   },
                   onPress2: () {
 //                    Future future =
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LeaveReasonPage(
-                              meetingId: widget.id,
-                            )));
-//                    future.then((value) {
-//                      if (value == "pop") {
-//                        setState(() {
-//                          _bloc.doGetMeetingInfoRequest(id: widget.id);
-//                        });
-//                      }
-//                    });
+                    Future future =
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LeaveReasonPage(
+                                  meetingId: widget.id,
+                                )));
+                    future.then((value) {
+                      if (value == "2") {
+                        setState(() {
+                          print(value);
+                          _bloc.doGetMeetingInfoRequest(id: widget.id);
+                        });
+                      }
+                    });
                   });
             } else {
               return Container(
@@ -569,8 +571,7 @@ class MeetingInfoState extends State<MeetingInfoPage> with SignUpBloc {
     if (model.code == "0000") {
       GlobalToast.showToast(model.msg);
       Future future = Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              SuccessRstPage(
+          builder: (context) => SuccessRstPage(
                 skipId: "0",
               )));
       future.then((value) {

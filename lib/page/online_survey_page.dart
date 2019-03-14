@@ -8,6 +8,7 @@ import 'package:party_build/model/response_rst_model.dart';
 import 'package:party_build/model/survey_answer_model.dart';
 import 'package:party_build/model/survey_question_model.dart';
 import 'package:party_build/page/success_rst_page.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 // ignore: must_be_immutable
 class OnlineSurveyPage extends StatefulWidget {
@@ -48,17 +49,62 @@ class OnlineSurveyState extends State<OnlineSurveyPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "调查问卷",
-          style: TextStyle(fontSize: 18.0, color: Colors.white),
+    return WillPopScope(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "调查问卷",
+            style: TextStyle(fontSize: 18.0, color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.red,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.red,
+        body: _buildExamQuestion(),
       ),
-      body: _buildExamQuestion(),
+      onWillPop: _goBackWarning,
     );
+  }
+
+  Future<bool> _goBackWarning() {
+    NavigatorState navigator =
+        context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+    Alert(
+        context: context,
+        title: "退出调查?",
+        desc: "调查中途退出，本次调查会作废，您确定退出?",
+        style: AlertStyle(
+          isCloseButton: false,
+          titleStyle: TextStyle(fontSize: 18.0),
+          descStyle: TextStyle(fontSize: 16.0),
+        ),
+        buttons: [
+          DialogButton(
+            height: 45.0,
+            child: Text(
+              "确定",
+              style: TextStyle(fontSize: 14.0, color: Colors.white),
+            ),
+            color: Colors.blue[600],
+            onPressed: () {
+              navigator.pop(context);
+              setState(() {
+                Navigator.of(context).pop();
+              });
+            },
+          ),
+          DialogButton(
+            height: 45.0,
+            child: Text(
+              "取消",
+              style: TextStyle(fontSize: 14.0, color: Colors.white),
+            ),
+            color: Colors.red,
+            onPressed: () {
+              navigator.pop(context);
+            },
+          ),
+        ]).show();
+    return Future.value(false);
   }
 
   void _pageChanged(int index) {
@@ -175,12 +221,12 @@ class OnlineSurveyState extends State<OnlineSurveyPage>
   @override
   void onSuccess(ResponseRstModel model) {
     if (model.code == "0000") {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => SuccessRstPage(
-                    skipId: "4",
-                  )),
-          (route) => route == null);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+            builder: (context) => SuccessRstPage(
+                  skipId: "4",
+                )),
+      );
     }
   }
 }

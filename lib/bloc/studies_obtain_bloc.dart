@@ -13,12 +13,8 @@ abstract class StudiesObtainBloc {
     print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
-    FormData data = FormData.from({
-      "id": id,
-      "result": result,
-    });
-    print(data);
-    Response response = await Dio(options).post("courseInfo", data: data);
+    Response response = await Dio(options)
+        .post("studyObtain", data: {"id": id, "result": result});
     doRequest(
         response: response, dispose: (map) => ResponseRstModel.fromJson(map));
   }
