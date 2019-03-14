@@ -89,6 +89,7 @@ class LeaveReasonState extends State<LeaveReasonPage> with LeaveReasonBloc {
         MaterialPageRoute(
             builder: (context) => SuccessRstPage(
                   skipId: "2",
+              meetingId: widget.meetingId,
                 )),
       );
       setState(() {

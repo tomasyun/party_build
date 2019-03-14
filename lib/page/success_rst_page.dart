@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class SuccessRstPage extends StatefulWidget {
   String skipId;
 
-  SuccessRstPage({this.skipId});
+  String meetingId;
+
+  SuccessRstPage({this.skipId, this.meetingId});
 
   @override
   State<StatefulWidget> createState() => SuccessRstState();
@@ -24,7 +26,7 @@ class SuccessRstState extends State<SuccessRstPage> {
         decs = "恭喜您!报名成功";
         prompt = "注意开会时间和地点,千万不要迟到";
         break;
-      case "1": //"组织活动"报名成功
+      case "1": //"组织活动"报名成功（暂不实现）
         title = "报名成功";
         decs = "恭喜您!报名成功";
         prompt = "注意活动时间和地点,千万不要迟到";
@@ -109,6 +111,14 @@ class SuccessRstState extends State<SuccessRstPage> {
   }
 
   void onFinish() {
-    Navigator.of(context).pop();
+    if (widget.skipId == "0") { //报名
+      Navigator.of(context).pop("0");
+    } else if (widget.skipId == "1") {
+      //暂时不实现
+    } else if (widget.skipId == "2") { //请假
+    } else if (widget.skipId == "3") { //投票
+    } else if (widget.skipId == "4") { //问卷
+
+    }
   }
 }

@@ -6,6 +6,7 @@ import 'package:party_build/model/meeting_info_model.dart';
 import 'package:party_build/model/response_rst_model.dart';
 import 'package:party_build/page/leave_reason_page.dart';
 import 'package:party_build/page/meeting_summary_page.dart';
+import 'package:party_build/page/success_rst_page.dart';
 
 // ignore: must_be_immutable
 class MeetingInfoPage extends StatefulWidget {
@@ -567,8 +568,17 @@ class MeetingInfoState extends State<MeetingInfoPage> with SignUpBloc {
     //报名成功回调
     if (model.code == "0000") {
       GlobalToast.showToast(model.msg);
-      setState(() {
-        _bloc.doGetMeetingInfoRequest(id: widget.id);
+      Future future = Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              SuccessRstPage(
+                skipId: "0",
+              )));
+      future.then((value) {
+        if (value == "0") {
+          setState(() {
+            _bloc.doGetMeetingInfoRequest(id: widget.id);
+          });
+        }
       });
     }
   }
