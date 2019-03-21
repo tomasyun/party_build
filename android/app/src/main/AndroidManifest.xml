@@ -14,8 +14,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="party_build"
-        android:icon="@mipmap/ic_launcher">
+        android:label="智慧党建"
+        android:icon="@mipmap/ic_app_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

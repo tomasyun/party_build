@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/save_vote_answer_bloc.dart';
 import 'package:party_build/bloc/vote_info_bloc.dart';
@@ -21,6 +23,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
   VoteInfoBloc _bloc = VoteInfoBloc.newInstance;
   int groupValue;
   List<String> optionIds;
+
   @override
   void initState() {
     optionIds = List<String>();
@@ -191,7 +194,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
           style: TextStyle(fontSize: 14.0, color: Colors.white),
         ),
         padding:
-            EdgeInsets.only(left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
+        EdgeInsets.only(left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
         color: Colors.deepOrange[100],
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0))),
@@ -216,10 +219,8 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
             if (optionIds.length == 0) {
               GlobalToast.showToast("请选择");
             } else {
-              VoteSub sub =
-                  VoteSub.fromParams(id: widget.id, optionIds: optionIds);
-              print(sub.toString());
-              doSaveVoteAnswerRequest(json: sub.toString());
+              VoteSubModel sub = VoteSubModel(widget.id, optionIds);
+              doSaveVoteAnswerRequest(json: json.encode(sub));
             }
           },
           child: Text(
@@ -283,7 +284,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
         child: Text(
           data.options[value].votes + "  票",
           style:
-              TextStyle(fontSize: 14, color: Color.fromARGB(255, 246, 37, 12)),
+          TextStyle(fontSize: 14, color: Color.fromARGB(255, 246, 37, 12)),
         ),
       ),
       groupValue: group,
@@ -308,6 +309,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
   void onSuccess(ResponseRstModel model) {
     if (model.code == "0000") {
       setState(() {
+        widget.isVoter = "1";
         _bloc.doGetVoteInfoRequest(widget.id);
       });
     }

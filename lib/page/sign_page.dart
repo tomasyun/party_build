@@ -1,4 +1,4 @@
-import 'package:amap_plugin/amap_location.dart';
+import 'package:amap_location/amap_location.dart';
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/sign_in_bloc.dart';
 import 'package:party_build/global/toast.dart';

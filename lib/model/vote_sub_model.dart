@@ -1,29 +1,20 @@
-import 'dart:convert' show json;
+import 'package:json_annotation/json_annotation.dart';
 
-class VoteSub {
+part 'vote_sub_model.g.dart';
+
+@JsonSerializable()
+class VoteSubModel extends Object {
+  @JsonKey(name: 'id')
   String id;
+
+  @JsonKey(name: 'optionIds')
   List<String> optionIds;
 
-  VoteSub.fromParams({this.id, this.optionIds});
+  VoteSubModel(this.id,
+      this.optionIds,);
 
-  factory VoteSub(jsonStr) => jsonStr == null
-      ? null
-      : jsonStr is String
-          ? new VoteSub.fromJson(json.decode(jsonStr))
-          : new VoteSub.fromJson(jsonStr);
+  factory VoteSubModel.fromJson(Map<String, dynamic> srcJson) =>
+      _$VoteSubModelFromJson(srcJson);
 
-  VoteSub.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    optionIds = jsonRes['optionIds'] == null ? null : [];
-
-    for (var optionIdsItem in optionIds == null ? [] : jsonRes['optionIds']) {
-      optionIds.add(optionIdsItem);
-    }
-  }
-
-  @override
-  String toString() {
-    return '{"id": ${id != null ? '${json.encode(id)}' : 'null'},"optionIds":'
-        ' $optionIds}';
-  }
+  Map<String, dynamic> toJson() => _$VoteSubModelToJson(this);
 }
