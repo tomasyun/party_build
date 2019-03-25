@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/meeting_bloc.dart';
-import 'package:party_build/list/meeting_list.dart';
+import 'package:party_build/item/meeting_item.dart';
 import 'package:party_build/model/meeting_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 //三会一课
 class MeetingPage extends StatefulWidget {
@@ -40,16 +43,45 @@ class MeetingState extends State<MeetingPage> {
             );
           },
           success: (data) {
-            return _buildMeetingList(data);
+            return Center(
+              child: EasyRefresh(
+                key: GlobalKey<EasyRefreshState>(),
+                behavior: ScrollOverBehavior(),
+                refreshHeader: ClassicsHeader(
+                  key: GlobalKey<RefreshHeaderState>(),
+                  bgColor: Colors.transparent,
+                  textColor: Colors.black87,
+                  moreInfoColor: Colors.black54,
+                  showMore: true,
+                ),
+                child: ListView(
+                  children: _buildMeetingList(data),
+                ),
+                onRefresh: () async {
+                  await new Future.delayed(const Duration(seconds: 1), () {
+                    setState(() {});
+                  });
+                },
+              ),
+            );
           },
-          empty: () {},
+          empty: () {
+            return Container(
+              child: Center(
+                child: Text("暂无数据"),
+              ),
+            );
+          },
           error: (msg) {}),
     );
   }
 
-  Widget _buildMeetingList(Meeting meeting) {
-    return MeetingList(
-      meeting: meeting,
-    );
+  List<MeetingItem> _buildMeetingList(Meeting meeting) {
+    return meeting.data
+        .map((item) =>
+        MeetingItem(
+          data: item,
+        ))
+        .toList();
   }
 }

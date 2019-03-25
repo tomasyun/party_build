@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/info_bloc.dart';
-import 'package:party_build/list/info_list.dart';
+import 'package:party_build/item/info_item.dart';
 import 'package:party_build/model/info_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/footer.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 //资讯
 class InfoPage extends StatefulWidget {
@@ -11,8 +15,10 @@ class InfoPage extends StatefulWidget {
 
 class InfoPageState extends State<InfoPage>
     with SingleTickerProviderStateMixin {
-  TabController _controller;
   InfoBloc _bloc = InfoBloc.newInstance;
+  TabController _controller;
+  List<InfoModel> infoModels;
+  String start = "0";
 
   @override
   void initState() {
@@ -20,21 +26,16 @@ class InfoPageState extends State<InfoPage>
     _bloc.doInfoRequest(id: "0", draw: "0", start: "0", length: "10");
     _controller = TabController(length: 4, vsync: this, initialIndex: 0);
     _controller.addListener(() {
-      switch (_controller.index) {
-        case 0: //习总讲话
-          _bloc.doInfoRequest(id: "0", draw: "0", start: "0", length: "10");
-          break;
-        case 1: //时政要闻
-          _bloc.doInfoRequest(id: "1", draw: "0", start: "0", length: "10");
-          break;
-        case 2: //反腐倡廉
-          _bloc.doInfoRequest(id: "2", draw: "0", start: "0", length: "10");
-          break;
-        case 3: //时代先锋
-          _bloc.doInfoRequest(id: "3", draw: "0", start: "0", length: "10");
-          break;
+      start = "0";
+      if (_controller.indexIsChanging) {
+        _bloc.doInfoRequest(
+            id: _controller.index.toString(),
+            draw: "0",
+            start: start,
+            length: "10");
       }
     });
+    infoModels = List<InfoModel>();
   }
 
   @override
@@ -69,18 +70,10 @@ class InfoPageState extends State<InfoPage>
       ),
       body: TabBarView(
         children: <Widget>[
-          Center(
-            child: _inflateList(),
-          ),
-          Center(
-            child: _inflateList(),
-          ),
-          Center(
-            child: _inflateList(),
-          ),
-          Center(
-            child: _inflateList(),
-          ),
+          _inflateList(),
+          _inflateList(),
+          _inflateList(),
+          _inflateList(),
         ],
         controller: _controller,
         physics: NeverScrollableScrollPhysics(),
@@ -89,7 +82,69 @@ class InfoPageState extends State<InfoPage>
   }
 
   Widget _buildList(Info info) {
-    return InfoList(data: info.data);
+    return Center(
+      child: EasyRefresh(
+        key: GlobalKey<EasyRefreshState>(),
+        behavior: ScrollOverBehavior(),
+        refreshHeader: ClassicsHeader(
+          key: GlobalKey<RefreshHeaderState>(),
+          bgColor: Colors.transparent,
+          textColor: Colors.black87,
+          moreInfoColor: Colors.black54,
+          showMore: true,
+        ),
+        refreshFooter: ClassicsFooter(
+          key: GlobalKey<RefreshFooterState>(),
+          bgColor: Colors.transparent,
+          textColor: Colors.black87,
+          moreInfoColor: Colors.black54,
+          showMore: true,
+        ),
+        child: ListView(
+          children: _buildInfoList(info.data),
+        ),
+        onRefresh: () async {
+          await new Future.delayed(const Duration(seconds: 1), () {
+            start = "0";
+            _bloc.doInfoRequest(
+                id: _controller.index.toString(),
+                draw: "0",
+                start: start,
+                length: "10");
+          });
+        },
+        loadMore: () async {
+          await new Future.delayed(const Duration(seconds: 1), () {
+            start = (int.parse(start) + 10).toString();
+            _bloc.doInfoRequest(
+                id: _controller.index.toString(),
+                draw: "0",
+                start: start,
+                length: "10");
+          });
+        },
+      ),
+    );
+  }
+
+  List<InfoItem> _buildInfoList(InfoData data) {
+    if (start == "0") {
+      infoModels = data.data;
+      return infoModels
+          .map((item) =>
+          InfoItem(
+            model: item,
+          ))
+          .toList();
+    } else {
+      infoModels.addAll(data.data);
+      return infoModels
+          .map((item) =>
+          InfoItem(
+            model: item,
+          ))
+          .toList();
+    }
   }
 
   Widget _inflateList() {

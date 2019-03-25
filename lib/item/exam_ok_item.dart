@@ -104,7 +104,7 @@ class ExamOkItem extends StatelessWidget {
             style: TextStyle(fontSize: 15.0, color: Colors.white),
           ));
     } else {
-      return null;
+      return Container();
     }
   }
 }

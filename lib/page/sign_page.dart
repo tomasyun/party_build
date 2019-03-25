@@ -1,4 +1,3 @@
-import 'package:amap_location/amap_location.dart';
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/sign_in_bloc.dart';
 import 'package:party_build/global/toast.dart';
@@ -10,22 +9,22 @@ class SignPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => SignPageState();
 }
-
-String getLocationStr(AMapLocation loc) {
-  if (loc == null) {
-    return "正在定位";
-  }
-
-  if (loc.isSuccess()) {
-    if (loc.hasAddress()) {
-      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc.longitude}\n 地址:${loc.formattedAddress} 城市:${loc.city} 省:${loc.province}";
-    } else {
-      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc.longitude}\n ";
-    }
-  } else {
-    return "定位失败: \n错误:{code=${loc.code},description=${loc.description}";
-  }
-}
+//
+//String getLocationStr(AMapLocation loc) {
+//  if (loc == null) {
+//    return "正在定位";
+//  }
+//
+//  if (loc.isSuccess()) {
+//    if (loc.hasAddress()) {
+//      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc.longitude}\n 地址:${loc.formattedAddress} 城市:${loc.city} 省:${loc.province}";
+//    } else {
+//      return "定位成功: \n时间${loc.timestamp}\n经纬度:${loc.latitude} ${loc.longitude}\n ";
+//    }
+//  } else {
+//    return "定位失败: \n错误:{code=${loc.code},description=${loc.description}";
+//  }
+//}
 
 class SignPageState extends State<SignPage> with SignInBloc {
   String location;
@@ -33,9 +32,9 @@ class SignPageState extends State<SignPage> with SignInBloc {
   @override
   void initState() {
     super.initState();
-    AMapLocationClient.startup(new AMapLocationOption(
-        desiredAccuracy: CLLocationAccuracy.kCLLocationAccuracyHundredMeters));
-    location = getLocationStr(null);
+//    AMapLocationClient.startup(new AMapLocationOption(
+//        desiredAccuracy: CLLocationAccuracy.kCLLocationAccuracyHundredMeters));
+//    location = getLocationStr(null);
   }
 
   @override
@@ -166,22 +165,22 @@ class SignPageState extends State<SignPage> with SignInBloc {
         return;
       }
     }
-    AMapLocationClient.onLocationUpate.listen((AMapLocation loc) {
-      if (!mounted) return;
-      setState(() {
-        location = getLocationStr(loc);
-        print(location);
-      });
-    });
-
-    AMapLocationClient.startLocation();
+//    AMapLocationClient.onLocationUpate.listen((AMapLocation loc) {
+//      if (!mounted) return;
+//      setState(() {
+//        location = getLocationStr(loc);
+//        print(location);
+//      });
+//    });
+//
+//    AMapLocationClient.startLocation();
   }
 
   @override
   void dispose() {
     //注意这里关闭
-    AMapLocationClient.stopLocation();
-    AMapLocationClient.shutdown();
+//    AMapLocationClient.stopLocation();
+//    AMapLocationClient.shutdown();
     super.dispose();
   }
 

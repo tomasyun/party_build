@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/vote_bloc.dart';
-import 'package:party_build/list/vote_list.dart';
+import 'package:party_build/item/vote_item.dart';
 import 'package:party_build/model/vote_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class VoteMrgPage extends StatefulWidget {
   @override
@@ -34,10 +37,13 @@ class VoteMrgState extends State<VoteMrgPage> {
     );
   }
 
-  Widget _buildVoteListView(Vote vote) {
-    return VoteList(
-      vote: vote,
-    );
+  List<VoteItem> _buildVoteListView(Vote vote) {
+    return vote.data
+        .map((item) =>
+        VoteItem(
+          model: item,
+        ))
+        .toList();
   }
 
   Widget _buildVoteList() {
@@ -52,7 +58,27 @@ class VoteMrgState extends State<VoteMrgPage> {
           );
         },
         success: (data) {
-          return _buildVoteListView(data);
+          return Center(
+            child: EasyRefresh(
+              key: GlobalKey<EasyRefreshState>(),
+              behavior: ScrollOverBehavior(),
+              refreshHeader: ClassicsHeader(
+                key: GlobalKey<RefreshHeaderState>(),
+                bgColor: Colors.transparent,
+                textColor: Colors.black87,
+                moreInfoColor: Colors.black54,
+                showMore: true,
+              ),
+              child: ListView(
+                children: _buildVoteListView(data),
+              ),
+              onRefresh: () async {
+                await new Future.delayed(const Duration(seconds: 1), () {
+                  setState(() {});
+                });
+              },
+            ),
+          );
         },
         error: (msg) {},
         empty: () {

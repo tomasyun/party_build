@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/letter_bloc.dart';
-import 'package:party_build/list/letter_list.dart';
+import 'package:party_build/item/letter_item.dart';
 import 'package:party_build/model/letter_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class LetterPage extends StatefulWidget {
   @override
@@ -39,7 +42,27 @@ class LetterState extends State<LetterPage> {
             );
           },
           success: (data) {
-            return _buildLetterListView(data);
+            return Center(
+              child: EasyRefresh(
+                key: GlobalKey<EasyRefreshState>(),
+                behavior: ScrollOverBehavior(),
+                refreshHeader: ClassicsHeader(
+                  key: GlobalKey<RefreshHeaderState>(),
+                  bgColor: Colors.transparent,
+                  textColor: Colors.black87,
+                  moreInfoColor: Colors.black54,
+                  showMore: true,
+                ),
+                child: ListView(
+                  children: _buildMailList(data),
+                ),
+                onRefresh: () async {
+                  await new Future.delayed(const Duration(seconds: 1), () {
+                    setState(() {});
+                  });
+                },
+              ),
+            );
           },
           error: (msg) {},
           empty: () {
@@ -52,9 +75,12 @@ class LetterState extends State<LetterPage> {
     );
   }
 
-  Widget _buildLetterListView(Letter letter) {
-    return LetterList(
-      letter: letter,
-    );
+  List<LetterItem> _buildMailList(Letter letter) {
+    return letter.data
+        .map((item) =>
+        LetterItem(
+          model: item,
+        ))
+        .toList();
   }
 }

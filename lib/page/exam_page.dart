@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/exam_bloc.dart';
-import 'package:party_build/list/exam_ok_list.dart';
-import 'package:party_build/list/exam_on_list.dart';
+import 'package:party_build/item/exam_ok_item.dart';
+import 'package:party_build/item/exam_on_item.dart';
 import 'package:party_build/model/exam_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 //考试
 class ExamPage extends StatefulWidget {
@@ -21,14 +24,8 @@ class ExamPageState extends State<ExamPage>
     _bloc.doGetExam(type: "0");
     _controller = TabController(length: 2, vsync: this, initialIndex: 0);
     _controller.addListener(() {
-      switch (_controller.index) {
-        case 0: //待考
-          _bloc.doGetExam(type: "0");
-          break;
-        case 1: //已考
-          _bloc.doGetExam(type: "1");
-          break;
-      }
+      if (_controller.indexIsChanging)
+        _bloc.doGetExam(type: _controller.index.toString());
     });
   }
 
@@ -59,12 +56,8 @@ class ExamPageState extends State<ExamPage>
       ),
       body: TabBarView(
         children: <Widget>[
-          Center(
-            child: _buildExamList("0"),
-          ),
-          Center(
-            child: _buildExamList("1"),
-          )
+          _buildExamList("0"),
+          _buildExamList("1"),
         ],
         controller: _controller,
         physics: NeverScrollableScrollPhysics(),
@@ -72,18 +65,49 @@ class ExamPageState extends State<ExamPage>
     );
   }
 
-//待考列表
-  Widget _buildExamOnList(ExamModel model) {
-    return ExamOnList(
-      model: model,
+//已考列表
+  Widget _buildList(String type, ExamModel model) {
+    return Center(
+      child: EasyRefresh(
+        key: GlobalKey<EasyRefreshState>(),
+        behavior: ScrollOverBehavior(),
+        refreshHeader: ClassicsHeader(
+          key: GlobalKey<RefreshHeaderState>(),
+          bgColor: Colors.transparent,
+          textColor: Colors.black87,
+          moreInfoColor: Colors.black54,
+          showMore: true,
+        ),
+        child: ListView(
+          children: _buildExamListView(type, model),
+        ),
+        onRefresh: () async {
+          await new Future.delayed(const Duration(seconds: 1), () {
+            setState(() {});
+          });
+        },
+      ),
     );
   }
 
-//已考列表
-  Widget _buildExamOkList(ExamModel model) {
-    return ExamOkList(
-      model: model,
-    );
+  List<Widget> _buildExamListView(String type, ExamModel model) {
+    if (type == "0") {
+      return model.data
+          .map((item) =>
+          ExamOnItem(
+            exam: item,
+          ))
+          .toList();
+    } else if (type == "1") {
+      return model.data
+          .map((item) =>
+          ExamOkItem(
+            exam: item,
+          ))
+          .toList();
+    } else {
+      return [];
+    }
   }
 
   Widget _buildExamList(String type) {
@@ -98,13 +122,7 @@ class ExamPageState extends State<ExamPage>
           );
         },
         success: (data) {
-          if (type == "0") {
-            return _buildExamOnList(data);
-          } else if (type == "1") {
-            return _buildExamOkList(data);
-          } else {
-            return null;
-          }
+          return _buildList(type, data);
         },
         error: (msg) {},
         empty: () {

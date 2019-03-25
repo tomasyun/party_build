@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/survey_bloc.dart';
-import 'package:party_build/list/survey_list.dart';
+import 'package:party_build/item/survey_item.dart';
 import 'package:party_build/model/survey_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class QuestionSurPage extends StatefulWidget {
   @override
@@ -39,7 +42,27 @@ class QuestionSurState extends State<QuestionSurPage> {
             );
           },
           success: (data) {
-            return _buildSurveyList(data);
+            return Center(
+              child: EasyRefresh(
+                key: GlobalKey<EasyRefreshState>(),
+                behavior: ScrollOverBehavior(),
+                refreshHeader: ClassicsHeader(
+                  key: GlobalKey<RefreshHeaderState>(),
+                  bgColor: Colors.transparent,
+                  textColor: Colors.black87,
+                  moreInfoColor: Colors.black54,
+                  showMore: true,
+                ),
+                child: ListView(
+                  children: _buildSurveyListView(data),
+                ),
+                onRefresh: () async {
+                  await new Future.delayed(const Duration(seconds: 1), () {
+                    setState(() {});
+                  });
+                },
+              ),
+            );
           },
           empty: () {},
           error: (msg) {
@@ -52,9 +75,12 @@ class QuestionSurState extends State<QuestionSurPage> {
     );
   }
 
-  Widget _buildSurveyList(Survey survey) {
-    return SurveyList(
-      survey: survey,
-    );
+  List<SurveyItem> _buildSurveyListView(Survey survey) {
+    return survey.data
+        .map((item) =>
+        SurveyItem(
+          model: item,
+        ))
+        .toList();
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/task_bloc.dart';
-import 'package:party_build/list/task_list.dart';
+import 'package:party_build/item/task_item.dart';
 import 'package:party_build/model/task_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class TaskPage extends StatefulWidget {
   @override
@@ -44,7 +47,27 @@ class TaskState extends State<TaskPage> {
     }, success: (data) {
       return Container(
         color: Colors.black12,
-        child: _buildTaskListView(data),
+        child: Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildTaskList(data),
+            ),
+            onRefresh: () async {
+              await new Future.delayed(const Duration(seconds: 1), () {
+                setState(() {});
+              });
+            },
+          ),
+        ),
       );
     }, error: (msg) {
       return Container(
@@ -61,9 +84,12 @@ class TaskState extends State<TaskPage> {
     });
   }
 
-  Widget _buildTaskListView(Task task) {
-    return TaskList(
-      task: task,
-    );
+  List<TaskItem> _buildTaskList(Task task) {
+    return task.data
+        .map((item) =>
+        TaskItem(
+          model: item,
+        ))
+        .toList();
   }
 }
