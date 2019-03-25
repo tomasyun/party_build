@@ -91,6 +91,10 @@ class InfoPageState extends State<InfoPage>
           bgColor: Colors.transparent,
           textColor: Colors.black87,
           moreInfoColor: Colors.black54,
+          refreshedText: "刷新完成",
+          refreshText: "下拉刷新",
+          refreshingText: "正在刷新",
+          refreshReadyText: "释放刷新",
           showMore: true,
         ),
         refreshFooter: ClassicsFooter(

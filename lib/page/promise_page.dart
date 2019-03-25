@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/union_bloc.dart';
-import 'package:party_build/list/union_list.dart';
+import 'package:party_build/item/union_item.dart';
 import 'package:party_build/model/union_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/footer.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class OpenPromisePage extends StatefulWidget {
   @override
@@ -11,8 +15,9 @@ class OpenPromisePage extends StatefulWidget {
 class OpenPromiseState extends State<OpenPromisePage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
-
   UnionBloc _bloc = UnionBloc.newInstance;
+  String start = "0";
+  List<UnionModel> unionModels;
 
   @override
   void initState() {
@@ -22,36 +27,20 @@ class OpenPromiseState extends State<OpenPromisePage>
         articleType: "13",
         childrenType: "44",
         draw: "0",
-        start: "0",
+        start: start,
         length: "10");
     _controller.addListener(() {
-      switch (_controller.index) {
-        case 0:
-          _bloc.doGetUnionRequest(
-              articleType: "13",
-              childrenType: "44",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
-        case 1:
-          _bloc.doGetUnionRequest(
-              articleType: "13",
-              childrenType: "45",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
-        case 2:
-          _bloc.doGetUnionRequest(
-              articleType: "13",
-              childrenType: "46",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
+      start = "0";
+      if (_controller.indexIsChanging) {
+        _bloc.doGetUnionRequest(
+            articleType: "13",
+            childrenType: (_controller.index + 44).toString(),
+            draw: "0",
+            start: start,
+            length: "10");
       }
     });
+    unionModels = List<UnionModel>();
   }
 
   @override
@@ -84,15 +73,9 @@ class OpenPromiseState extends State<OpenPromisePage>
       body: Center(
         child: TabBarView(
           children: <Widget>[
-            Center(
-              child: _buildPromiseList(),
-            ),
-            Center(
-              child: _buildPromiseList(),
-            ),
-            Center(
-              child: _buildPromiseList(),
-            )
+            _buildPromiseList(),
+            _buildPromiseList(),
+            _buildPromiseList(),
           ],
           controller: _controller,
           physics: NeverScrollableScrollPhysics(),
@@ -101,10 +84,24 @@ class OpenPromiseState extends State<OpenPromisePage>
     );
   }
 
-  Widget _buildPromiseListView(Union union) {
-    return UnionList(
-      data: union.data,
-    );
+  List<UnionItem> _buildPromiseListView(Union union) {
+    if (start == "0") {
+      unionModels = union.data.data;
+      return unionModels
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
+          .toList();
+    } else {
+      unionModels.addAll(union.data.data);
+      return unionModels
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
+          .toList();
+    }
   }
 
   Widget _buildPromiseList() {
@@ -117,7 +114,51 @@ class OpenPromiseState extends State<OpenPromisePage>
         ),
       );
     }, success: (data) {
-      return _buildPromiseListView(data);
+      return Center(
+        child: EasyRefresh(
+          key: GlobalKey<EasyRefreshState>(),
+          behavior: ScrollOverBehavior(),
+          refreshHeader: ClassicsHeader(
+            key: GlobalKey<RefreshHeaderState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          refreshFooter: ClassicsFooter(
+            key: GlobalKey<RefreshFooterState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          child: ListView(
+            children: _buildPromiseListView(data),
+          ),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = "0";
+              _bloc.doGetUnionRequest(
+                  articleType: "13",
+                  childrenType: (_controller.index + 44).toString(),
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+          loadMore: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = (int.parse(start) + 10).toString();
+              _bloc.doGetUnionRequest(
+                  articleType: "13",
+                  childrenType: (_controller.index + 44).toString(),
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+        ),
+      );
     }, error: (msg) {
       return Container(
         child: Center(

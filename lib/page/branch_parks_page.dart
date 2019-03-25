@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/notice_bloc.dart';
 import 'package:party_build/bloc/union_bloc.dart';
-import 'package:party_build/list/notice_list.dart';
-import 'package:party_build/list/union_list.dart';
+import 'package:party_build/item/notice_item.dart';
+import 'package:party_build/item/union_item.dart';
 import 'package:party_build/model/notice_model.dart';
 import 'package:party_build/model/union_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/footer.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class BranchParksPage extends StatefulWidget {
   @override
@@ -16,6 +20,9 @@ class BranchParksState extends State<BranchParksPage>
   TabController _controller;
   NoticeBloc _noticeBloc = NoticeBloc.newInstance;
   UnionBloc _unionBloc = UnionBloc.newInstance;
+  String start = "0";
+  List<NoticeModel> noticeModels;
+  List<UnionModel> unionModels;
 
   @override
   void initState() {
@@ -25,44 +32,30 @@ class BranchParksState extends State<BranchParksPage>
         title: "",
         type: "3",
         draw: "0",
-        start: "0",
+        start: start,
         length: "10");
     _controller.addListener(() {
-      switch (_controller.index) {
-        case 0:
+      start = "0";
+      if (_controller.indexIsChanging) {
+        if (_controller.index == 0) {
           _noticeBloc.doGetNoticeRequest(
               title: "",
               type: "3",
               draw: "0",
-              start: "0",
+              start: start,
               length: "10");
-          break;
-        case 1:
+        } else {
           _unionBloc.doGetUnionRequest(
               articleType: "15",
-              childrenType: "32",
+              childrenType: (_controller.index + 31).toString(),
               draw: "0",
-              start: "0",
+              start: start,
               length: "10");
-          break;
-        case 2:
-          _unionBloc.doGetUnionRequest(
-              articleType: "15",
-              childrenType: "33",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
-        case 3:
-          _unionBloc.doGetUnionRequest(
-              articleType: "15",
-              childrenType: "34",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
+        }
       }
     });
+    noticeModels = List<NoticeModel>();
+    unionModels = List<UnionModel>();
   }
 
   @override
@@ -98,18 +91,10 @@ class BranchParksState extends State<BranchParksPage>
       body: Center(
         child: TabBarView(
           children: [
-            Center(
-              child: _buildNoticeList(),
-            ),
-            Center(
-              child: _buildUnionList(),
-            ),
-            Center(
-              child: _buildUnionList(),
-            ),
-            Center(
-              child: _buildUnionList(),
-            )
+            _buildNoticeList(),
+            _buildUnionList(),
+            _buildUnionList(),
+            _buildUnionList(),
           ],
           controller: _controller,
           physics: NeverScrollableScrollPhysics(), //禁止滑动
@@ -118,16 +103,44 @@ class BranchParksState extends State<BranchParksPage>
     );
   }
 
-  Widget _buildNoticeListView(Notice notice) {
-    return NoticeList(
-      notice: notice,
-    );
+  List<NoticeItem> _buildNoticeListView(Notice notice) {
+    if (start == "0") {
+      noticeModels = notice.data;
+      return noticeModels
+          .map((item) =>
+          NoticeItem(
+            model: item,
+          ))
+          .toList();
+    } else {
+      noticeModels.addAll(notice.data);
+      return noticeModels
+          .map((item) =>
+          NoticeItem(
+            model: item,
+          ))
+          .toList();
+    }
   }
 
-  Widget _buildUnionListView(Union union) {
-    return UnionList(
-      data: union.data,
-    );
+  List<UnionItem> _buildUnionListView(Union union) {
+    if (start == "0") {
+      unionModels = union.data.data;
+      return unionModels
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
+          .toList();
+    } else {
+      unionModels.addAll(union.data.data);
+      return unionModels
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
+          .toList();
+    }
   }
 
   Widget _buildNoticeList() {
@@ -140,7 +153,51 @@ class BranchParksState extends State<BranchParksPage>
         ),
       );
     }, success: (data) {
-      return _buildNoticeListView(data);
+      return Center(
+        child: EasyRefresh(
+          key: GlobalKey<EasyRefreshState>(),
+          behavior: ScrollOverBehavior(),
+          refreshHeader: ClassicsHeader(
+            key: GlobalKey<RefreshHeaderState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          refreshFooter: ClassicsFooter(
+            key: GlobalKey<RefreshFooterState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          child: ListView(
+            children: _buildNoticeListView(data),
+          ),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = "0";
+              _noticeBloc.doGetNoticeRequest(
+                  title: "",
+                  type: "3",
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+          loadMore: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = (int.parse(start) + 10).toString();
+              _noticeBloc.doGetNoticeRequest(
+                  title: "",
+                  type: "3",
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+        ),
+      );
     }, empty: () {
       return Container(
         child: Center(
@@ -166,7 +223,51 @@ class BranchParksState extends State<BranchParksPage>
         ),
       );
     }, success: (data) {
-      return _buildUnionListView(data);
+      return Center(
+        child: EasyRefresh(
+          key: GlobalKey<EasyRefreshState>(),
+          behavior: ScrollOverBehavior(),
+          refreshHeader: ClassicsHeader(
+            key: GlobalKey<RefreshHeaderState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          refreshFooter: ClassicsFooter(
+            key: GlobalKey<RefreshFooterState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          child: ListView(
+            children: _buildUnionListView(data),
+          ),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = "0";
+              _unionBloc.doGetUnionRequest(
+                  articleType: "15",
+                  childrenType: (_controller.index + 31).toString(),
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+          loadMore: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = (int.parse(start) + 10).toString();
+              _unionBloc.doGetUnionRequest(
+                  articleType: "15",
+                  childrenType: (_controller.index + 31).toString(),
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+        ),
+      );
     }, empty: () {
       return Container(
         child: Center(
