@@ -82,7 +82,7 @@ class ExamPageState extends State<ExamPage>
           children: _buildExamListView(type, model),
         ),
         onRefresh: () async {
-          await new Future.delayed(const Duration(seconds: 1), () {
+          await Future.delayed(const Duration(seconds: 1), () {
             setState(() {
               _bloc.doGetExam(type: _controller.index.toString());
             });

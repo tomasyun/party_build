@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/union_bloc.dart';
-import 'package:party_build/list/union_list.dart';
+import 'package:party_build/item/union_item.dart';
 import 'package:party_build/model/union_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/footer.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class IntegrityPage extends StatefulWidget {
   @override
@@ -12,6 +16,8 @@ class IntegrityState extends State<IntegrityPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
   UnionBloc _bloc = UnionBloc.newInstance;
+  List<UnionModel> unionModels;
+  String start = "0";
 
   @override
   void initState() {
@@ -21,36 +27,20 @@ class IntegrityState extends State<IntegrityPage>
         articleType: "10",
         childrenType: "",
         draw: "0",
-        start: "0",
+        start: start,
         length: "10");
     _controller.addListener(() {
-      switch (_controller.index) {
-        case 0:
-          _bloc.doGetUnionRequest(
-              articleType: "10",
-              childrenType: "",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
-        case 1:
-          _bloc.doGetUnionRequest(
-              articleType: "11",
-              childrenType: "",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
-        case 2:
-          _bloc.doGetUnionRequest(
-              articleType: "12",
-              childrenType: "",
-              draw: "0",
-              start: "0",
-              length: "10");
-          break;
+      start = "0";
+      if (_controller.indexIsChanging) {
+        _bloc.doGetUnionRequest(
+            articleType: (_controller.index + 10).toString(),
+            childrenType: "",
+            draw: "0",
+            start: start,
+            length: "10");
       }
     });
+    unionModels = List<UnionModel>();
   }
 
   @override
@@ -83,15 +73,9 @@ class IntegrityState extends State<IntegrityPage>
       body: Center(
         child: TabBarView(
           children: [
-            Center(
-              child: _buildIntegrityList(),
-            ),
-            Center(
-              child: _buildIntegrityList(),
-            ),
-            Center(
-              child: _buildIntegrityList(),
-            )
+            _buildIntegrityList(),
+            _buildIntegrityList(),
+            _buildIntegrityList(),
           ],
           controller: _controller,
           physics: NeverScrollableScrollPhysics(),
@@ -110,7 +94,51 @@ class IntegrityState extends State<IntegrityPage>
         ),
       );
     }, success: (data) {
-      return _buildListView(data);
+      return Center(
+        child: EasyRefresh(
+          key: GlobalKey<EasyRefreshState>(),
+          behavior: ScrollOverBehavior(),
+          refreshHeader: ClassicsHeader(
+            key: GlobalKey<RefreshHeaderState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          refreshFooter: ClassicsFooter(
+            key: GlobalKey<RefreshFooterState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          child: ListView(
+            children: _buildListView(data),
+          ),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = "0";
+              _bloc.doGetUnionRequest(
+                  articleType: (_controller.index + 10).toString(),
+                  childrenType: "",
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+          loadMore: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              start = (int.parse(start) + 10).toString();
+              _bloc.doGetUnionRequest(
+                  articleType: (_controller.index + 10).toString(),
+                  childrenType: "",
+                  draw: "0",
+                  start: start,
+                  length: "10");
+            });
+          },
+        ),
+      );
     }, empty: () {
       return Container(
         child: Center(
@@ -126,9 +154,23 @@ class IntegrityState extends State<IntegrityPage>
     });
   }
 
-  Widget _buildListView(Union union) {
-    return UnionList(
-      data: union.data,
-    );
+  List<UnionItem> _buildListView(Union union) {
+    if (start == "0") {
+      unionModels = union.data.data;
+      return unionModels
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
+          .toList();
+    } else {
+      unionModels.addAll(union.data.data);
+      return unionModels
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
+          .toList();
+    }
   }
 }

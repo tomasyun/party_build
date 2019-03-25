@@ -104,7 +104,7 @@ class InfoPageState extends State<InfoPage>
           children: _buildInfoList(info.data),
         ),
         onRefresh: () async {
-          await new Future.delayed(const Duration(seconds: 1), () {
+          await Future.delayed(const Duration(seconds: 1), () {
             start = "0";
             _bloc.doInfoRequest(
                 id: _controller.index.toString(),
@@ -114,7 +114,7 @@ class InfoPageState extends State<InfoPage>
           });
         },
         loadMore: () async {
-          await new Future.delayed(const Duration(seconds: 1), () {
+          await Future.delayed(const Duration(seconds: 1), () {
             start = (int.parse(start) + 10).toString();
             _bloc.doInfoRequest(
                 id: _controller.index.toString(),
