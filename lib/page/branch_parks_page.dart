@@ -29,21 +29,13 @@ class BranchParksState extends State<BranchParksPage>
     super.initState();
     _controller = TabController(length: 4, vsync: this);
     _noticeBloc.doGetNoticeRequest(
-        title: "",
-        type: "3",
-        draw: "0",
-        start: start,
-        length: "10");
+        title: "", type: "3", draw: "0", start: start, length: "10");
     _controller.addListener(() {
       start = "0";
       if (_controller.indexIsChanging) {
         if (_controller.index == 0) {
           _noticeBloc.doGetNoticeRequest(
-              title: "",
-              type: "3",
-              draw: "0",
-              start: start,
-              length: "10");
+              title: "", type: "3", draw: "0", start: start, length: "10");
         } else {
           _unionBloc.doGetUnionRequest(
               articleType: "15",
@@ -107,18 +99,16 @@ class BranchParksState extends State<BranchParksPage>
     if (start == "0") {
       noticeModels = notice.data;
       return noticeModels
-          .map((item) =>
-          NoticeItem(
-            model: item,
-          ))
+          .map((item) => NoticeItem(
+                model: item,
+              ))
           .toList();
     } else {
       noticeModels.addAll(notice.data);
       return noticeModels
-          .map((item) =>
-          NoticeItem(
-            model: item,
-          ))
+          .map((item) => NoticeItem(
+                model: item,
+              ))
           .toList();
     }
   }
@@ -127,18 +117,16 @@ class BranchParksState extends State<BranchParksPage>
     if (start == "0") {
       unionModels = union.data.data;
       return unionModels
-          .map((item) =>
-          UnionItem(
-            model: item,
-          ))
+          .map((item) => UnionItem(
+                model: item,
+              ))
           .toList();
     } else {
       unionModels.addAll(union.data.data);
       return unionModels
-          .map((item) =>
-          UnionItem(
-            model: item,
-          ))
+          .map((item) => UnionItem(
+                model: item,
+              ))
           .toList();
     }
   }
@@ -178,22 +166,14 @@ class BranchParksState extends State<BranchParksPage>
             await Future.delayed(const Duration(seconds: 1), () {
               start = "0";
               _noticeBloc.doGetNoticeRequest(
-                  title: "",
-                  type: "3",
-                  draw: "0",
-                  start: start,
-                  length: "10");
+                  title: "", type: "3", draw: "0", start: start, length: "10");
             });
           },
           loadMore: () async {
             await Future.delayed(const Duration(seconds: 1), () {
               start = (int.parse(start) + 10).toString();
               _noticeBloc.doGetNoticeRequest(
-                  title: "",
-                  type: "3",
-                  draw: "0",
-                  start: start,
-                  length: "10");
+                  title: "", type: "3", draw: "0", start: start, length: "10");
             });
           },
         ),

@@ -79,10 +79,9 @@ class QuestionSurState extends State<QuestionSurPage> {
 
   List<SurveyItem> _buildSurveyListView(Survey survey) {
     return survey.data
-        .map((item) =>
-        SurveyItem(
-          model: item,
-        ))
+        .map((item) => SurveyItem(
+              model: item,
+            ))
         .toList();
   }
 }

@@ -135,18 +135,16 @@ class InfoPageState extends State<InfoPage>
     if (start == "0") {
       infoModels = data.data;
       return infoModels
-          .map((item) =>
-          InfoItem(
-            model: item,
-          ))
+          .map((item) => InfoItem(
+                model: item,
+              ))
           .toList();
     } else {
       infoModels.addAll(data.data);
       return infoModels
-          .map((item) =>
-          InfoItem(
-            model: item,
-          ))
+          .map((item) => InfoItem(
+                model: item,
+              ))
           .toList();
     }
   }

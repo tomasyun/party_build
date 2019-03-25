@@ -88,18 +88,16 @@ class OpenPromiseState extends State<OpenPromisePage>
     if (start == "0") {
       unionModels = union.data.data;
       return unionModels
-          .map((item) =>
-          UnionItem(
-            model: item,
-          ))
+          .map((item) => UnionItem(
+                model: item,
+              ))
           .toList();
     } else {
       unionModels.addAll(union.data.data);
       return unionModels
-          .map((item) =>
-          UnionItem(
-            model: item,
-          ))
+          .map((item) => UnionItem(
+                model: item,
+              ))
           .toList();
     }
   }
