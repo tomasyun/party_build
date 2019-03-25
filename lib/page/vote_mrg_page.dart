@@ -39,10 +39,9 @@ class VoteMrgState extends State<VoteMrgPage> {
 
   List<VoteItem> _buildVoteListView(Vote vote) {
     return vote.data
-        .map((item) =>
-        VoteItem(
-          model: item,
-        ))
+        .map((item) => VoteItem(
+              model: item,
+            ))
         .toList();
   }
 
@@ -74,7 +73,9 @@ class VoteMrgState extends State<VoteMrgPage> {
               ),
               onRefresh: () async {
                 await new Future.delayed(const Duration(seconds: 1), () {
-                  setState(() {});
+                  setState(() {
+                    _bloc.doGetVoteListRequest();
+                  });
                 });
               },
             ),

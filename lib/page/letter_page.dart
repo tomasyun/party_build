@@ -58,7 +58,9 @@ class LetterState extends State<LetterPage> {
                 ),
                 onRefresh: () async {
                   await new Future.delayed(const Duration(seconds: 1), () {
-                    setState(() {});
+                    setState(() {
+                      _bloc.doGetLetterRequest();
+                    });
                   });
                 },
               ),
@@ -77,10 +79,9 @@ class LetterState extends State<LetterPage> {
 
   List<LetterItem> _buildMailList(Letter letter) {
     return letter.data
-        .map((item) =>
-        LetterItem(
-          model: item,
-        ))
+        .map((item) => LetterItem(
+              model: item,
+            ))
         .toList();
   }
 }

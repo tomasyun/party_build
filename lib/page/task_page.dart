@@ -63,7 +63,9 @@ class TaskState extends State<TaskPage> {
             ),
             onRefresh: () async {
               await new Future.delayed(const Duration(seconds: 1), () {
-                setState(() {});
+                setState(() {
+                  _bloc.doGetTaskListRequest();
+                });
               });
             },
           ),
@@ -86,10 +88,9 @@ class TaskState extends State<TaskPage> {
 
   List<TaskItem> _buildTaskList(Task task) {
     return task.data
-        .map((item) =>
-        TaskItem(
-          model: item,
-        ))
+        .map((item) => TaskItem(
+              model: item,
+            ))
         .toList();
   }
 }

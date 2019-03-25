@@ -83,7 +83,9 @@ class ExamPageState extends State<ExamPage>
         ),
         onRefresh: () async {
           await new Future.delayed(const Duration(seconds: 1), () {
-            setState(() {});
+            setState(() {
+              _bloc.doGetExam(type: _controller.index.toString());
+            });
           });
         },
       ),
@@ -93,17 +95,15 @@ class ExamPageState extends State<ExamPage>
   List<Widget> _buildExamListView(String type, ExamModel model) {
     if (type == "0") {
       return model.data
-          .map((item) =>
-          ExamOnItem(
-            exam: item,
-          ))
+          .map((item) => ExamOnItem(
+                exam: item,
+              ))
           .toList();
     } else if (type == "1") {
       return model.data
-          .map((item) =>
-          ExamOkItem(
-            exam: item,
-          ))
+          .map((item) => ExamOkItem(
+                exam: item,
+              ))
           .toList();
     } else {
       return [];

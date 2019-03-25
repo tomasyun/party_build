@@ -58,7 +58,9 @@ class QuestionSurState extends State<QuestionSurPage> {
                 ),
                 onRefresh: () async {
                   await new Future.delayed(const Duration(seconds: 1), () {
-                    setState(() {});
+                    setState(() {
+                      _bloc.doSurveyQuestion();
+                    });
                   });
                 },
               ),

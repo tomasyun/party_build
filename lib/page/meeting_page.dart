@@ -59,7 +59,9 @@ class MeetingState extends State<MeetingPage> {
                 ),
                 onRefresh: () async {
                   await new Future.delayed(const Duration(seconds: 1), () {
-                    setState(() {});
+                    setState(() {
+                      _bloc.doGetMeetingList();
+                    });
                   });
                 },
               ),
@@ -78,10 +80,9 @@ class MeetingState extends State<MeetingPage> {
 
   List<MeetingItem> _buildMeetingList(Meeting meeting) {
     return meeting.data
-        .map((item) =>
-        MeetingItem(
-          data: item,
-        ))
+        .map((item) => MeetingItem(
+              data: item,
+            ))
         .toList();
   }
 }

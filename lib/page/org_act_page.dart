@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/org_act_bloc.dart';
-import 'package:party_build/list/org_act_list.dart';
+import 'package:party_build/item/org_act_item.dart';
 import 'package:party_build/model/org_act_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class OrgActPage extends StatefulWidget {
   @override
@@ -34,10 +37,10 @@ class OrgActState extends State<OrgActPage> {
     );
   }
 
-  Widget _buildOrgActListView(OrgAct org) {
-    return OrgActList(
-      orgAct: org,
-    );
+  List<OrgActItem> _buildOrgActListView(OrgAct org) {
+    return org.data.map((item) => OrgActItem(
+          model: item,
+        ));
   }
 
   Widget _buildOrgActList() {
@@ -52,7 +55,29 @@ class OrgActState extends State<OrgActPage> {
         );
       },
       success: (data) {
-        return _buildOrgActListView(data);
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildOrgActListView(data),
+            ),
+            onRefresh: () async {
+              await new Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetOrgActRequest();
+                });
+              });
+            },
+          ),
+        );
       },
       empty: () {
         return Container(
