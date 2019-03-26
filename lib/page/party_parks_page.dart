@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/union_bloc.dart';
-import 'package:party_build/list/union_list.dart';
+import 'package:party_build/item/union_item.dart';
 import 'package:party_build/model/union_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class PartyParksPage extends StatefulWidget {
   @override
@@ -37,10 +40,12 @@ class PartyParksState extends State<PartyParksPage> {
     );
   }
 
-  Widget _buildPartyParksListView(Union union) {
-    return UnionList(
-      data: union.data,
-    );
+  List<UnionItem> _buildPartyParksListView(Union union) {
+    return union.data.data
+        .map((item) => UnionItem(
+              model: item,
+            ))
+        .toList();
   }
 
   Widget _buildPartyParksList() {
@@ -53,7 +58,34 @@ class PartyParksState extends State<PartyParksPage> {
         ),
       );
     }, success: (data) {
-      return _buildPartyParksListView(data);
+      return Center(
+        child: EasyRefresh(
+          key: GlobalKey<EasyRefreshState>(),
+          behavior: ScrollOverBehavior(),
+          refreshHeader: ClassicsHeader(
+            key: GlobalKey<RefreshHeaderState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          child: ListView(
+            children: _buildPartyParksListView(data),
+          ),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              setState(() {
+                _bloc.doGetUnionRequest(
+                    articleType: "14",
+                    childrenType: "",
+                    draw: "0",
+                    start: "0",
+                    length: "10");
+              });
+            });
+          },
+        ),
+      );
     }, error: (msg) {
       return Container(
         child: Center(

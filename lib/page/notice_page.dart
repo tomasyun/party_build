@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/notice_bloc.dart';
-import 'package:party_build/list/notice_list.dart';
+import 'package:party_build/item/notice_item.dart';
 import 'package:party_build/model/notice_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class NoticePage extends StatefulWidget {
   @override
@@ -15,11 +18,7 @@ class NoticeState extends State<NoticePage> {
   void initState() {
     super.initState();
     _bloc.doGetNoticeRequest(
-        title: "",
-        type: "1",
-        draw: "0",
-        start: "0",
-        length: "10");
+        title: "", type: "1", draw: "0", start: "0", length: "10");
   }
 
   @override
@@ -44,7 +43,34 @@ class NoticeState extends State<NoticePage> {
             );
           },
           success: (data) {
-            return _buildNoticeListView(data);
+            return Center(
+              child: EasyRefresh(
+                key: GlobalKey<EasyRefreshState>(),
+                behavior: ScrollOverBehavior(),
+                refreshHeader: ClassicsHeader(
+                  key: GlobalKey<RefreshHeaderState>(),
+                  bgColor: Colors.transparent,
+                  textColor: Colors.black87,
+                  moreInfoColor: Colors.black54,
+                  showMore: true,
+                ),
+                child: ListView(
+                  children: _buildNoticeListView(data),
+                ),
+                onRefresh: () async {
+                  await Future.delayed(const Duration(seconds: 1), () {
+                    setState(() {
+                      _bloc.doGetNoticeRequest(
+                          title: "",
+                          type: "1",
+                          draw: "0",
+                          start: "0",
+                          length: "10");
+                    });
+                  });
+                },
+              ),
+            );
           },
           error: (msg) {},
           empty: () {
@@ -57,9 +83,11 @@ class NoticeState extends State<NoticePage> {
     );
   }
 
-  Widget _buildNoticeListView(Notice notice) {
-    return NoticeList(
-      notice: notice,
-    );
+  List<NoticeItem> _buildNoticeListView(Notice notice) {
+    return notice.data
+        .map((item) => NoticeItem(
+              model: item,
+            ))
+        .toList();
   }
 }
