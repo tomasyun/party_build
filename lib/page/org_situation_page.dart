@@ -42,10 +42,9 @@ class OrgSituationState extends State<OrgSituationPage> {
 
   List<UnionItem> _buildOrgSituationListView(Union union) {
     return union.data.data
-        .map((item) =>
-        UnionItem(
-          model: item,
-        ))
+        .map((item) => UnionItem(
+              model: item,
+            ))
         .toList();
   }
 

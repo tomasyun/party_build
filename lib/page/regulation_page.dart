@@ -42,10 +42,9 @@ class RegulationState extends State<RegulationPage> {
 
   List<UnionItem> _buildRegulationListView(Union union) {
     return union.data.data
-        .map((item) =>
-        UnionItem(
-          model: item,
-        ))
+        .map((item) => UnionItem(
+              model: item,
+            ))
         .toList();
   }
 

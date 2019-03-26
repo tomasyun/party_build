@@ -42,10 +42,9 @@ class GardenParksState extends State<GardenParksPage> {
 
   List<UnionItem> _buildGardenParksListView(Union union) {
     return union.data.data
-        .map((item) =>
-        UnionItem(
-          model: item,
-        ))
+        .map((item) => UnionItem(
+              model: item,
+            ))
         .toList();
   }
 
