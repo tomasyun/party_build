@@ -131,7 +131,8 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
       sp.putString("partyPost", data.partyPost);
       sp.putString("token", "Bearer " + data.token);
       sp.putString("userId", data.userId);
-      sp.putString("avatar", data.avatar);
+      sp.putString("avatar",
+          "http://p1.img.cctvpic.com/photoworkspace/2018/05/18/2018051814594647287.jpg");
       sp.putBool("isManager", data.isManager);
       sp.putInt("isLoginOk", 1);
       Navigator.of(context).pushAndRemoveUntil(

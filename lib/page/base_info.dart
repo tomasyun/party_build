@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/api/global_api.dart';
 import 'package:party_build/bloc/base_info_bloc.dart';
 import 'package:party_build/model/base_info_model.dart';
 
@@ -103,10 +104,16 @@ class BaseInfoState extends State<BaseInfoPage> {
                     ),
                   ),
                   Container(
-                    child: Image.asset(
-                      "images/ic_avatar.png",
-                      width: 40.0,
-                      height: 40.0,
+                    child: ClipOval(
+                      child: FadeInImage.assetNetwork(
+                        placeholder: "images/ic_avatar.png",
+                        //预览图
+                        fit: BoxFit.fitWidth,
+                        image:
+                        GlobalApi().doFormatImageUrl(url: info.data.avatar),
+                        width: 50.0,
+                        height: 50.0,
+                      ),
                     ),
                   )
                 ],

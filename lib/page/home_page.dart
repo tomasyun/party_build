@@ -87,7 +87,7 @@ class HomePageState extends State<HomePage> {
           children: <Widget>[
             Container(
               child: BannerWidget(
-                entity: entity,
+                entity: _initBanner(home),
                 delayTime: 500,
                 duration: 1000,
                 bannerPress: (position, entity) {
@@ -112,13 +112,16 @@ class HomePageState extends State<HomePage> {
                           fontStyle: FontStyle.italic,
                           color: Colors.red,
                           fontWeight: FontWeight.bold)),
-                  Container(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: MarqueeText(
-                      "陕西缔科网络科技有限公司",
-                      speed: 10.0,
-                      gap: 100.0,
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: MarqueeText(
+                        home.data.announcement.content,
+                        speed: 10.0,
+                        gap: 100.0,
+                      ),
                     ),
+                    flex: 1,
                   )
                 ],
               ),

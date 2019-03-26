@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:party_build/banner/banner_item.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 const CountMax = 0x7fffffff;
 
@@ -86,10 +85,11 @@ class BannerState extends State<BannerWidget> {
               }
             },
             child: widget.build == null
-                ? FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
+                ? FadeInImage.assetNetwork(
+//                    placeholder: kTransparentImage,
+                placeholder: "images/app_def.png",
                     image: widget.entity[index % widget.entity.length].bUrl,
-                    fit: BoxFit.cover)
+                fit: BoxFit.fitHeight)
                 : widget.build(
                     index, widget.entity[index % widget.entity.length]));
       },
@@ -106,8 +106,11 @@ class BannerState extends State<BannerWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(widget.entity[selectIndex].bTitle,
-                  style: new TextStyle(color: Colors.white)),
+              Expanded(
+                child: Text(widget.entity[selectIndex].bTitle,
+                    style: new TextStyle(color: Colors.white)),
+                flex: 1,
+              ),
               Row(children: circle())
             ],
           ),

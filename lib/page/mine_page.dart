@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/api/global_api.dart';
+import 'package:party_build/global/sharedpreferences.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/page/base_info.dart';
 import 'package:party_build/page/credit_page.dart';
@@ -7,6 +9,7 @@ import 'package:party_build/page/notice_page.dart';
 import 'package:party_build/page/rank_page.dart';
 import 'package:party_build/page/setting_page.dart';
 import 'package:party_build/page/suggest_page.dart';
+import 'package:rxdart/rxdart.dart';
 
 //我的
 class MinePage extends StatefulWidget {
@@ -15,6 +18,17 @@ class MinePage extends StatefulWidget {
 }
 
 class MinePageState extends State<MinePage> {
+  // ignore: close_sinks
+  var _streamController = new PublishSubject<String>();
+
+  @override
+  void initState() {
+    super.initState();
+    SpUtils().getString("avatar").then((value) {
+      _streamController.sink.add(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +61,30 @@ class MinePageState extends State<MinePage> {
                         margin: EdgeInsets.only(right: 15.0, bottom: 25.0),
                         child: GestureDetector(
                           onTap: () => {},
-                          child: Image.asset(
-                            "images/ic_avatar.png",
-                            width: 50.0,
-                            height: 50.0,
+                          child: StreamBuilder(
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return Container(
+                                  child: ClipOval(
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: "images/ic_avatar.png",
+                                      //预览图
+                                      fit: BoxFit.fitWidth,
+                                      image: GlobalApi()
+                                          .doFormatImageUrl(url: snapshot.data),
+                                      width: 50.0,
+                                      height: 50.0,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  width: 0.0,
+                                  height: 0.0,
+                                );
+                              }
+                            },
+                            stream: _streamController.stream,
                           ),
                         ),
                       ),
@@ -123,8 +157,7 @@ class MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildGestureDetectorAction(
-      BuildContext context, Widget widget, String url) {
+  Widget _buildGestureDetectorAction(BuildContext context, Widget widget, String url) {
     return GestureDetector(
       onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => widget)),
@@ -139,8 +172,7 @@ class MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildGestureDetectorCredit(
-      BuildContext context, Widget widget, String url, String title) {
+  Widget _buildGestureDetectorCredit(BuildContext context, Widget widget, String url, String title) {
     return GestureDetector(
         onTap: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => widget)),
@@ -164,8 +196,7 @@ class MinePageState extends State<MinePage> {
         ));
   }
 
-  Widget _buildContainer(
-      BuildContext context, Widget widget, String url, String title) {
+  Widget _buildContainer(BuildContext context, Widget widget, String url, String title) {
     return GestureDetector(
       onTap: () {
         if (widget == null) {

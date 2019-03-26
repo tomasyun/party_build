@@ -5,7 +5,7 @@ import 'package:rxdart/rxdart.dart';
 
 class BlocProvider<T> {
   final _api = new GlobalApi();
-  final _streamController = new PublishSubject<T>();
+  var _streamController = new PublishSubject<T>();
 
   Widget streamBuild({
     T initData,
