@@ -40,7 +40,7 @@ class OrgActState extends State<OrgActPage> {
   List<OrgActItem> _buildOrgActListView(OrgAct org) {
     return org.data.map((item) => OrgActItem(
           model: item,
-        ));
+    )).toList();
   }
 
   Widget _buildOrgActList() {
