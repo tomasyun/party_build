@@ -87,9 +87,9 @@ class BannerState extends State<BannerWidget> {
             child: widget.build == null
                 ? FadeInImage.assetNetwork(
 //                    placeholder: kTransparentImage,
-                placeholder: "images/app_def.png",
+                    placeholder: "images/app_def.png",
                     image: widget.entity[index % widget.entity.length].bUrl,
-                fit: BoxFit.fitHeight)
+                    fit: BoxFit.fitHeight)
                 : widget.build(
                     index, widget.entity[index % widget.entity.length]));
       },
