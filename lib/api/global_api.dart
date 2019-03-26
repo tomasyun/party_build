@@ -2,10 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:party_build/api/const.dart';
 
 class GlobalApi {
-  void doRequest({Response response,
-    Function success,
-    Function error,
-    Function empty}) async {
+  void doRequest(
+      {Response response,
+      Function success,
+      Function error,
+      Function empty}) async {
     int code = response.statusCode;
     if (code >= 200 && code <= 300) {
       Map<String, dynamic> data = response.data;
