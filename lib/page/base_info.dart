@@ -110,7 +110,7 @@ class BaseInfoState extends State<BaseInfoPage> {
                         //预览图
                         fit: BoxFit.fitWidth,
                         image:
-                        GlobalApi().doFormatImageUrl(url: info.data.avatar),
+                            GlobalApi().doFormatImageUrl(url: info.data.avatar),
                         width: 50.0,
                         height: 50.0,
                       ),
