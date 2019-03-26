@@ -157,7 +157,8 @@ class MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildGestureDetectorAction(BuildContext context, Widget widget, String url) {
+  Widget _buildGestureDetectorAction(
+      BuildContext context, Widget widget, String url) {
     return GestureDetector(
       onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => widget)),
@@ -172,7 +173,8 @@ class MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildGestureDetectorCredit(BuildContext context, Widget widget, String url, String title) {
+  Widget _buildGestureDetectorCredit(
+      BuildContext context, Widget widget, String url, String title) {
     return GestureDetector(
         onTap: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => widget)),
@@ -196,7 +198,8 @@ class MinePageState extends State<MinePage> {
         ));
   }
 
-  Widget _buildContainer(BuildContext context, Widget widget, String url, String title) {
+  Widget _buildContainer(
+      BuildContext context, Widget widget, String url, String title) {
     return GestureDetector(
       onTap: () {
         if (widget == null) {
