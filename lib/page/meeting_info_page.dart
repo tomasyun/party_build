@@ -83,8 +83,11 @@ class MeetingInfoState extends State<MeetingInfoPage> with SignUpBloc {
               child: Column(
                 children: <Widget>[
                   Container(
-                    child: Image.network(
-                        "http://p1.img.cctvpic.com/photoworkspace/2018/05/18/2018051814175817985.jpg"),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: "images/app_def.png",
+                      image: info.data.themeImg,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Container(
                     width: double.infinity,
