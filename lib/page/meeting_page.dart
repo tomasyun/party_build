@@ -58,10 +58,9 @@ class MeetingState extends State<MeetingPage> {
 
   List<MeetingItem> _buildMeetingList(Meeting meeting) {
     return meeting.data
-        .map((item) =>
-        MeetingItem(
-          data: item,
-        ))
+        .map((item) => MeetingItem(
+              data: item,
+            ))
         .toList();
   }
 

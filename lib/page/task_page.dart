@@ -66,10 +66,9 @@ class TaskState extends State<TaskPage> {
 
   List<TaskItem> _buildTaskList(Task task) {
     return task.data
-        .map((item) =>
-        TaskItem(
-          model: item,
-        ))
+        .map((item) => TaskItem(
+              model: item,
+            ))
         .toList();
   }
 

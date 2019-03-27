@@ -57,10 +57,9 @@ class LetterState extends State<LetterPage> {
 
   List<LetterItem> _buildMailList(Letter letter) {
     return letter.data
-        .map((item) =>
-        LetterItem(
-          model: item,
-        ))
+        .map((item) => LetterItem(
+              model: item,
+            ))
         .toList();
   }
 

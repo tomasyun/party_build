@@ -60,10 +60,9 @@ class NoticeState extends State<NoticePage> {
 
   List<NoticeItem> _buildNoticeListView(Notice notice) {
     return notice.data
-        .map((item) =>
-        NoticeItem(
-          model: item,
-        ))
+        .map((item) => NoticeItem(
+              model: item,
+            ))
         .toList();
   }
 
