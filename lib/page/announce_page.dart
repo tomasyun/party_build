@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/notice_bloc.dart';
-import 'package:party_build/list/notice_list.dart';
+import 'package:party_build/item/notice_item.dart';
 import 'package:party_build/model/notice_model.dart';
+import 'package:party_build/refresh/behavior.dart';
+import 'package:party_build/refresh/header.dart';
+import 'package:party_build/refresh/refresher.dart';
 
 class AnnouncePage extends StatefulWidget {
   @override
@@ -37,10 +40,13 @@ class AnnounceState extends State<AnnouncePage> {
     );
   }
 
-  Widget _buildAnnounceListView(Notice notice) {
-    return NoticeList(
-      notice: notice,
-    );
+  List<NoticeItem> _buildAnnounceListView(Notice notice) {
+    return notice.data
+        .map((item) =>
+        NoticeItem(
+          model: item,
+        ))
+        .toList();
   }
 
   Widget _buildAnnounceList() {
@@ -53,7 +59,34 @@ class AnnounceState extends State<AnnouncePage> {
         ),
       );
     }, success: (data) {
-      return _buildAnnounceListView(data);
+      return Center(
+        child: EasyRefresh(
+          key: GlobalKey<EasyRefreshState>(),
+          behavior: ScrollOverBehavior(),
+          refreshHeader: ClassicsHeader(
+            key: GlobalKey<RefreshHeaderState>(),
+            bgColor: Colors.transparent,
+            textColor: Colors.black87,
+            moreInfoColor: Colors.black54,
+            showMore: true,
+          ),
+          child: ListView(
+            children: _buildAnnounceListView(data),
+          ),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              setState(() {
+                _bloc.doGetNoticeRequest(
+                    title: "",
+                    type: "2",
+                    draw: "0",
+                    start: "0",
+                    length: "10");
+              });
+            });
+          },
+        ),
+      );
     }, error: (msg) {
       return Container(
         child: Center(
