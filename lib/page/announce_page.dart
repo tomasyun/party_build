@@ -18,11 +18,7 @@ class AnnounceState extends State<AnnouncePage> {
   void initState() {
     super.initState();
     _bloc.doGetNoticeRequest(
-        title: "",
-        type: "2",
-        draw: "0",
-        start: "0",
-        length: "10");
+        title: "", type: "2", draw: "0", start: "0", length: "10");
   }
 
   @override
@@ -42,10 +38,9 @@ class AnnounceState extends State<AnnouncePage> {
 
   List<NoticeItem> _buildAnnounceListView(Notice notice) {
     return notice.data
-        .map((item) =>
-        NoticeItem(
-          model: item,
-        ))
+        .map((item) => NoticeItem(
+              model: item,
+            ))
         .toList();
   }
 
@@ -77,11 +72,7 @@ class AnnounceState extends State<AnnouncePage> {
             await Future.delayed(const Duration(seconds: 1), () {
               setState(() {
                 _bloc.doGetNoticeRequest(
-                    title: "",
-                    type: "2",
-                    draw: "0",
-                    start: "0",
-                    length: "10");
+                    title: "", type: "2", draw: "0", start: "0", length: "10");
               });
             });
           },
