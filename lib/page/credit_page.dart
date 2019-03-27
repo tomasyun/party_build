@@ -162,4 +162,10 @@ class CreditState extends State<CreditPage>
           RxBus.post("refresh");
         });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    RxBus.destroy();
+  }
 }

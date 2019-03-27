@@ -112,4 +112,10 @@ class RankState extends State<RankPage> {
           RxBus.post("refresh");
         });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    RxBus.destroy();
+  }
 }
