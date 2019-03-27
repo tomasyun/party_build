@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/api/global_api.dart';
 import 'package:party_build/model/notice_model.dart';
 import 'package:party_build/page/notice_info_page.dart';
 
@@ -27,10 +28,14 @@ class NoticeItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          child: Image.asset("images/ic_avatar.png"),
+                            child: FadeInImage.assetNetwork(
+                              placeholder: "images/ic_avatar.png",
+                              image:
+                              GlobalApi().doFormatImageUrl(url: model.avatar),
+                              fit: BoxFit.fill,
                           width: 40.0,
                           height: 40.0,
-                        ),
+                            )),
                         Container(
                           margin: EdgeInsets.only(left: 10.0),
                           child: Text(
@@ -42,7 +47,7 @@ class NoticeItem extends StatelessWidget {
                         Expanded(
                           child: Container(
                             child: Text(
-                              "6小时前",
+                              doDataFunction(model.publishDate),
                               textAlign: TextAlign.right,
                               style: TextStyle(
                                   fontSize: 14.0, color: Colors.black45),
@@ -80,5 +85,22 @@ class NoticeItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String doDataFunction(String data) {
+    if (data != null && data != "") {
+      DateTime time = DateTime.parse(data);
+      if (time.isBefore(DateTime.now())) {
+        Duration duration = DateTime.now().difference(time);
+        if (duration.inDays > 1) {
+          return duration.inDays.toString() + "天前";
+        } else if (duration.inHours > 1) {
+          return duration.inHours.toString() + "小时前";
+        } else {
+          return duration.inMilliseconds.toString() + "分钟前";
+        }
+      }
+    }
+    return "";
   }
 }

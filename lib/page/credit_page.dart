@@ -101,6 +101,7 @@ class CreditState extends State<CreditPage>
                             controller: _controller,
                             labelColor: Colors.white,
                             indicatorColor: Colors.red,
+                            indicatorSize: TabBarIndicatorSize.label,
                           ),
                         ),
                       ],

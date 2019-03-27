@@ -68,6 +68,7 @@ class IntegrityState extends State<IntegrityPage>
           controller: _controller,
           labelColor: Colors.white,
           indicatorColor: Colors.red,
+          indicatorSize: TabBarIndicatorSize.label,
         ),
       ),
       body: Center(

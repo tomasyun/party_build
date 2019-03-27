@@ -89,7 +89,7 @@ class BannerState extends State<BannerWidget> {
 //                    placeholder: kTransparentImage,
                     placeholder: "images/app_def.png",
                     image: widget.entity[index % widget.entity.length].bUrl,
-                    fit: BoxFit.fitHeight)
+                fit: BoxFit.fill)
                 : widget.build(
                     index, widget.entity[index % widget.entity.length]));
       },

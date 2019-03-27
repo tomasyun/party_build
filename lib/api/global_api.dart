@@ -23,10 +23,13 @@ class GlobalApi {
 
   String doFormatImageUrl({String url}) {
     String newUrl = "";
-    if (url.substring(0, 1) == "/") {
-      newUrl = url.substring(1, url.length);
-      return BASE_URL + newUrl;
+    if (url != null && url != "") {
+      if (url.substring(0, 1) == "/") {
+        newUrl = url.substring(1, url.length);
+        return BASE_URL + newUrl;
+      }
+      return BASE_URL + url;
     }
-    return BASE_URL + url;
+    return newUrl;
   }
 }

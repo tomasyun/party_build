@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_build/api/global_api.dart';
 import 'package:party_build/bloc/rank_bloc.dart';
 import 'package:party_build/global/rxbus.dart';
 import 'package:party_build/list/rank_list.dart';
@@ -14,6 +15,7 @@ class RankState extends State<RankPage> {
 
   String mRank = "";
   String mScore = "";
+  String mAvatar = "";
 
   @override
   void initState() {
@@ -44,8 +46,9 @@ class RankState extends State<RankPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   _buildRichText(mRank, "名"),
-                  Image.asset(
-                    "images/ic_avatar.png",
+                  FadeInImage.assetNetwork(
+                    placeholder: "images/ic_avatar.png",
+                    image: GlobalApi().doFormatImageUrl(url: mAvatar),
                     width: 50.0,
                     height: 50.0,
                   ),
@@ -79,6 +82,7 @@ class RankState extends State<RankPage> {
   void init(Rank rank) {
     mRank = rank.data.mrank;
     mScore = rank.data.mscore;
+    mAvatar = rank.data.mavatar;
   }
 
   Widget _buildRankList() {

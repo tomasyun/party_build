@@ -52,6 +52,8 @@ class ExamPageState extends State<ExamPage>
           controller: _controller,
           indicatorColor: Colors.red,
           labelColor: Colors.white,
+          labelStyle: TextStyle(letterSpacing: 5.0),
+          indicatorSize: TabBarIndicatorSize.label,
         ),
       ),
       body: TabBarView(

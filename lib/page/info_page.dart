@@ -66,6 +66,7 @@ class InfoPageState extends State<InfoPage>
           controller: _controller,
           indicatorColor: Colors.red,
           labelColor: Colors.white,
+          indicatorSize: TabBarIndicatorSize.label,
         ),
       ),
       body: TabBarView(

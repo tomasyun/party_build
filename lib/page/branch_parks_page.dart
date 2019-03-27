@@ -78,6 +78,7 @@ class BranchParksState extends State<BranchParksPage>
           labelColor: Colors.white,
           indicatorColor: Colors.red,
           controller: _controller,
+          indicatorSize: TabBarIndicatorSize.label,
         ),
       ),
       body: Center(
