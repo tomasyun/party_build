@@ -29,13 +29,13 @@ class NoticeItem extends StatelessWidget {
                       children: <Widget>[
                         Container(
                             child: FadeInImage.assetNetwork(
-                              placeholder: "images/ic_avatar.png",
-                              image:
+                          placeholder: "images/ic_avatar.png",
+                          image:
                               GlobalApi().doFormatImageUrl(url: model.avatar),
-                              fit: BoxFit.fill,
+                          fit: BoxFit.fill,
                           width: 40.0,
                           height: 40.0,
-                            )),
+                        )),
                         Container(
                           margin: EdgeInsets.only(left: 10.0),
                           child: Text(
