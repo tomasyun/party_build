@@ -47,29 +47,7 @@ class TaskState extends State<TaskPage> {
     }, success: (data) {
       return Container(
         color: Colors.black12,
-        child: Center(
-          child: EasyRefresh(
-            key: GlobalKey<EasyRefreshState>(),
-            behavior: ScrollOverBehavior(),
-            refreshHeader: ClassicsHeader(
-              key: GlobalKey<RefreshHeaderState>(),
-              bgColor: Colors.transparent,
-              textColor: Colors.black87,
-              moreInfoColor: Colors.black54,
-              showMore: true,
-            ),
-            child: ListView(
-              children: _buildTaskList(data),
-            ),
-            onRefresh: () async {
-              await new Future.delayed(const Duration(seconds: 1), () {
-                setState(() {
-                  _bloc.doGetTaskListRequest();
-                });
-              });
-            },
-          ),
-        ),
+        child: _buildStateView(data),
       );
     }, error: (msg) {
       return Container(
@@ -88,9 +66,51 @@ class TaskState extends State<TaskPage> {
 
   List<TaskItem> _buildTaskList(Task task) {
     return task.data
-        .map((item) => TaskItem(
-              model: item,
-            ))
+        .map((item) =>
+        TaskItem(
+          model: item,
+        ))
         .toList();
+  }
+
+  Widget _buildStateView(Task task) {
+    if (task.code == "0000") {
+      if (task.data != null && task.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildTaskList(task),
+            ),
+            onRefresh: () async {
+              await new Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetTaskListRequest();
+                });
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
   }
 }

@@ -42,29 +42,7 @@ class LetterState extends State<LetterPage> {
             );
           },
           success: (data) {
-            return Center(
-              child: EasyRefresh(
-                key: GlobalKey<EasyRefreshState>(),
-                behavior: ScrollOverBehavior(),
-                refreshHeader: ClassicsHeader(
-                  key: GlobalKey<RefreshHeaderState>(),
-                  bgColor: Colors.transparent,
-                  textColor: Colors.black87,
-                  moreInfoColor: Colors.black54,
-                  showMore: true,
-                ),
-                child: ListView(
-                  children: _buildMailList(data),
-                ),
-                onRefresh: () async {
-                  await Future.delayed(const Duration(seconds: 1), () {
-                    setState(() {
-                      _bloc.doGetLetterRequest();
-                    });
-                  });
-                },
-              ),
-            );
+            return _buildStateView(data);
           },
           error: (msg) {},
           empty: () {
@@ -79,9 +57,51 @@ class LetterState extends State<LetterPage> {
 
   List<LetterItem> _buildMailList(Letter letter) {
     return letter.data
-        .map((item) => LetterItem(
-              model: item,
-            ))
+        .map((item) =>
+        LetterItem(
+          model: item,
+        ))
         .toList();
+  }
+
+  Widget _buildStateView(Letter letter) {
+    if (letter.code == "0000") {
+      if (letter.data != null && letter.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildMailList(letter),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetLetterRequest();
+                });
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
   }
 }

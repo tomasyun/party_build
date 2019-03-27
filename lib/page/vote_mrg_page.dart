@@ -45,6 +45,47 @@ class VoteMrgState extends State<VoteMrgPage> {
         .toList();
   }
 
+  Widget _buildStateView(Vote vote) {
+    if (vote.code == "0000") {
+      if (vote.data != null && vote.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildVoteListView(vote),
+            ),
+            onRefresh: () async {
+              await new Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetVoteListRequest();
+                });
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
+  }
+
   Widget _buildVoteList() {
     return _bloc.streamBuild(
         loading: () {
@@ -57,29 +98,7 @@ class VoteMrgState extends State<VoteMrgPage> {
           );
         },
         success: (data) {
-          return Center(
-            child: EasyRefresh(
-              key: GlobalKey<EasyRefreshState>(),
-              behavior: ScrollOverBehavior(),
-              refreshHeader: ClassicsHeader(
-                key: GlobalKey<RefreshHeaderState>(),
-                bgColor: Colors.transparent,
-                textColor: Colors.black87,
-                moreInfoColor: Colors.black54,
-                showMore: true,
-              ),
-              child: ListView(
-                children: _buildVoteListView(data),
-              ),
-              onRefresh: () async {
-                await new Future.delayed(const Duration(seconds: 1), () {
-                  setState(() {
-                    _bloc.doGetVoteListRequest();
-                  });
-                });
-              },
-            ),
-          );
+          return _buildStateView(data);
         },
         error: (msg) {},
         empty: () {

@@ -83,70 +83,91 @@ class InfoPageState extends State<InfoPage>
   }
 
   Widget _buildList(Info info) {
-    return Center(
-      child: EasyRefresh(
-        key: GlobalKey<EasyRefreshState>(),
-        behavior: ScrollOverBehavior(),
-        refreshHeader: ClassicsHeader(
-          key: GlobalKey<RefreshHeaderState>(),
-          bgColor: Colors.transparent,
-          textColor: Colors.black87,
-          moreInfoColor: Colors.black54,
-          refreshedText: "刷新完成",
-          refreshText: "下拉刷新",
-          refreshingText: "正在刷新",
-          refreshReadyText: "释放刷新",
-          showMore: true,
-        ),
-        refreshFooter: ClassicsFooter(
-          key: GlobalKey<RefreshFooterState>(),
-          bgColor: Colors.transparent,
-          textColor: Colors.black87,
-          moreInfoColor: Colors.black54,
-          showMore: true,
-        ),
-        child: ListView(
-          children: _buildInfoList(info.data),
-        ),
-        onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 1), () {
-            start = "0";
-            _bloc.doInfoRequest(
-                id: _controller.index.toString(),
-                draw: "0",
-                start: start,
-                length: "10");
-          });
-        },
-        loadMore: () async {
-          await Future.delayed(const Duration(seconds: 1), () {
-            start = (int.parse(start) + 10).toString();
-            _bloc.doInfoRequest(
-                id: _controller.index.toString(),
-                draw: "0",
-                start: start,
-                length: "10");
-          });
-        },
-      ),
-    );
+    return _buildStateView(info);
   }
 
   List<InfoItem> _buildInfoList(InfoData data) {
     if (start == "0") {
       infoModels = data.data;
       return infoModels
-          .map((item) => InfoItem(
-                model: item,
-              ))
+          .map((item) =>
+          InfoItem(
+            model: item,
+          ))
           .toList();
     } else {
       infoModels.addAll(data.data);
       return infoModels
-          .map((item) => InfoItem(
-                model: item,
-              ))
+          .map((item) =>
+          InfoItem(
+            model: item,
+          ))
           .toList();
+    }
+  }
+
+  Widget _buildStateView(Info data) {
+    if (data.code == "0000") {
+      if (data.data.data != null && data.data.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              refreshedText: "刷新完成",
+              refreshText: "下拉刷新",
+              refreshingText: "正在刷新",
+              refreshReadyText: "释放刷新",
+              showMore: true,
+            ),
+            refreshFooter: ClassicsFooter(
+              key: GlobalKey<RefreshFooterState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildInfoList(data.data),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = "0";
+                _bloc.doInfoRequest(
+                    id: _controller.index.toString(),
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+            loadMore: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = (int.parse(start) + 10).toString();
+                _bloc.doInfoRequest(
+                    id: _controller.index.toString(),
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
     }
   }
 

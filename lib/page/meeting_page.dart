@@ -43,29 +43,7 @@ class MeetingState extends State<MeetingPage> {
             );
           },
           success: (data) {
-            return Center(
-              child: EasyRefresh(
-                key: GlobalKey<EasyRefreshState>(),
-                behavior: ScrollOverBehavior(),
-                refreshHeader: ClassicsHeader(
-                  key: GlobalKey<RefreshHeaderState>(),
-                  bgColor: Colors.transparent,
-                  textColor: Colors.black87,
-                  moreInfoColor: Colors.black54,
-                  showMore: true,
-                ),
-                child: ListView(
-                  children: _buildMeetingList(data),
-                ),
-                onRefresh: () async {
-                  await new Future.delayed(const Duration(seconds: 1), () {
-                    setState(() {
-                      _bloc.doGetMeetingList();
-                    });
-                  });
-                },
-              ),
-            );
+            return _buildStateView(data);
           },
           empty: () {
             return Container(
@@ -80,9 +58,51 @@ class MeetingState extends State<MeetingPage> {
 
   List<MeetingItem> _buildMeetingList(Meeting meeting) {
     return meeting.data
-        .map((item) => MeetingItem(
-              data: item,
-            ))
+        .map((item) =>
+        MeetingItem(
+          data: item,
+        ))
         .toList();
+  }
+
+  Widget _buildStateView(Meeting meeting) {
+    if (meeting.code == "0000") {
+      if (meeting.data != null && meeting.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildMeetingList(meeting),
+            ),
+            onRefresh: () async {
+              await new Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetMeetingList();
+                });
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
   }
 }

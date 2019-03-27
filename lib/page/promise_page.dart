@@ -68,6 +68,7 @@ class OpenPromiseState extends State<OpenPromisePage>
           labelColor: Colors.white,
           indicatorColor: Colors.red,
           controller: _controller,
+          indicatorSize: TabBarIndicatorSize.label,
         ),
       ),
       body: Center(
@@ -102,6 +103,69 @@ class OpenPromiseState extends State<OpenPromisePage>
     }
   }
 
+  Widget _buildStateView(Union union) {
+    if (union.code == "0000") {
+      if (union.data.data != null && union.data.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            refreshFooter: ClassicsFooter(
+              key: GlobalKey<RefreshFooterState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildPromiseListView(union),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = "0";
+                _bloc.doGetUnionRequest(
+                    articleType: "13",
+                    childrenType: (_controller.index + 44).toString(),
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+            loadMore: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = (int.parse(start) + 10).toString();
+                _bloc.doGetUnionRequest(
+                    articleType: "13",
+                    childrenType: (_controller.index + 44).toString(),
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
+  }
+
   Widget _buildPromiseList() {
     return _bloc.streamBuild(loading: () {
       return Container(
@@ -112,51 +176,7 @@ class OpenPromiseState extends State<OpenPromisePage>
         ),
       );
     }, success: (data) {
-      return Center(
-        child: EasyRefresh(
-          key: GlobalKey<EasyRefreshState>(),
-          behavior: ScrollOverBehavior(),
-          refreshHeader: ClassicsHeader(
-            key: GlobalKey<RefreshHeaderState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          refreshFooter: ClassicsFooter(
-            key: GlobalKey<RefreshFooterState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          child: ListView(
-            children: _buildPromiseListView(data),
-          ),
-          onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = "0";
-              _bloc.doGetUnionRequest(
-                  articleType: "13",
-                  childrenType: (_controller.index + 44).toString(),
-                  draw: "0",
-                  start: start,
-                  length: "10");
-            });
-          },
-          loadMore: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = (int.parse(start) + 10).toString();
-              _bloc.doGetUnionRequest(
-                  articleType: "13",
-                  childrenType: (_controller.index + 44).toString(),
-                  draw: "0",
-                  start: start,
-                  length: "10");
-            });
-          },
-        ),
-      );
+      return _buildStateView(data);
     }, error: (msg) {
       return Container(
         child: Center(

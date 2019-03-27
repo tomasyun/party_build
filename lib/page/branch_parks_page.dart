@@ -114,20 +114,148 @@ class BranchParksState extends State<BranchParksPage>
     }
   }
 
+  Widget _buildNoticeStateView(Notice notice) {
+    if (notice.code == "0000") {
+      if (notice.data != null && notice.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            refreshFooter: ClassicsFooter(
+              key: GlobalKey<RefreshFooterState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildNoticeListView(notice),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = "0";
+                _noticeBloc.doGetNoticeRequest(
+                    title: "",
+                    type: "3",
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+            loadMore: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = (int.parse(start) + 10).toString();
+                _noticeBloc.doGetNoticeRequest(
+                    title: "",
+                    type: "3",
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
+  }
+
+  Widget _buildUnionStateView(Union union) {
+    if (union.code == "0000") {
+      if (union.data.data != null && union.data.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            refreshFooter: ClassicsFooter(
+              key: GlobalKey<RefreshFooterState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildUnionListView(union),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = "0";
+                _unionBloc.doGetUnionRequest(
+                    articleType: "15",
+                    childrenType: (_controller.index + 31).toString(),
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+            loadMore: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = (int.parse(start) + 10).toString();
+                _unionBloc.doGetUnionRequest(
+                    articleType: "15",
+                    childrenType: (_controller.index + 31).toString(),
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
+  }
+
   List<UnionItem> _buildUnionListView(Union union) {
     if (start == "0") {
       unionModels = union.data.data;
       return unionModels
-          .map((item) => UnionItem(
-                model: item,
-              ))
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
           .toList();
     } else {
       unionModels.addAll(union.data.data);
       return unionModels
-          .map((item) => UnionItem(
-                model: item,
-              ))
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
           .toList();
     }
   }
@@ -142,43 +270,7 @@ class BranchParksState extends State<BranchParksPage>
         ),
       );
     }, success: (data) {
-      return Center(
-        child: EasyRefresh(
-          key: GlobalKey<EasyRefreshState>(),
-          behavior: ScrollOverBehavior(),
-          refreshHeader: ClassicsHeader(
-            key: GlobalKey<RefreshHeaderState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          refreshFooter: ClassicsFooter(
-            key: GlobalKey<RefreshFooterState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          child: ListView(
-            children: _buildNoticeListView(data),
-          ),
-          onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = "0";
-              _noticeBloc.doGetNoticeRequest(
-                  title: "", type: "3", draw: "0", start: start, length: "10");
-            });
-          },
-          loadMore: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = (int.parse(start) + 10).toString();
-              _noticeBloc.doGetNoticeRequest(
-                  title: "", type: "3", draw: "0", start: start, length: "10");
-            });
-          },
-        ),
-      );
+      return _buildNoticeStateView(data);
     }, empty: () {
       return Container(
         child: Center(
@@ -204,51 +296,7 @@ class BranchParksState extends State<BranchParksPage>
         ),
       );
     }, success: (data) {
-      return Center(
-        child: EasyRefresh(
-          key: GlobalKey<EasyRefreshState>(),
-          behavior: ScrollOverBehavior(),
-          refreshHeader: ClassicsHeader(
-            key: GlobalKey<RefreshHeaderState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          refreshFooter: ClassicsFooter(
-            key: GlobalKey<RefreshFooterState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          child: ListView(
-            children: _buildUnionListView(data),
-          ),
-          onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = "0";
-              _unionBloc.doGetUnionRequest(
-                  articleType: "15",
-                  childrenType: (_controller.index + 31).toString(),
-                  draw: "0",
-                  start: start,
-                  length: "10");
-            });
-          },
-          loadMore: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = (int.parse(start) + 10).toString();
-              _unionBloc.doGetUnionRequest(
-                  articleType: "15",
-                  childrenType: (_controller.index + 31).toString(),
-                  draw: "0",
-                  start: start,
-                  length: "10");
-            });
-          },
-        ),
-      );
+      return;
     }, empty: () {
       return Container(
         child: Center(

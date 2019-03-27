@@ -48,6 +48,52 @@ class RegulationState extends State<RegulationPage> {
         .toList();
   }
 
+  Widget _buildStateView(Union union) {
+    if (union.code == "0000") {
+      if (union.data.data != null && union.data.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildRegulationListView(union),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetUnionRequest(
+                      articleType: "8",
+                      childrenType: "",
+                      draw: "0",
+                      start: "0",
+                      length: "10");
+                });
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
+  }
+
   Widget _buildRegulationList() {
     return _bloc.streamBuild(loading: () {
       return Container(
@@ -58,34 +104,7 @@ class RegulationState extends State<RegulationPage> {
         ),
       );
     }, success: (data) {
-      return Center(
-        child: EasyRefresh(
-          key: GlobalKey<EasyRefreshState>(),
-          behavior: ScrollOverBehavior(),
-          refreshHeader: ClassicsHeader(
-            key: GlobalKey<RefreshHeaderState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          child: ListView(
-            children: _buildRegulationListView(data),
-          ),
-          onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              setState(() {
-                _bloc.doGetUnionRequest(
-                    articleType: "8",
-                    childrenType: "",
-                    draw: "0",
-                    start: "0",
-                    length: "10");
-              });
-            });
-          },
-        ),
-      );
+      return _buildStateView(data);
     }, error: (msg) {
       return Container(
         child: Center(

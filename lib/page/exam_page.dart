@@ -69,46 +69,67 @@ class ExamPageState extends State<ExamPage>
 
 //已考列表
   Widget _buildList(String type, ExamModel model) {
-    return Center(
-      child: EasyRefresh(
-        key: GlobalKey<EasyRefreshState>(),
-        behavior: ScrollOverBehavior(),
-        refreshHeader: ClassicsHeader(
-          key: GlobalKey<RefreshHeaderState>(),
-          bgColor: Colors.transparent,
-          textColor: Colors.black87,
-          moreInfoColor: Colors.black54,
-          showMore: true,
-        ),
-        child: ListView(
-          children: _buildExamListView(type, model),
-        ),
-        onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 1), () {
-            setState(() {
-              _bloc.doGetExam(type: _controller.index.toString());
-            });
-          });
-        },
-      ),
-    );
+    return _buildStateView(type, model);
   }
 
   List<Widget> _buildExamListView(String type, ExamModel model) {
     if (type == "0") {
       return model.data
-          .map((item) => ExamOnItem(
-                exam: item,
-              ))
+          .map((item) =>
+          ExamOnItem(
+            exam: item,
+          ))
           .toList();
     } else if (type == "1") {
       return model.data
-          .map((item) => ExamOkItem(
-                exam: item,
-              ))
+          .map((item) =>
+          ExamOkItem(
+            exam: item,
+          ))
           .toList();
     } else {
       return [];
+    }
+  }
+
+  Widget _buildStateView(String type, ExamModel model) {
+    if (model.code == "0000") {
+      if (model.data != null && model.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildExamListView(type, model),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  _bloc.doGetExam(type: _controller.index.toString());
+                });
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
     }
   }
 

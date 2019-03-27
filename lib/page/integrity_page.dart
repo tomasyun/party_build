@@ -95,51 +95,7 @@ class IntegrityState extends State<IntegrityPage>
         ),
       );
     }, success: (data) {
-      return Center(
-        child: EasyRefresh(
-          key: GlobalKey<EasyRefreshState>(),
-          behavior: ScrollOverBehavior(),
-          refreshHeader: ClassicsHeader(
-            key: GlobalKey<RefreshHeaderState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          refreshFooter: ClassicsFooter(
-            key: GlobalKey<RefreshFooterState>(),
-            bgColor: Colors.transparent,
-            textColor: Colors.black87,
-            moreInfoColor: Colors.black54,
-            showMore: true,
-          ),
-          child: ListView(
-            children: _buildListView(data),
-          ),
-          onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = "0";
-              _bloc.doGetUnionRequest(
-                  articleType: (_controller.index + 10).toString(),
-                  childrenType: "",
-                  draw: "0",
-                  start: start,
-                  length: "10");
-            });
-          },
-          loadMore: () async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              start = (int.parse(start) + 10).toString();
-              _bloc.doGetUnionRequest(
-                  articleType: (_controller.index + 10).toString(),
-                  childrenType: "",
-                  draw: "0",
-                  start: start,
-                  length: "10");
-            });
-          },
-        ),
-      );
+      return _buildStateView(data);
     }, empty: () {
       return Container(
         child: Center(
@@ -159,17 +115,82 @@ class IntegrityState extends State<IntegrityPage>
     if (start == "0") {
       unionModels = union.data.data;
       return unionModels
-          .map((item) => UnionItem(
-                model: item,
-              ))
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
           .toList();
     } else {
       unionModels.addAll(union.data.data);
       return unionModels
-          .map((item) => UnionItem(
-                model: item,
-              ))
+          .map((item) =>
+          UnionItem(
+            model: item,
+          ))
           .toList();
+    }
+  }
+
+  Widget _buildStateView(Union union) {
+    if (union.code == "0000") {
+      if (union.data.data != null && union.data.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            refreshFooter: ClassicsFooter(
+              key: GlobalKey<RefreshFooterState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildListView(union),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = "0";
+                _bloc.doGetUnionRequest(
+                    articleType: (_controller.index + 10).toString(),
+                    childrenType: "",
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+            loadMore: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = (int.parse(start) + 10).toString();
+                _bloc.doGetUnionRequest(
+                    articleType: (_controller.index + 10).toString(),
+                    childrenType: "",
+                    draw: "0",
+                    start: start,
+                    length: "10");
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
     }
   }
 }

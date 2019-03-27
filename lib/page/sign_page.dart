@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:party_build/bloc/sign_in_bloc.dart';
+import 'package:party_build/bloc/sign_info_bloc.dart';
 import 'package:party_build/global/toast.dart';
 import 'package:party_build/model/response_rst_model.dart';
+import 'package:party_build/model/sign_info_model.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 
 //签到
@@ -28,10 +30,12 @@ class SignPage extends StatefulWidget {
 
 class SignPageState extends State<SignPage> with SignInBloc {
   String location;
+  SignInfoBloc _bloc = SignInfoBloc.newInstance;
 
   @override
   void initState() {
     super.initState();
+    _bloc.doGetSignInfoRequest();
 //    AMapLocationClient.startup(new AMapLocationOption(
 //        desiredAccuracy: CLLocationAccuracy.kCLLocationAccuracyHundredMeters));
 //    location = getLocationStr(null);
@@ -49,15 +53,24 @@ class SignPageState extends State<SignPage> with SignInBloc {
         iconTheme: null,
         backgroundColor: Colors.red,
       ),
-      body: SingleChildScrollView(
+      body: _buildSignInfoContent(),
+    );
+  }
+
+  Widget _buildSignInfoBody(SignInfo info) {
+    if (info.code == "0000") {
+      return SingleChildScrollView(
         child: Container(
           child: Column(
             children: <Widget>[
               Container(
                 width: double.infinity,
                 height: 200.0,
-                child: Image.network(
-                    "http://p1.img.cctvpic.com/photoworkspace/2018/05/18/2018051814175817985.jpg"),
+                child: FadeInImage.assetNetwork(
+                  placeholder: "images/app_def.png",
+                  image: info.data.themeImg,
+                  fit: BoxFit.fill,
+                ),
               ),
               Container(
                 padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 20.0),
@@ -76,7 +89,7 @@ class SignPageState extends State<SignPage> with SignInBloc {
                         children: <Widget>[
                           Container(
                             child: Text(
-                              "2018年12月11日",
+                              info.data.startDate,
                               style: TextStyle(
                                   fontSize: 14.0, color: Colors.black45),
                             ),
@@ -118,7 +131,7 @@ class SignPageState extends State<SignPage> with SignInBloc {
                       child: Container(
                         margin: EdgeInsets.only(left: 15.0),
                         child: Text(
-                          "陕西省西安市高新区丈八北路汇鑫IBC 1501室",
+                          info.data.address,
                           style: TextStyle(fontSize: 14.0, color: Colors.red),
                           maxLines: 2,
                         ),
@@ -139,18 +152,61 @@ class SignPageState extends State<SignPage> with SignInBloc {
                     margin: EdgeInsets.only(top: 60.0),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Colors.red),
-                    child: Text(
-                      "会议签到",
-                      style: TextStyle(fontSize: 14.0, color: Colors.white),
-                    ),
+                    child: _buildBtnText(info.data.type),
                   ),
                 ),
               )
             ],
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text("暂无签到"),
+        ),
+      );
+    }
+  }
+
+  Widget _buildBtnText(String type) {
+    if (type == "0") {
+      return Text(
+        "会议签到",
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
+      );
+    } else {
+      return Text(
+        "活动签到",
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
+      );
+    }
+  }
+
+  Widget _buildSignInfoContent() {
+    return _bloc.streamBuild(loading: () {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.red),
+          ),
+        ),
+      );
+    }, success: (data) {
+      return _buildSignInfoBody(data);
+    }, empty: () {
+      return Container(
+        child: Center(
+          child: Text("暂无数据"),
+        ),
+      );
+    }, error: (msg) {
+      return Container(
+        child: Center(
+          child: Text(msg),
+        ),
+      );
+    });
   }
 
   void _checkPermission() async {

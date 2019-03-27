@@ -45,18 +45,9 @@ class OrgActState extends State<OrgActPage> {
         .toList();
   }
 
-  Widget _buildOrgActList() {
-    return _bloc.streamBuild(
-      loading: () {
-        return Container(
-          child: Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Colors.red),
-            ),
-          ),
-        );
-      },
-      success: (data) {
+  Widget _buildStateView(OrgAct org) {
+    if (org.code == "0000") {
+      if (org.data != null && org.data.isNotEmpty) {
         return Center(
           child: EasyRefresh(
             key: GlobalKey<EasyRefreshState>(),
@@ -69,7 +60,7 @@ class OrgActState extends State<OrgActPage> {
               showMore: true,
             ),
             child: ListView(
-              children: _buildOrgActListView(data),
+              children: _buildOrgActListView(org),
             ),
             onRefresh: () async {
               await new Future.delayed(const Duration(seconds: 1), () {
@@ -80,6 +71,34 @@ class OrgActState extends State<OrgActPage> {
             },
           ),
         );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    }
+  }
+
+  Widget _buildOrgActList() {
+    return _bloc.streamBuild(
+      loading: () {
+        return Container(
+          child: Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(Colors.red),
+            ),
+          ),
+        );
+      },
+      success: (data) {
+        return _buildStateView(data);
       },
       empty: () {
         return Container(
@@ -88,7 +107,13 @@ class OrgActState extends State<OrgActPage> {
           ),
         );
       },
-      error: (msg) {},
+      error: (msg) {
+        return Container(
+          child: Center(
+            child: Text(msg),
+          ),
+        );
+      },
     );
   }
 }

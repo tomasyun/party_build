@@ -231,41 +231,7 @@ class UnionCommonState extends State<UnionCommonPage> {
           ),
         );
       }, success: (data) {
-        return Center(
-          child: EasyRefresh(
-            key: GlobalKey<EasyRefreshState>(),
-            behavior: ScrollOverBehavior(),
-            refreshHeader: ClassicsHeader(
-              key: GlobalKey<RefreshHeaderState>(),
-              bgColor: Colors.transparent,
-              textColor: Colors.black87,
-              moreInfoColor: Colors.black54,
-              showMore: true,
-            ),
-            refreshFooter: ClassicsFooter(
-              key: GlobalKey<RefreshFooterState>(),
-              bgColor: Colors.transparent,
-              textColor: Colors.black87,
-              moreInfoColor: Colors.black54,
-              showMore: true,
-            ),
-            child: ListView(
-              children: _buildUnionList(data),
-            ),
-            onRefresh: () async {
-              await Future.delayed(const Duration(seconds: 1), () {
-                start = "0";
-                doUnionRequest(widget.skipType);
-              });
-            },
-            loadMore: () async {
-              await Future.delayed(const Duration(seconds: 1), () {
-                start = (int.parse(start) + 10).toString();
-                doUnionRequest(widget.skipType);
-              });
-            },
-          ),
-        );
+        return _buildStateView(data);
       }, error: (msg) {
         return Container(
           child: Center(
@@ -297,6 +263,59 @@ class UnionCommonState extends State<UnionCommonPage> {
                 model: item,
               ))
           .toList();
+    }
+  }
+
+  Widget _buildStateView(Union union) {
+    if (union.code == "0000") {
+      if (union.data.data != null && union.data.data.isNotEmpty) {
+        return Center(
+          child: EasyRefresh(
+            key: GlobalKey<EasyRefreshState>(),
+            behavior: ScrollOverBehavior(),
+            refreshHeader: ClassicsHeader(
+              key: GlobalKey<RefreshHeaderState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            refreshFooter: ClassicsFooter(
+              key: GlobalKey<RefreshFooterState>(),
+              bgColor: Colors.transparent,
+              textColor: Colors.black87,
+              moreInfoColor: Colors.black54,
+              showMore: true,
+            ),
+            child: ListView(
+              children: _buildUnionList(union),
+            ),
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = "0";
+                doUnionRequest(widget.skipType);
+              });
+            },
+            loadMore: () async {
+              await Future.delayed(const Duration(seconds: 1), () {
+                start = (int.parse(start) + 10).toString();
+                doUnionRequest(widget.skipType);
+              });
+            },
+          ),
+        );
+      } else {
+        return Container(
+          child: Center(
+            child: Text("暂无数据"),
+          ),
+        );
+      }
+    } else {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
     }
   }
 }
