@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_text.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:party_build/bloc/studies_bloc.dart';
 import 'package:party_build/model/studies_model.dart';
 import 'package:party_build/page/course_info_page.dart';
@@ -112,8 +112,8 @@ class StudiesState extends State<StudiesPage> {
                         body: Container(
                           padding: EdgeInsets.all(30.0),
                           width: double.infinity,
-                          child: HtmlText(
-                            data: studies.data.content,
+                          child: HtmlWidget(
+                            studies.data.content,
                           ),
                         ),
                         isExpanded: _isExpandedTask),

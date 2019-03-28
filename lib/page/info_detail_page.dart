@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_text.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:party_build/bloc/info_detail_bloc.dart';
 import 'package:party_build/model/info_detail_model.dart';
 
@@ -114,8 +114,8 @@ class InfoDetailState extends State<InfoDetailPage> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10.0),
-                child: HtmlText(
-                  data: detail.data.content,
+                child: HtmlWidget(
+                  detail.data.content,
                 ),
               ),
             ],

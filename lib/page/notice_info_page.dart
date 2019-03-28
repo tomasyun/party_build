@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_text.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:party_build/bloc/notice_info_bloc.dart';
 import 'package:party_build/model/notice_info_model.dart';
 
@@ -108,8 +108,8 @@ class NoticeInfoState extends State<NoticeInfoPage> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 20.0),
-                child: HtmlText(
-                  data: info.data.content,
+                child: HtmlWidget(
+                  info.data.content,
                 ),
               ),
             ],

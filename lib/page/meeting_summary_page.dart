@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_text.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:party_build/bloc/meeting_summary_bloc.dart';
 import 'package:party_build/model/meeting_summary_model.dart';
 
@@ -105,8 +105,8 @@ class MeetingSummaryState extends State<MeetingSummaryPage> {
           ),
           Container(
             margin: EdgeInsets.only(top: 30.0),
-            child: HtmlText(
-              data: summary.data.summary,
+            child: HtmlWidget(
+              summary.data.summary,
             ),
           )
         ],
