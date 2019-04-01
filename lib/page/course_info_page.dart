@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:party_build/bloc/course_hours_bloc.dart';
 import 'package:party_build/bloc/course_info_bloc.dart';
 import 'package:party_build/global/toast.dart';
@@ -76,11 +77,10 @@ class CourseInfoState extends State<CourseInfoPage> with CourseHoursBloc {
     return SingleChildScrollView(
       child: Center(
         child: Container(
-          padding:
-              EdgeInsets.only(top: 30.0, left: 15.0, right: 15.0, bottom: 50.0),
           child: Column(
             children: <Widget>[
               Container(
+                margin: EdgeInsets.only(top: 30.0, left: 15.0, right: 15.0),
                 child: Text(
                   info.data.title,
                   style: TextStyle(
@@ -90,12 +90,9 @@ class CourseInfoState extends State<CourseInfoPage> with CourseHoursBloc {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20.0),
-                child: Text(
-                  info.data.context,
-                  style: TextStyle(
-                      fontSize: 14.0, color: Colors.black, letterSpacing: 3.0),
-                ),
+                margin: EdgeInsets.only(
+                    top: 20.0, left: 5.0, right: 5.0, bottom: 50.0),
+                child: HtmlWidget(info.data.context),
               )
             ],
           ),

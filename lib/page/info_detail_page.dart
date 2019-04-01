@@ -69,33 +69,32 @@ class InfoDetailState extends State<InfoDetailPage> {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Container(
-        padding: EdgeInsets.all(15.0),
         child: Center(
           child: Column(
             children: <Widget>[
               Container(
+                margin: EdgeInsets.only(left: 15.0, top: 20.0, right: 15.0),
                 child: Text(
                   detail.data.title,
                   style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black,
-                  ),
+                      fontSize: 16.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20.0),
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                margin: EdgeInsets.only(left: 15.0, top: 10.0, right: 15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       child: Text(
                         "发布单位:",
-                        style: TextStyle(fontSize: 14.0, color: Colors.black45),
+                        style: TextStyle(fontSize: 13.0, color: Colors.black45),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 3.0),
+                      margin: EdgeInsets.only(left: 8.0),
                       child: _buildText(
                         detail.data.publicUnit,
                       ),
@@ -106,14 +105,14 @@ class InfoDetailState extends State<InfoDetailPage> {
                         child: Text(detail.data.publishDate,
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                                fontSize: 14.0, color: Colors.black45)),
+                                fontSize: 13.0, color: Colors.black45)),
                       ),
                     )
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10.0),
+                margin: EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
                 child: HtmlWidget(
                   detail.data.content,
                 ),
@@ -128,10 +127,10 @@ class InfoDetailState extends State<InfoDetailPage> {
   Widget _buildText(String name) {
     if (name != null && name.length < 8) {
       return Text(name,
-          style: TextStyle(fontSize: 14.0, color: Colors.black45));
+          style: TextStyle(fontSize: 13.0, color: Colors.black45));
     } else {
-      return Text("-- --",
-          style: TextStyle(fontSize: 14.0, color: Colors.black45));
+      return Text("--",
+          style: TextStyle(fontSize: 13.0, color: Colors.black45));
     }
   }
 }
