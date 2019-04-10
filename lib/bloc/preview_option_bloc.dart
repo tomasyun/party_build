@@ -10,11 +10,9 @@ class PreviewOptionBloc extends BlocProvider<PreviewOption> {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
-    print(data);
     Response response =
         await Dio(options).post("getExamQuestionAnswers", data: data);
     doRequest(

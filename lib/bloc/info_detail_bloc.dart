@@ -10,7 +10,6 @@ class InfoDetailBloc extends BlocProvider<InfoDetail> {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
@@ -28,7 +27,6 @@ class InfoDetailBloc extends BlocProvider<InfoDetail> {
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
-    print(data);
     Dio dio = Dio(options);
     Response response = await dio.post("articleDetail", data: data);
     doRequest(response: response, dispose: (map) => InfoDetail.fromJson(map));

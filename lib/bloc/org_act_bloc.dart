@@ -10,7 +10,6 @@ class OrgActBloc extends BlocProvider<OrgAct> {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     Response response = await Dio(options).post("orgActList");

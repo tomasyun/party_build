@@ -10,7 +10,6 @@ class GlobalApi {
     int code = response.statusCode;
     if (code >= 200 && code <= 300) {
       Map<String, dynamic> data = response.data;
-      print(data);
       if (data != null) {
         success(data);
       } else {

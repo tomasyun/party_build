@@ -10,7 +10,6 @@ abstract class SaveExamAnswerBloc {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     Response response = await Dio(options).post("saveExamAnswers", data: json);

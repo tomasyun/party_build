@@ -10,8 +10,6 @@ abstract class SaveVoteAnswerBloc {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
-    print(json);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     Response response = await Dio(options).post("submitVote", data: json);

@@ -15,7 +15,6 @@ class NoticeBloc extends BlocProvider<Notice> {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({
@@ -25,7 +24,6 @@ class NoticeBloc extends BlocProvider<Notice> {
       "start": start,
       "length": length
     });
-    print(data);
     Response response = await Dio(options).post("noticeByType", data: data);
     doRequest(response: response, dispose: (map) => Notice.fromJson(map));
   }

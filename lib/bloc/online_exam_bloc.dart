@@ -10,11 +10,9 @@ class OnlineExamBloc extends BlocProvider<Question> {
     await SpUtils().getString("token").then((value) {
       token = value;
     });
-    print(token);
     Options options =
         Options(baseUrl: BASE_URL, headers: {"Authorization": token});
     FormData data = FormData.from({"id": id});
-    print(data);
     Response response =
         await Dio(options).post("queryExamQuestionList", data: data);
     doRequest(response: response, dispose: (map) => Question.fromJson(map));
