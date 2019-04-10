@@ -50,7 +50,7 @@ class NoticeItem extends StatelessWidget {
                               doDataFunction(model.publishDate),
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                  fontSize: 14.0, color: Colors.black45),
+                                  fontSize: 13.0, color: Colors.black45),
                             ),
                           ),
                           flex: 1,
@@ -64,7 +64,7 @@ class NoticeItem extends StatelessWidget {
                     child: Text(
                       model.content,
                       style: TextStyle(
-                        fontSize: 14.0,
+                        fontSize: 13.0,
                         color: Colors.black45,
                         letterSpacing: 0.8,
                       ),
