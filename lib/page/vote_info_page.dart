@@ -296,7 +296,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
             color: Color.fromARGB(255, 51, 51, 51),
             fontWeight: FontWeight.bold),
       ),
-      onChanged: (T){},
+      onChanged: (T) {},
     );
   }
 

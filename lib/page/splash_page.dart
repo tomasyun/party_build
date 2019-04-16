@@ -5,7 +5,6 @@ import 'package:party_build/tab/index.dart';
 
 //启动页
 class SplashPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => SplashState();
 }
