@@ -194,7 +194,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
           style: TextStyle(fontSize: 14.0, color: Colors.white),
         ),
         padding:
-        EdgeInsets.only(left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
+            EdgeInsets.only(left: 130.0, top: 15.0, bottom: 15.0, right: 130.0),
         color: Colors.deepOrange[100],
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0))),
@@ -284,7 +284,7 @@ class VoteInfoState extends State<VoteInfoPage> with SaveVoteAnswerBloc {
         child: Text(
           data.options[value].votes + "  票",
           style:
-          TextStyle(fontSize: 14, color: Color.fromARGB(255, 246, 37, 12)),
+              TextStyle(fontSize: 14, color: Color.fromARGB(255, 246, 37, 12)),
         ),
       ),
       groupValue: group,
