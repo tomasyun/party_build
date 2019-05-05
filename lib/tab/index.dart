@@ -75,7 +75,7 @@ class IndexState extends State<Index> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     initIcon();
-    final BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(
+    BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(
         items: <NavItem>[
           NavItem(
             icon: getTabIcon(0),

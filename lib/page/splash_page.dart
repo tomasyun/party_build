@@ -12,7 +12,7 @@ class SplashPage extends StatefulWidget {
 class SplashState extends State<SplashPage> with TickerProviderStateMixin {
   Animation _animation;
   AnimationController _controller;
-  var animationStateListener;
+  AnimationStatusListener animationStateListener;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class SplashState extends State<SplashPage> with TickerProviderStateMixin {
     animationStateListener = (status) {
       _judgeIsLogin(status);
     };
-    _animation.addStatusListener((status) => animationStateListener(status));
+    _animation.addStatusListener(animationStateListener);
     _controller.forward();
   }
 
