@@ -60,6 +60,7 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
                       child: TextField(
                         controller: userNameController,
                         keyboardType: TextInputType.text,
+                        autofocus: false,
                         style: TextStyle(fontSize: 15, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "请输入用户名",
@@ -75,6 +76,8 @@ class LoginPageState extends State<LoginPage> with LoginBloc {
                       child: TextField(
                         controller: passwordController,
                         keyboardType: TextInputType.text,
+                        autofocus: false,
+                        textInputAction: TextInputAction.done,
                         style: TextStyle(fontSize: 15, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "请输入密码",
